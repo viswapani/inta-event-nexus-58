@@ -1,13 +1,13 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Calendar, Users, Building, Image, MessageCircle } from 'lucide-react';
+import { Menu, X, Calendar, Users, Building, Image, MessageCircle, Heart } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigationItems = [
     { name: 'Agenda', href: '#agenda', icon: Calendar },
+    { name: 'Favorites', href: '#favorites', icon: Heart },
     { name: 'Speakers', href: '#speakers', icon: Users },
     { name: 'Sponsors & Media', href: '#sponsors', icon: Building },
     { name: 'AI Assistant', href: '#chatbot', icon: MessageCircle },

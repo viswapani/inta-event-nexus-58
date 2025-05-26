@@ -10,6 +10,7 @@ import RegistrationSection from "@/components/RegistrationSection";
 import ChatbotSection from "@/components/ChatbotSection";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import BottomActionBar from "@/components/BottomActionBar";
 
 const Index = () => {
   return (
@@ -35,6 +36,10 @@ const Index = () => {
         <ChatbotSection />
       </section>
       <Footer />
+      <BottomActionBar />
+      
+      {/* Add bottom padding for mobile to account for bottom action bar */}
+      <div className="h-16 md:hidden" />
     </div>
   );
 };

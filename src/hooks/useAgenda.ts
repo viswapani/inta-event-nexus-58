@@ -1,5 +1,5 @@
-
 import { useQuery, useMutation } from '@tanstack/react-query';
+import { API_ENDPOINTS } from '../services/api';
 
 interface Session {
   time: string;
@@ -28,8 +28,10 @@ interface PersonalAgendaItem {
 }
 
 // Mock API calls
-const fetchAgendaPrograms = async (): Promise<AgendaProgram[]> => {
+const fetchAgendaPrograms = async (eventId: string): Promise<AgendaProgram[]> => {
   await new Promise(resolve => setTimeout(resolve, 700));
+  
+  console.log('Fetching agenda programs for event:', eventId);
   
   return [
     {
@@ -53,45 +55,49 @@ const fetchAgendaPrograms = async (): Promise<AgendaProgram[]> => {
   ];
 };
 
-const addToPersonalAgenda = async (sessionData: { sessionId: string; sessionTitle: string; time: string; date: string }): Promise<void> => {
+const addToPersonalAgenda = async (eventId: string, sessionData: { sessionId: string; sessionTitle: string; time: string; date: string }): Promise<void> => {
   await new Promise(resolve => setTimeout(resolve, 500));
-  console.log('Added to personal agenda:', sessionData);
+  console.log('Added to personal agenda for event:', eventId, sessionData);
 };
 
-const removeFromPersonalAgenda = async (sessionId: string): Promise<void> => {
+const removeFromPersonalAgenda = async (eventId: string, sessionId: string): Promise<void> => {
   await new Promise(resolve => setTimeout(resolve, 500));
-  console.log('Removed from personal agenda:', sessionId);
+  console.log('Removed from personal agenda for event:', eventId, 'session:', sessionId);
 };
 
-const fetchPersonalAgenda = async (): Promise<PersonalAgendaItem[]> => {
+const fetchPersonalAgenda = async (eventId: string): Promise<PersonalAgendaItem[]> => {
   await new Promise(resolve => setTimeout(resolve, 400));
+  console.log('Fetching personal agenda for event:', eventId);
   return [];
 };
 
-export const useAgendaPrograms = () => {
+export const useAgendaPrograms = (eventId: string) => {
   return useQuery({
-    queryKey: ['agendaPrograms'],
-    queryFn: fetchAgendaPrograms,
+    queryKey: ['agendaPrograms', eventId],
+    queryFn: () => fetchAgendaPrograms(eventId),
     staleTime: 15 * 60 * 1000,
+    enabled: !!eventId,
   });
 };
 
-export const usePersonalAgenda = () => {
+export const usePersonalAgenda = (eventId: string) => {
   return useQuery({
-    queryKey: ['personalAgenda'],
-    queryFn: fetchPersonalAgenda,
+    queryKey: ['personalAgenda', eventId],
+    queryFn: () => fetchPersonalAgenda(eventId),
     staleTime: 5 * 60 * 1000,
+    enabled: !!eventId,
   });
 };
 
-export const useAddToAgenda = () => {
+export const useAddToAgenda = (eventId: string) => {
   return useMutation({
-    mutationFn: addToPersonalAgenda,
+    mutationFn: (sessionData: { sessionId: string; sessionTitle: string; time: string; date: string }) => 
+      addToPersonalAgenda(eventId, sessionData),
   });
 };
 
-export const useRemoveFromAgenda = () => {
+export const useRemoveFromAgenda = (eventId: string) => {
   return useMutation({
-    mutationFn: removeFromPersonalAgenda,
+    mutationFn: (sessionId: string) => removeFromPersonalAgenda(eventId, sessionId),
   });
 };

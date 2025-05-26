@@ -1,5 +1,5 @@
-
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { API_ENDPOINTS } from '../services/api';
 
 interface RegistrationPlan {
   name: string;
@@ -27,8 +27,10 @@ interface RegistrationData {
 }
 
 // Mock API calls
-const fetchRegistrationPlans = async (): Promise<RegistrationPlan[]> => {
+const fetchRegistrationPlans = async (eventId: string): Promise<RegistrationPlan[]> => {
   await new Promise(resolve => setTimeout(resolve, 400));
+  
+  console.log('Fetching registration plans for event:', eventId);
   
   return [
     {
@@ -51,8 +53,10 @@ const fetchRegistrationPlans = async (): Promise<RegistrationPlan[]> => {
   ];
 };
 
-const fetchRegistrationStats = async (): Promise<RegistrationStats> => {
+const fetchRegistrationStats = async (eventId: string): Promise<RegistrationStats> => {
   await new Promise(resolve => setTimeout(resolve, 300));
+  
+  console.log('Fetching registration stats for event:', eventId);
   
   return {
     registered: '1,847',
@@ -61,51 +65,53 @@ const fetchRegistrationStats = async (): Promise<RegistrationStats> => {
   };
 };
 
-const submitRegistration = async (data: RegistrationData): Promise<{ success: boolean; registrationId: string }> => {
+const submitRegistration = async (eventId: string, data: RegistrationData): Promise<{ success: boolean; registrationId: string }> => {
   await new Promise(resolve => setTimeout(resolve, 2000));
   
-  console.log('Registration submitted:', data);
+  console.log('Registration submitted for event:', eventId, data);
   
   return {
     success: true,
-    registrationId: `REG-${Date.now()}`
+    registrationId: `REG-${eventId}-${Date.now()}`
   };
 };
 
-const requestGroupDiscount = async (data: { attendeeCount: number; contactInfo: any }): Promise<void> => {
+const requestGroupDiscount = async (eventId: string, data: { attendeeCount: number; contactInfo: any }): Promise<void> => {
   await new Promise(resolve => setTimeout(resolve, 1000));
-  console.log('Group discount requested:', data);
+  console.log('Group discount requested for event:', eventId, data);
 };
 
-export const useRegistrationPlans = () => {
+export const useRegistrationPlans = (eventId: string) => {
   return useQuery({
-    queryKey: ['registrationPlans'],
-    queryFn: fetchRegistrationPlans,
+    queryKey: ['registrationPlans', eventId],
+    queryFn: () => fetchRegistrationPlans(eventId),
     staleTime: 30 * 60 * 1000, // 30 minutes
+    enabled: !!eventId,
   });
 };
 
-export const useRegistrationStats = () => {
+export const useRegistrationStats = (eventId: string) => {
   return useQuery({
-    queryKey: ['registrationStats'],
-    queryFn: fetchRegistrationStats,
+    queryKey: ['registrationStats', eventId],
+    queryFn: () => fetchRegistrationStats(eventId),
     refetchInterval: 5 * 60 * 1000, // Refetch every 5 minutes
+    enabled: !!eventId,
   });
 };
 
-export const useSubmitRegistration = () => {
+export const useSubmitRegistration = (eventId: string) => {
   const queryClient = useQueryClient();
   
   return useMutation({
-    mutationFn: submitRegistration,
+    mutationFn: (data: RegistrationData) => submitRegistration(eventId, data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['registrationStats'] });
+      queryClient.invalidateQueries({ queryKey: ['registrationStats', eventId] });
     },
   });
 };
 
-export const useGroupDiscountRequest = () => {
+export const useGroupDiscountRequest = (eventId: string) => {
   return useMutation({
-    mutationFn: requestGroupDiscount,
+    mutationFn: (data: { attendeeCount: number; contactInfo: any }) => requestGroupDiscount(eventId, data),
   });
 };

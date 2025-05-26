@@ -1,6 +1,6 @@
-
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
+import { API_ENDPOINTS } from '../services/api';
 
 interface ChatMessage {
   id: string;
@@ -15,8 +15,10 @@ interface ChatbotResponse {
 }
 
 // Mock API call for chatbot
-const sendChatMessage = async (message: string): Promise<ChatbotResponse> => {
+const sendChatMessage = async (eventId: string, message: string): Promise<ChatbotResponse> => {
   await new Promise(resolve => setTimeout(resolve, 1000));
+  
+  console.log('Sending chat message for event:', eventId, 'message:', message);
   
   // Simple mock responses
   const responses = [
@@ -35,7 +37,7 @@ const sendChatMessage = async (message: string): Promise<ChatbotResponse> => {
   };
 };
 
-export const useChatbot = () => {
+export const useChatbot = (eventId: string) => {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: '1',
@@ -46,7 +48,7 @@ export const useChatbot = () => {
   ]);
 
   const chatMutation = useMutation({
-    mutationFn: sendChatMessage,
+    mutationFn: (message: string) => sendChatMessage(eventId, message),
     onSuccess: (data, variables) => {
       // Add user message
       const userMessage: ChatMessage = {

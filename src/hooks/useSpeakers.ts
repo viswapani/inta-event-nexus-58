@@ -1,5 +1,5 @@
-
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { API_ENDPOINTS } from '../services/api';
 
 interface Speaker {
   id: number;
@@ -23,10 +23,12 @@ interface SpeakerFilters {
 }
 
 // Mock API calls - replace with actual API endpoints
-const fetchSpeakers = async (filters: SpeakerFilters = {}): Promise<Speaker[]> => {
+const fetchSpeakers = async (eventId: string, filters: SpeakerFilters = {}): Promise<Speaker[]> => {
   await new Promise(resolve => setTimeout(resolve, 800));
   
-  // This would normally come from your API
+  console.log('Fetching speakers for event:', eventId, 'with filters:', filters);
+  
+  // This would normally come from your API using API_ENDPOINTS.SPEAKERS(eventId)
   const allSpeakers = [
     {
       id: 1,
@@ -62,26 +64,27 @@ const fetchSpeakers = async (filters: SpeakerFilters = {}): Promise<Speaker[]> =
   return filtered;
 };
 
-const favoriteSpeaker = async (speakerId: number): Promise<void> => {
+const favoriteSpeaker = async (eventId: string, speakerId: number): Promise<void> => {
   await new Promise(resolve => setTimeout(resolve, 500));
-  console.log('Speaker favorited:', speakerId);
+  console.log('Speaker favorited for event:', eventId, 'speaker:', speakerId);
 };
 
-export const useSpeakers = (filters: SpeakerFilters = {}) => {
+export const useSpeakers = (eventId: string, filters: SpeakerFilters = {}) => {
   return useQuery({
-    queryKey: ['speakers', filters],
-    queryFn: () => fetchSpeakers(filters),
+    queryKey: ['speakers', eventId, filters],
+    queryFn: () => fetchSpeakers(eventId, filters),
     staleTime: 10 * 60 * 1000, // 10 minutes
+    enabled: !!eventId,
   });
 };
 
-export const useFavoriteSpeaker = () => {
+export const useFavoriteSpeaker = (eventId: string) => {
   const queryClient = useQueryClient();
   
   return useMutation({
-    mutationFn: favoriteSpeaker,
+    mutationFn: (speakerId: number) => favoriteSpeaker(eventId, speakerId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['speakers'] });
+      queryClient.invalidateQueries({ queryKey: ['speakers', eventId] });
     },
   });
 };

@@ -1,5 +1,5 @@
-
 import { useQuery, useMutation } from '@tanstack/react-query';
+import { API_ENDPOINTS } from '../services/api';
 
 interface Sponsor {
   name: string;
@@ -24,8 +24,10 @@ interface SponsorsData {
 }
 
 // Mock API calls
-const fetchSponsors = async (): Promise<SponsorsData> => {
+const fetchSponsors = async (eventId: string): Promise<SponsorsData> => {
   await new Promise(resolve => setTimeout(resolve, 600));
+  
+  console.log('Fetching sponsors for event:', eventId);
   
   return {
     platinum: [
@@ -61,8 +63,10 @@ const fetchSponsors = async (): Promise<SponsorsData> => {
   };
 };
 
-const fetchMediaGallery = async (): Promise<MediaItem[]> => {
+const fetchMediaGallery = async (eventId: string): Promise<MediaItem[]> => {
   await new Promise(resolve => setTimeout(resolve, 500));
+  
+  console.log('Fetching media gallery for event:', eventId);
   
   return [
     { 
@@ -76,29 +80,32 @@ const fetchMediaGallery = async (): Promise<MediaItem[]> => {
   ];
 };
 
-const submitSponsorshipInquiry = async (data: { name: string; email: string; company: string; message: string }): Promise<void> => {
+const submitSponsorshipInquiry = async (eventId: string, data: { name: string; email: string; company: string; message: string }): Promise<void> => {
   await new Promise(resolve => setTimeout(resolve, 1000));
-  console.log('Sponsorship inquiry submitted:', data);
+  console.log('Sponsorship inquiry submitted for event:', eventId, data);
 };
 
-export const useSponsors = () => {
+export const useSponsors = (eventId: string) => {
   return useQuery({
-    queryKey: ['sponsors'],
-    queryFn: fetchSponsors,
+    queryKey: ['sponsors', eventId],
+    queryFn: () => fetchSponsors(eventId),
     staleTime: 15 * 60 * 1000, // 15 minutes
+    enabled: !!eventId,
   });
 };
 
-export const useMediaGallery = () => {
+export const useMediaGallery = (eventId: string) => {
   return useQuery({
-    queryKey: ['mediaGallery'],
-    queryFn: fetchMediaGallery,
+    queryKey: ['mediaGallery', eventId],
+    queryFn: () => fetchMediaGallery(eventId),
     staleTime: 10 * 60 * 1000,
+    enabled: !!eventId,
   });
 };
 
-export const useSponsorshipInquiry = () => {
+export const useSponsorshipInquiry = (eventId: string) => {
   return useMutation({
-    mutationFn: submitSponsorshipInquiry,
+    mutationFn: (data: { name: string; email: string; company: string; message: string }) => 
+      submitSponsorshipInquiry(eventId, data),
   });
 };

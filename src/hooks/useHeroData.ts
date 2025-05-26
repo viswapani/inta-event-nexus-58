@@ -1,5 +1,6 @@
 
 import { useQuery } from '@tanstack/react-query';
+import { API_ENDPOINTS } from '../services/api';
 
 interface HeroData {
   title: string;
@@ -14,9 +15,11 @@ interface HeroData {
 }
 
 // Mock API call - replace with actual API endpoint
-const fetchHeroData = async (): Promise<HeroData> => {
+const fetchHeroData = async (eventId: string): Promise<HeroData> => {
   // Simulate API delay
   await new Promise(resolve => setTimeout(resolve, 1000));
+  
+  console.log('Fetching hero data for event:', eventId);
   
   return {
     title: "INTA EVENT 2028",
@@ -31,10 +34,11 @@ const fetchHeroData = async (): Promise<HeroData> => {
   };
 };
 
-export const useHeroData = () => {
+export const useHeroData = (eventId: string) => {
   return useQuery({
-    queryKey: ['heroData'],
-    queryFn: fetchHeroData,
+    queryKey: ['heroData', eventId],
+    queryFn: () => fetchHeroData(eventId),
     staleTime: 5 * 60 * 1000, // 5 minutes
+    enabled: !!eventId, // Only run query when eventId is provided
   });
 };

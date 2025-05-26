@@ -6,35 +6,40 @@ const API_BASE_URL = process.env.NODE_ENV === 'production'
 
 // API endpoints configuration
 export const API_ENDPOINTS = {
-  // Hero section
-  HERO_DATA: `${API_BASE_URL}/hero`,
+  // Event-specific endpoints
+  EVENT_DATA: (eventId: string) => `${API_BASE_URL}/events/${eventId}`,
+  HERO_DATA: (eventId: string) => `${API_BASE_URL}/events/${eventId}/hero`,
   
-  // Speakers
-  SPEAKERS: `${API_BASE_URL}/speakers`,
-  FAVORITE_SPEAKER: (id: number) => `${API_BASE_URL}/speakers/${id}/favorite`,
+  // Speakers endpoints
+  SPEAKERS: (eventId: string) => `${API_BASE_URL}/events/${eventId}/speakers`,
+  FAVORITE_SPEAKER: (eventId: string, speakerId: number) => `${API_BASE_URL}/events/${eventId}/speakers/${speakerId}/favorite`,
   
-  // Sponsors and Media
-  SPONSORS: `${API_BASE_URL}/sponsors`,
-  MEDIA_GALLERY: `${API_BASE_URL}/media`,
-  SPONSORSHIP_INQUIRY: `${API_BASE_URL}/sponsorship/inquiry`,
-  MEDIA_UPLOAD: `${API_BASE_URL}/media/upload`,
+  // Sponsors and Media endpoints
+  SPONSORS: (eventId: string) => `${API_BASE_URL}/events/${eventId}/sponsors`,
+  MEDIA_GALLERY: (eventId: string) => `${API_BASE_URL}/events/${eventId}/media`,
+  SPONSORSHIP_INQUIRY: (eventId: string) => `${API_BASE_URL}/events/${eventId}/sponsorship/inquiry`,
+  MEDIA_UPLOAD: (eventId: string) => `${API_BASE_URL}/events/${eventId}/media/upload`,
   
-  // Registration
-  REGISTRATION_PLANS: `${API_BASE_URL}/registration/plans`,
-  REGISTRATION_STATS: `${API_BASE_URL}/registration/stats`,
-  SUBMIT_REGISTRATION: `${API_BASE_URL}/registration/submit`,
-  GROUP_DISCOUNT: `${API_BASE_URL}/registration/group-discount`,
+  // Registration endpoints
+  REGISTRATION_PLANS: (eventId: string) => `${API_BASE_URL}/events/${eventId}/registration/plans`,
+  REGISTRATION_STATS: (eventId: string) => `${API_BASE_URL}/events/${eventId}/registration/stats`,
+  SUBMIT_REGISTRATION: (eventId: string) => `${API_BASE_URL}/events/${eventId}/registration/submit`,
+  GROUP_DISCOUNT: (eventId: string) => `${API_BASE_URL}/events/${eventId}/registration/group-discount`,
   
-  // Agenda
-  AGENDA_PROGRAMS: `${API_BASE_URL}/agenda/programs`,
-  PERSONAL_AGENDA: `${API_BASE_URL}/agenda/personal`,
-  ADD_TO_AGENDA: `${API_BASE_URL}/agenda/add`,
-  REMOVE_FROM_AGENDA: (sessionId: string) => `${API_BASE_URL}/agenda/remove/${sessionId}`,
+  // Agenda endpoints
+  AGENDA_PROGRAMS: (eventId: string) => `${API_BASE_URL}/events/${eventId}/agenda/programs`,
+  PERSONAL_AGENDA: (eventId: string) => `${API_BASE_URL}/events/${eventId}/agenda/personal`,
+  ADD_TO_AGENDA: (eventId: string) => `${API_BASE_URL}/events/${eventId}/agenda/add`,
+  REMOVE_FROM_AGENDA: (eventId: string, sessionId: string) => `${API_BASE_URL}/events/${eventId}/agenda/remove/${sessionId}`,
   
-  // Chatbot
-  CHAT: `${API_BASE_URL}/chat`,
+  // Venue endpoints
+  VENUE_INFO: (eventId: string) => `${API_BASE_URL}/events/${eventId}/venue`,
+  HOTELS: (eventId: string) => `${API_BASE_URL}/events/${eventId}/hotels`,
   
-  // Common
+  // Chatbot endpoint
+  CHAT: (eventId: string) => `${API_BASE_URL}/events/${eventId}/chat`,
+  
+  // Common endpoints
   NEWSLETTER_SIGNUP: `${API_BASE_URL}/newsletter/signup`,
   CONTACT_FORM: `${API_BASE_URL}/contact`,
 };

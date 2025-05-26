@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -6,8 +5,10 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Clock, MapPin, Users, Search, Calendar, Download, Smartphone, FileText, ExternalLink } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import DateWiseAgenda from './DateWiseAgenda';
 
 const AgendaSection = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -268,83 +269,105 @@ const AgendaSection = () => {
           </div>
         </div>
 
-        {/* Programs Accordion */}
-        <div className="space-y-6">
-          <Accordion type="multiple" className="space-y-4">
-            {filteredPrograms.map((program) => (
-              <AccordionItem 
-                key={program.id} 
-                value={program.id}
-                className="bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden"
-              >
-                <AccordionTrigger className="px-8 py-6 hover:no-underline hover:bg-gray-50 text-left">
-                  <div>
-                    <h3 className="text-2xl font-bold text-inta-navy mb-2">{program.title}</h3>
-                    <p className="text-inta-gray text-lg">{program.description}</p>
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent className="px-0 pb-0">
-                  <div className="border-t border-gray-200">
-                    {program.days.map((day, dayIndex) => (
-                      <div key={dayIndex} className="border-b border-gray-100 last:border-b-0">
-                        <div className="bg-inta-navy text-white px-8 py-4">
-                          <h4 className="text-xl font-semibold flex items-center">
-                            <Calendar className="w-6 h-6 mr-3" />
-                            {day.date}
-                          </h4>
-                        </div>
-                        <div className="divide-y divide-gray-100">
-                          {day.sessions.map((session, sessionIndex) => (
-                            <div key={sessionIndex} className="px-8 py-6 hover:bg-gray-50 transition-colors">
-                              <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
-                                <div className="flex-1">
-                                  <div className="flex items-center gap-3 mb-3">
-                                    <Badge className="bg-inta-blue text-white px-3 py-1 text-sm">
-                                      <Clock className="w-4 h-4 mr-1" />
-                                      {session.time}
-                                    </Badge>
-                                    <Badge variant="outline" className="border-inta-accent text-inta-accent px-3 py-1 text-sm">
-                                      {session.track}
-                                    </Badge>
-                                  </div>
-                                  <h5 className="text-xl font-semibold text-inta-navy mb-3">{session.title}</h5>
-                                  <p className="text-inta-gray mb-4 leading-relaxed">{session.description}</p>
-                                  
-                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                                    <div className="flex items-center text-inta-gray">
-                                      <MapPin className="w-5 h-5 mr-2" />
-                                      <span className="font-medium">{session.location}</span>
-                                    </div>
-                                    {session.speakers.length > 0 && (
-                                      <div className="flex items-center text-inta-gray">
-                                        <Users className="w-5 h-5 mr-2" />
-                                        <span className="font-medium">{session.speakers.join(', ')}</span>
+        {/* Tabbed View for Programs and Date-wise */}
+        <Tabs defaultValue="programs" className="space-y-6">
+          <TabsList className="grid w-full grid-cols-2 bg-white shadow-md h-14">
+            <TabsTrigger value="programs" className="text-lg font-semibold data-[state=active]:bg-inta-blue data-[state=active]:text-white">
+              View by Programs
+            </TabsTrigger>
+            <TabsTrigger value="dates" className="text-lg font-semibold data-[state=active]:bg-inta-blue data-[state=active]:text-white">
+              View by Date
+            </TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="programs">
+            {/* Programs Accordion */}
+            <div className="space-y-6">
+              <Accordion type="multiple" className="space-y-4">
+                {filteredPrograms.map((program) => (
+                  <AccordionItem 
+                    key={program.id} 
+                    value={program.id}
+                    className="bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden"
+                  >
+                    <AccordionTrigger className="px-8 py-6 hover:no-underline hover:bg-gray-50 text-left">
+                      <div>
+                        <h3 className="text-2xl font-bold text-inta-navy mb-2">{program.title}</h3>
+                        <p className="text-inta-gray text-lg">{program.description}</p>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent className="px-0 pb-0">
+                      <div className="border-t border-gray-200">
+                        {program.days.map((day, dayIndex) => (
+                          <div key={dayIndex} className="border-b border-gray-100 last:border-b-0">
+                            <div className="bg-inta-navy text-white px-8 py-4">
+                              <h4 className="text-xl font-semibold flex items-center">
+                                <Calendar className="w-6 h-6 mr-3" />
+                                {day.date}
+                              </h4>
+                            </div>
+                            <div className="divide-y divide-gray-100">
+                              {day.sessions.map((session, sessionIndex) => (
+                                <div key={sessionIndex} className="px-8 py-6 hover:bg-gray-50 transition-colors">
+                                  <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+                                    <div className="flex-1">
+                                      <div className="flex items-center gap-3 mb-3">
+                                        <Badge className="bg-inta-blue text-white px-3 py-1 text-sm">
+                                          <Clock className="w-4 h-4 mr-1" />
+                                          {session.time}
+                                        </Badge>
+                                        <Badge variant="outline" className="border-inta-accent text-inta-accent px-3 py-1 text-sm">
+                                          {session.track}
+                                        </Badge>
                                       </div>
-                                    )}
-                                  </div>
+                                      <h5 className="text-xl font-semibold text-inta-navy mb-3">{session.title}</h5>
+                                      <p className="text-inta-gray mb-4 leading-relaxed">{session.description}</p>
+                                      
+                                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                        <div className="flex items-center text-inta-gray">
+                                          <MapPin className="w-5 h-5 mr-2" />
+                                          <span className="font-medium">{session.location}</span>
+                                        </div>
+                                        {session.speakers.length > 0 && (
+                                          <div className="flex items-center text-inta-gray">
+                                            <Users className="w-5 h-5 mr-2" />
+                                            <span className="font-medium">{session.speakers.join(', ')}</span>
+                                          </div>
+                                        )}
+                                      </div>
 
-                                  <div className="flex flex-wrap gap-3">
-                                    <Button size="sm" className="bg-inta-blue hover:bg-inta-navy">
-                                      <Calendar className="w-4 h-4 mr-2" />
-                                      Add to Calendar
-                                    </Button>
-                                    <Button variant="outline" size="sm" className="border-inta-gray text-inta-gray hover:bg-inta-gray hover:text-white">
-                                      Session Details
-                                    </Button>
+                                      <div className="flex flex-wrap gap-3">
+                                        <Button size="sm" className="bg-inta-blue hover:bg-inta-navy">
+                                          <Calendar className="w-4 h-4 mr-2" />
+                                          Add to Calendar
+                                        </Button>
+                                        <Button variant="outline" size="sm" className="border-inta-gray text-inta-gray hover:bg-inta-gray hover:text-white">
+                                          Session Details
+                                        </Button>
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
+                              ))}
                             </div>
-                          ))}
-                        </div>
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="dates">
+            <DateWiseAgenda 
+              programs={programs}
+              searchTerm={searchTerm}
+              selectedTrack={selectedTrack}
+            />
+          </TabsContent>
+        </Tabs>
 
         {/* Additional Information */}
         <div className="mt-12 bg-gradient-to-r from-inta-navy to-inta-blue rounded-lg p-8 text-white text-center">

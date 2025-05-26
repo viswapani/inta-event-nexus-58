@@ -30,14 +30,10 @@ const Header = () => {
       <header className="fixed top-0 left-0 right-0 z-50 glass-effect">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            {/* Logo and Event Info */}
-            <div className="flex items-center space-x-4">
+            {/* Logo */}
+            <div className="flex items-center">
               <div className="bg-inta-navy text-white px-3 py-1 rounded-md font-bold text-sm">
                 INTA
-              </div>
-              <div className="hidden md:block">
-                <h1 className="text-lg font-semibold text-inta-navy">INTA EVENT 2028</h1>
-                <p className="text-xs text-inta-gray">Global Innovation Summit</p>
               </div>
             </div>
 

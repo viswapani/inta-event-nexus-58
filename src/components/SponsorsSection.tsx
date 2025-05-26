@@ -1,109 +1,43 @@
 
+import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ExternalLink, Play, Image as ImageIcon } from 'lucide-react';
+import { apiService, SponsorsData, MediaItem } from '@/services/api';
+import { useToast } from '@/hooks/use-toast';
 
 const SponsorsSection = () => {
-  const sponsors = {
-    platinum: [
-      { 
-        name: 'TechLegal Corp', 
-        logo: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=200&h=100&fit=crop', 
-        description: 'Leading AI solutions for legal professionals' 
-      },
-      { 
-        name: 'Global IP Solutions', 
-        logo: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=200&h=100&fit=crop', 
-        description: 'Worldwide trademark protection services' 
-      }
-    ],
-    gold: [
-      { 
-        name: 'Innovation Partners', 
-        logo: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=150&h=75&fit=crop', 
-        description: 'IP consulting and strategy' 
-      },
-      { 
-        name: 'Brand Protect Inc', 
-        logo: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=150&h=75&fit=crop', 
-        description: 'Anti-counterfeiting solutions' 
-      },
-      { 
-        name: 'Legal Tech Hub', 
-        logo: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=150&h=75&fit=crop', 
-        description: 'Digital transformation for law firms' 
-      }
-    ],
-    silver: [
-      { 
-        name: 'IP Analytics', 
-        logo: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=120&h=60&fit=crop', 
-        description: 'Data-driven IP insights' 
-      },
-      { 
-        name: 'Trademark Tools', 
-        logo: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=120&h=60&fit=crop', 
-        description: 'Software for trademark management' 
-      },
-      { 
-        name: 'Global Legal Network', 
-        logo: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=120&h=60&fit=crop', 
-        description: 'International legal services' 
-      },
-      { 
-        name: 'Digital Rights Co', 
-        logo: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=120&h=60&fit=crop', 
-        description: 'Online brand protection' 
-      }
-    ]
-  };
+  const [sponsors, setSponsors] = useState<SponsorsData>({ platinum: [], gold: [], silver: [] });
+  const [mediaGallery, setMediaGallery] = useState<MediaItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const { toast } = useToast();
 
-  const mediaGallery = [
-    { 
-      id: 1, 
-      type: 'image', 
-      title: 'Opening Ceremony 2027', 
-      thumbnail: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=400&h=300&fit=crop', 
-      date: 'Day 1' 
-    },
-    { 
-      id: 2, 
-      type: 'video', 
-      title: 'Keynote Highlights', 
-      thumbnail: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop', 
-      date: 'Day 1' 
-    },
-    { 
-      id: 3, 
-      type: 'image', 
-      title: 'Networking Session', 
-      thumbnail: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=300&fit=crop', 
-      date: 'Day 2' 
-    },
-    { 
-      id: 4, 
-      type: 'video', 
-      title: 'Panel Discussion', 
-      thumbnail: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=400&h=300&fit=crop', 
-      date: 'Day 2' 
-    },
-    { 
-      id: 5, 
-      type: 'image', 
-      title: 'Innovation Showcase', 
-      thumbnail: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop', 
-      date: 'Day 3' 
-    },
-    { 
-      id: 6, 
-      type: 'video', 
-      title: 'Closing Remarks', 
-      thumbnail: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=300&fit=crop', 
-      date: 'Day 3' 
-    }
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const [sponsorsData, mediaData] = await Promise.all([
+          apiService.getSponsors(),
+          apiService.getMediaGallery()
+        ]);
+        setSponsors(sponsorsData);
+        setMediaGallery(mediaData);
+      } catch (error) {
+        console.error('Error loading sponsors and media:', error);
+        toast({
+          title: 'Error',
+          description: 'Failed to load sponsors and media data',
+          variant: 'destructive'
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [toast]);
 
   const SponsorCard = ({ sponsor, tier }: { sponsor: any, tier: string }) => {
     const tierColors = {
@@ -124,7 +58,12 @@ const SponsorsSection = () => {
           </div>
           <h3 className="font-semibold text-inta-navy mb-2">{sponsor.name}</h3>
           <p className="text-sm text-inta-gray mb-4">{sponsor.description}</p>
-          <Button variant="outline" size="sm" className="w-full hover:bg-inta-blue hover:text-white">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="w-full hover:bg-inta-blue hover:text-white"
+            onClick={() => sponsor.website && window.open(sponsor.website, '_blank')}
+          >
             <ExternalLink className="w-3 h-3 mr-1" />
             Visit Website
           </Button>
@@ -132,6 +71,19 @@ const SponsorsSection = () => {
       </Card>
     );
   };
+
+  if (loading) {
+    return (
+      <section id="sponsors" className="py-20 bg-inta-light relative">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <h2 className="text-4xl font-bold text-inta-navy mb-4">Loading Sponsors & Media...</h2>
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-inta-blue mx-auto"></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="sponsors" className="py-20 bg-inta-light relative">
@@ -161,46 +113,52 @@ const SponsorsSection = () => {
 
           <TabsContent value="sponsors" className="space-y-12">
             {/* Platinum Sponsors */}
-            <div>
-              <div className="flex items-center justify-center mb-8">
-                <Badge className="bg-gray-800 text-white px-6 py-2 text-lg font-semibold">
-                  Platinum Partners
-                </Badge>
+            {sponsors.platinum.length > 0 && (
+              <div>
+                <div className="flex items-center justify-center mb-8">
+                  <Badge className="bg-gray-800 text-white px-6 py-2 text-lg font-semibold">
+                    Platinum Partners
+                  </Badge>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {sponsors.platinum.map((sponsor, index) => (
+                    <SponsorCard key={index} sponsor={sponsor} tier="platinum" />
+                  ))}
+                </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {sponsors.platinum.map((sponsor, index) => (
-                  <SponsorCard key={index} sponsor={sponsor} tier="platinum" />
-                ))}
-              </div>
-            </div>
+            )}
 
             {/* Gold Sponsors */}
-            <div>
-              <div className="flex items-center justify-center mb-8">
-                <Badge className="bg-inta-accent text-inta-navy px-6 py-2 text-lg font-semibold">
-                  Gold Partners
-                </Badge>
+            {sponsors.gold.length > 0 && (
+              <div>
+                <div className="flex items-center justify-center mb-8">
+                  <Badge className="bg-inta-accent text-inta-navy px-6 py-2 text-lg font-semibold">
+                    Gold Partners
+                  </Badge>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {sponsors.gold.map((sponsor, index) => (
+                    <SponsorCard key={index} sponsor={sponsor} tier="gold" />
+                  ))}
+                </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {sponsors.gold.map((sponsor, index) => (
-                  <SponsorCard key={index} sponsor={sponsor} tier="gold" />
-                ))}
-              </div>
-            </div>
+            )}
 
             {/* Silver Sponsors */}
-            <div>
-              <div className="flex items-center justify-center mb-8">
-                <Badge className="bg-gray-400 text-white px-6 py-2 text-lg font-semibold">
-                  Silver Partners
-                </Badge>
+            {sponsors.silver.length > 0 && (
+              <div>
+                <div className="flex items-center justify-center mb-8">
+                  <Badge className="bg-gray-400 text-white px-6 py-2 text-lg font-semibold">
+                    Silver Partners
+                  </Badge>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {sponsors.silver.map((sponsor, index) => (
+                    <SponsorCard key={index} sponsor={sponsor} tier="silver" />
+                  ))}
+                </div>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {sponsors.silver.map((sponsor, index) => (
-                  <SponsorCard key={index} sponsor={sponsor} tier="silver" />
-                ))}
-              </div>
-            </div>
+            )}
 
             {/* Sponsorship CTA */}
             <div className="bg-white rounded-lg p-8 text-center border-2 border-inta-accent/20 shadow-lg">

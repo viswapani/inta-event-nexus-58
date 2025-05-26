@@ -1,21 +1,27 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Clock, MapPin, Users, Search, Calendar, MessageCircle, Sparkles } from 'lucide-react';
+import { Clock, MapPin, Users, Search, Calendar, MessageCircle, Sparkles, Bookmark, BookmarkCheck } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const AgendaSection = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTrack, setSelectedTrack] = useState('all');
+  const [bookmarkedSessions, setBookmarkedSessions] = useState<number[]>([]);
+  const [currentTime] = useState(new Date('2025-03-15T10:15:00')); // Mock current time for demo
+  const { toast } = useToast();
 
   const sessions = [
     {
       id: 1,
       title: 'AI and the Future of Trademark Law',
       time: '09:00 - 10:30',
+      startTime: '09:00',
+      endTime: '10:30',
       date: 'March 15',
       location: 'Main Auditorium',
       track: 'AI Innovation',
@@ -23,12 +29,15 @@ const AgendaSection = () => {
       type: 'Keynote',
       summary: 'Exploring how artificial intelligence is transforming trademark examination and protection.',
       attendees: 450,
-      hasQA: true
+      hasQA: true,
+      topics: ['AI', 'Machine Learning', 'Trademark Examination', 'Legal Tech']
     },
     {
       id: 2,
       title: 'Global Brand Protection Strategies',
       time: '11:00 - 12:30',
+      startTime: '11:00',
+      endTime: '12:30',
       date: 'March 15',
       location: 'Conference Room A',
       track: 'Brand Protection',
@@ -36,12 +45,15 @@ const AgendaSection = () => {
       type: 'Panel',
       summary: 'Best practices for protecting brands across international markets.',
       attendees: 320,
-      hasQA: true
+      hasQA: true,
+      topics: ['Brand Protection', 'International Law', 'Anti-Counterfeiting']
     },
     {
       id: 3,
       title: 'Digital Transformation in IP Management',
       time: '14:00 - 15:30',
+      startTime: '14:00',
+      endTime: '15:30',
       date: 'March 15',
       location: 'Tech Hub',
       track: 'Digital Innovation',
@@ -49,7 +61,8 @@ const AgendaSection = () => {
       type: 'Workshop',
       summary: 'Hands-on session on implementing digital tools for IP portfolio management.',
       attendees: 180,
-      hasQA: false
+      hasQA: false,
+      topics: ['Digital Tools', 'IP Management', 'Portfolio Management', 'Technology']
     }
   ];
 
@@ -60,12 +73,80 @@ const AgendaSection = () => {
     { value: 'Digital Innovation', label: 'Digital Innovation' }
   ];
 
+  const getSessionStatus = (session: any) => {
+    const now = currentTime;
+    const sessionDate = new Date(`2025-03-15T${session.startTime}:00`);
+    const sessionEndDate = new Date(`2025-03-15T${session.endTime}:00`);
+    
+    if (now >= sessionDate && now <= sessionEndDate) {
+      return { status: 'live', label: '🔴 Live Now', color: 'bg-red-500 text-white' };
+    } else if (sessionDate > now && (sessionDate.getTime() - now.getTime()) <= 30 * 60 * 1000) {
+      return { status: 'soon', label: '🕑 Starting Soon', color: 'bg-orange-500 text-white' };
+    } else if (sessionDate < now) {
+      return { status: 'ended', label: '✅ Completed', color: 'bg-gray-500 text-white' };
+    }
+    return { status: 'upcoming', label: '📅 Upcoming', color: 'bg-blue-500 text-white' };
+  };
+
   const filteredSessions = sessions.filter(session => {
-    const matchesSearch = session.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         session.speakers.some(speaker => speaker.toLowerCase().includes(searchTerm.toLowerCase()));
+    const searchLower = searchTerm.toLowerCase();
+    const matchesSearch = session.title.toLowerCase().includes(searchLower) ||
+                         session.speakers.some(speaker => speaker.toLowerCase().includes(searchLower)) ||
+                         session.topics.some(topic => topic.toLowerCase().includes(searchLower)) ||
+                         session.track.toLowerCase().includes(searchLower) ||
+                         session.location.toLowerCase().includes(searchLower);
     const matchesTrack = selectedTrack === 'all' || session.track === selectedTrack;
     return matchesSearch && matchesTrack;
   });
+
+  const toggleBookmark = (sessionId: number) => {
+    setBookmarkedSessions(prev => {
+      const isBookmarked = prev.includes(sessionId);
+      const newBookmarks = isBookmarked 
+        ? prev.filter(id => id !== sessionId)
+        : [...prev, sessionId];
+      
+      toast({
+        title: isBookmarked ? "Bookmark Removed" : "Session Bookmarked",
+        description: isBookmarked 
+          ? "Session removed from your agenda" 
+          : "Session added to your personal agenda"
+      });
+      
+      return newBookmarks;
+    });
+  };
+
+  const exportToCalendar = (session: any) => {
+    const startDate = new Date(`2025-03-15T${session.startTime}:00`);
+    const endDate = new Date(`2025-03-15T${session.endTime}:00`);
+    
+    const formatDate = (date: Date) => {
+      return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+    };
+    
+    const calendarUrl = `data:text/calendar;charset=utf8,BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+URL:${window.location.href}
+DTSTART:${formatDate(startDate)}
+DTEND:${formatDate(endDate)}
+SUMMARY:${session.title}
+DESCRIPTION:${session.summary}\\nSpeakers: ${session.speakers.join(', ')}\\nLocation: ${session.location}
+LOCATION:${session.location}
+END:VEVENT
+END:VCALENDAR`;
+    
+    const link = document.createElement('a');
+    link.href = calendarUrl;
+    link.download = `${session.title.replace(/\s+/g, '_')}.ics`;
+    link.click();
+    
+    toast({
+      title: "Calendar Event Created",
+      description: "Session exported to your calendar"
+    });
+  };
 
   return (
     <section id="agenda" className="py-20 bg-inta-light">
@@ -95,12 +176,12 @@ const AgendaSection = () => {
           </CardContent>
         </Card>
 
-        {/* Search and Filters */}
-        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-8">
+        {/* Enhanced Search and Filters */}
+        <div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4 mb-8">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-inta-gray w-4 h-4" />
             <Input
-              placeholder="Search sessions or speakers..."
+              placeholder="Search by session, speaker, topic, track, or location..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10"
@@ -138,14 +219,24 @@ const AgendaSection = () => {
           </TabsList>
 
           <TabsContent value="march-15" className="space-y-6">
-            {filteredSessions.map((session) => (
-              <Card key={session.id} className="hover:shadow-lg transition-shadow duration-300 animate-slide-in">
-                <CardContent className="p-6">
-                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-start justify-between mb-3">
-                        <div>
+            {/* 2-Column Grid Layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {filteredSessions.map((session) => {
+                const sessionStatus = getSessionStatus(session);
+                const isBookmarked = bookmarkedSessions.includes(session.id);
+                
+                return (
+                  <Card key={session.id} className="hover:shadow-lg transition-shadow duration-300 animate-slide-in">
+                    <CardContent className="p-6">
+                      <div className="flex justify-between items-start mb-4">
+                        <div className="flex-1">
+                          {/* Status Badge */}
+                          <Badge className={`mb-3 ${sessionStatus.color} animate-pulse`}>
+                            {sessionStatus.label}
+                          </Badge>
+                          
                           <h3 className="text-xl font-semibold text-inta-navy mb-2">{session.title}</h3>
+                          
                           <div className="flex flex-wrap items-center gap-4 text-sm text-inta-gray mb-3">
                             <div className="flex items-center space-x-1">
                               <Clock className="w-4 h-4" />
@@ -161,16 +252,41 @@ const AgendaSection = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="flex flex-col items-end space-y-2">
-                          <Badge className="bg-inta-blue text-white">{session.type}</Badge>
-                          <Badge variant="outline" className="border-inta-accent text-inta-accent">
-                            {session.track}
-                          </Badge>
-                        </div>
+                        
+                        {/* Bookmark Button */}
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => toggleBookmark(session.id)}
+                          className={`ml-2 ${isBookmarked ? 'text-inta-accent' : 'text-inta-gray'}`}
+                        >
+                          {isBookmarked ? <BookmarkCheck className="w-5 h-5" /> : <Bookmark className="w-5 h-5" />}
+                        </Button>
+                      </div>
+
+                      {/* Track and Type Badges */}
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        <Badge className="bg-inta-blue text-white">{session.type}</Badge>
+                        <Badge variant="outline" className="border-inta-accent text-inta-accent">
+                          {session.track}
+                        </Badge>
                       </div>
 
                       <p className="text-inta-gray mb-4">{session.summary}</p>
 
+                      {/* Topics */}
+                      <div className="mb-4">
+                        <h4 className="text-xs font-medium text-inta-navy mb-2">Topics:</h4>
+                        <div className="flex flex-wrap gap-1">
+                          {session.topics.map((topic, index) => (
+                            <span key={index} className="text-xs bg-inta-light px-2 py-1 rounded text-inta-gray">
+                              {topic}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Speakers */}
                       <div className="flex flex-wrap items-center gap-2 mb-4">
                         <span className="text-sm font-medium text-inta-navy">Speakers:</span>
                         {session.speakers.map((speaker, index) => (
@@ -180,9 +296,15 @@ const AgendaSection = () => {
                         ))}
                       </div>
 
-                      <div className="flex flex-wrap items-center space-x-4">
-                        <Button size="sm" className="bg-inta-blue hover:bg-inta-navy">
-                          Add to My Agenda
+                      {/* Action Buttons */}
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Button 
+                          size="sm" 
+                          className="bg-inta-blue hover:bg-inta-navy"
+                          onClick={() => exportToCalendar(session)}
+                        >
+                          <Calendar className="w-4 h-4 mr-1" />
+                          Add to Calendar
                         </Button>
                         <Button variant="outline" size="sm">
                           View Details
@@ -194,11 +316,11 @@ const AgendaSection = () => {
                           </Button>
                         )}
                       </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
           </TabsContent>
 
           <TabsContent value="march-16" className="space-y-6">
@@ -221,8 +343,8 @@ const AgendaSection = () => {
           <h3 className="text-lg font-semibold text-inta-navy mb-4">Quick Actions</h3>
           <div className="flex flex-wrap gap-4">
             <Button variant="outline" className="flex items-center space-x-2">
-              <Calendar className="w-4 h-4" />
-              <span>Export to Calendar</span>
+              <BookmarkCheck className="w-4 h-4" />
+              <span>View My Bookmarks ({bookmarkedSessions.length})</span>
             </Button>
             <Button variant="outline" className="flex items-center space-x-2">
               <Sparkles className="w-4 h-4" />

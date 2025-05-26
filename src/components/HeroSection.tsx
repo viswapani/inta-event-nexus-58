@@ -5,8 +5,18 @@ import { Calendar, MapPin, Users } from 'lucide-react';
 
 const HeroSection = () => {
   return (
-    <section className="pt-16 min-h-screen gradient-hero relative overflow-hidden">
-      {/* Background Animation */}
+    <section className="pt-16 min-h-screen relative overflow-hidden">
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0">
+        <img 
+          src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=1920&h=1080&fit=crop"
+          alt="Event hall with screens and attendees"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-inta-navy/90 via-inta-blue/80 to-inta-navy/90"></div>
+      </div>
+
+      {/* Animated Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-inta-accent/20 rounded-full blur-3xl animate-pulse delay-1000"></div>

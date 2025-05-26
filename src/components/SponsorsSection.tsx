@@ -8,29 +8,101 @@ import { ExternalLink, Play, Image as ImageIcon } from 'lucide-react';
 const SponsorsSection = () => {
   const sponsors = {
     platinum: [
-      { name: 'TechLegal Corp', logo: '', description: 'Leading AI solutions for legal professionals' },
-      { name: 'Global IP Solutions', logo: '', description: 'Worldwide trademark protection services' }
+      { 
+        name: 'TechLegal Corp', 
+        logo: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=200&h=100&fit=crop', 
+        description: 'Leading AI solutions for legal professionals' 
+      },
+      { 
+        name: 'Global IP Solutions', 
+        logo: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=200&h=100&fit=crop', 
+        description: 'Worldwide trademark protection services' 
+      }
     ],
     gold: [
-      { name: 'Innovation Partners', logo: '', description: 'IP consulting and strategy' },
-      { name: 'Brand Protect Inc', logo: '', description: 'Anti-counterfeiting solutions' },
-      { name: 'Legal Tech Hub', logo: '', description: 'Digital transformation for law firms' }
+      { 
+        name: 'Innovation Partners', 
+        logo: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=150&h=75&fit=crop', 
+        description: 'IP consulting and strategy' 
+      },
+      { 
+        name: 'Brand Protect Inc', 
+        logo: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=150&h=75&fit=crop', 
+        description: 'Anti-counterfeiting solutions' 
+      },
+      { 
+        name: 'Legal Tech Hub', 
+        logo: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=150&h=75&fit=crop', 
+        description: 'Digital transformation for law firms' 
+      }
     ],
     silver: [
-      { name: 'IP Analytics', logo: '', description: 'Data-driven IP insights' },
-      { name: 'Trademark Tools', logo: '', description: 'Software for trademark management' },
-      { name: 'Global Legal Network', logo: '', description: 'International legal services' },
-      { name: 'Digital Rights Co', logo: '', description: 'Online brand protection' }
+      { 
+        name: 'IP Analytics', 
+        logo: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=120&h=60&fit=crop', 
+        description: 'Data-driven IP insights' 
+      },
+      { 
+        name: 'Trademark Tools', 
+        logo: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=120&h=60&fit=crop', 
+        description: 'Software for trademark management' 
+      },
+      { 
+        name: 'Global Legal Network', 
+        logo: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=120&h=60&fit=crop', 
+        description: 'International legal services' 
+      },
+      { 
+        name: 'Digital Rights Co', 
+        logo: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=120&h=60&fit=crop', 
+        description: 'Online brand protection' 
+      }
     ]
   };
 
   const mediaGallery = [
-    { id: 1, type: 'image', title: 'Opening Ceremony 2027', thumbnail: '', date: 'Day 1' },
-    { id: 2, type: 'video', title: 'Keynote Highlights', thumbnail: '', date: 'Day 1' },
-    { id: 3, type: 'image', title: 'Networking Session', thumbnail: '', date: 'Day 2' },
-    { id: 4, type: 'video', title: 'Panel Discussion', thumbnail: '', date: 'Day 2' },
-    { id: 5, type: 'image', title: 'Innovation Showcase', thumbnail: '', date: 'Day 3' },
-    { id: 6, type: 'video', title: 'Closing Remarks', thumbnail: '', date: 'Day 3' }
+    { 
+      id: 1, 
+      type: 'image', 
+      title: 'Opening Ceremony 2027', 
+      thumbnail: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=400&h=300&fit=crop', 
+      date: 'Day 1' 
+    },
+    { 
+      id: 2, 
+      type: 'video', 
+      title: 'Keynote Highlights', 
+      thumbnail: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop', 
+      date: 'Day 1' 
+    },
+    { 
+      id: 3, 
+      type: 'image', 
+      title: 'Networking Session', 
+      thumbnail: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=300&fit=crop', 
+      date: 'Day 2' 
+    },
+    { 
+      id: 4, 
+      type: 'video', 
+      title: 'Panel Discussion', 
+      thumbnail: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=400&h=300&fit=crop', 
+      date: 'Day 2' 
+    },
+    { 
+      id: 5, 
+      type: 'image', 
+      title: 'Innovation Showcase', 
+      thumbnail: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop', 
+      date: 'Day 3' 
+    },
+    { 
+      id: 6, 
+      type: 'video', 
+      title: 'Closing Remarks', 
+      thumbnail: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=300&fit=crop', 
+      date: 'Day 3' 
+    }
   ];
 
   const SponsorCard = ({ sponsor, tier }: { sponsor: any, tier: string }) => {
@@ -41,14 +113,18 @@ const SponsorsSection = () => {
     };
 
     return (
-      <Card className={`hover:shadow-lg transition-shadow duration-300 ${tierColors[tier as keyof typeof tierColors]}`}>
+      <Card className={`hover:shadow-xl transition-all duration-300 hover:scale-105 ${tierColors[tier as keyof typeof tierColors]}`}>
         <CardContent className="p-6 text-center">
-          <div className="w-full h-24 bg-white rounded-lg flex items-center justify-center mb-4 border">
-            <span className="text-sm text-inta-gray">{sponsor.name}</span>
+          <div className="w-full h-24 bg-white rounded-lg flex items-center justify-center mb-4 border overflow-hidden">
+            <img 
+              src={sponsor.logo} 
+              alt={sponsor.name}
+              className="w-full h-full object-cover rounded-lg"
+            />
           </div>
           <h3 className="font-semibold text-inta-navy mb-2">{sponsor.name}</h3>
           <p className="text-sm text-inta-gray mb-4">{sponsor.description}</p>
-          <Button variant="outline" size="sm" className="w-full">
+          <Button variant="outline" size="sm" className="w-full hover:bg-inta-blue hover:text-white">
             <ExternalLink className="w-3 h-3 mr-1" />
             Visit Website
           </Button>
@@ -58,8 +134,17 @@ const SponsorsSection = () => {
   };
 
   return (
-    <section id="sponsors" className="py-20 bg-inta-light">
-      <div className="container mx-auto px-4">
+    <section id="sponsors" className="py-20 bg-inta-light relative">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <img 
+          src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=1920&h=1080&fit=crop"
+          alt="Event background"
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-inta-navy mb-4">Sponsors & Media</h2>
@@ -118,7 +203,7 @@ const SponsorsSection = () => {
             </div>
 
             {/* Sponsorship CTA */}
-            <div className="bg-white rounded-lg p-8 text-center border-2 border-inta-accent/20">
+            <div className="bg-white rounded-lg p-8 text-center border-2 border-inta-accent/20 shadow-lg">
               <h3 className="text-2xl font-semibold text-inta-navy mb-4">Become a Sponsor</h3>
               <p className="text-inta-gray mb-6">
                 Join industry leaders in supporting the future of intellectual property innovation.
@@ -143,15 +228,18 @@ const SponsorsSection = () => {
             {/* Media Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {mediaGallery.map((item) => (
-                <Card key={item.id} className="hover:shadow-lg transition-shadow duration-300 group cursor-pointer">
+                <Card key={item.id} className="hover:shadow-xl transition-all duration-300 group cursor-pointer hover:scale-105">
                   <CardContent className="p-0">
-                    <div className="relative w-full h-48 bg-gradient-to-br from-inta-blue to-inta-navy rounded-t-lg flex items-center justify-center overflow-hidden">
-                      {item.type === 'video' ? (
+                    <div className="relative w-full h-48 rounded-t-lg overflow-hidden">
+                      <img 
+                        src={item.thumbnail} 
+                        alt={item.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                      {item.type === 'video' && (
                         <div className="absolute inset-0 bg-black/20 flex items-center justify-center group-hover:bg-black/40 transition-colors duration-300">
                           <Play className="w-12 h-12 text-white" />
                         </div>
-                      ) : (
-                        <ImageIcon className="w-12 h-12 text-white/70" />
                       )}
                       <Badge className="absolute top-2 right-2 bg-white/90 text-inta-navy">
                         {item.date}
@@ -173,7 +261,7 @@ const SponsorsSection = () => {
             </div>
 
             {/* Upload Section */}
-            <div className="bg-white rounded-lg p-8 text-center border-2 border-dashed border-inta-gray/30">
+            <div className="bg-white rounded-lg p-8 text-center border-2 border-dashed border-inta-gray/30 shadow-lg">
               <h3 className="text-xl font-semibold text-inta-navy mb-4">Share Your Event Photos</h3>
               <p className="text-inta-gray mb-6">
                 Help us capture memories! Upload your photos from the event.

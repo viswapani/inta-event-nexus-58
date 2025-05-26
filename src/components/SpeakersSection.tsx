@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -19,7 +18,7 @@ const SpeakersSection = () => {
       company: 'TechLegal Innovations',
       track: 'AI Innovation',
       bio: 'Leading expert in AI applications for legal technology with 15+ years of experience in intellectual property law.',
-      image: '',
+      image: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=400&h=400&fit=crop&crop=face',
       initials: 'SC',
       sessions: ['AI and the Future of Trademark Law', 'Machine Learning in IP Analysis'],
       social: {
@@ -34,7 +33,7 @@ const SpeakersSection = () => {
       company: 'Global IP Associates',
       track: 'AI Innovation',
       bio: 'International trademark attorney specializing in cross-border brand protection and enforcement strategies.',
-      image: '',
+      image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=400&fit=crop&crop=face',
       initials: 'MR',
       sessions: ['AI and the Future of Trademark Law'],
       social: {
@@ -49,7 +48,7 @@ const SpeakersSection = () => {
       company: 'Multinational Corp',
       track: 'Brand Protection',
       bio: 'Expert in global brand protection with extensive experience in anti-counterfeiting and enforcement.',
-      image: '',
+      image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=400&fit=crop&crop=face',
       initials: 'AW',
       sessions: ['Global Brand Protection Strategies', 'Anti-Counterfeiting Measures'],
       social: {
@@ -63,7 +62,7 @@ const SpeakersSection = () => {
       company: 'Innovation Partners',
       track: 'Digital Innovation',
       bio: 'Technology consultant helping organizations modernize their IP management and protection strategies.',
-      image: '',
+      image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=400&fit=crop&crop=face',
       initials: 'JM',
       sessions: ['Digital Transformation in IP Management'],
       social: {
@@ -98,8 +97,17 @@ const SpeakersSection = () => {
   };
 
   return (
-    <section id="speakers" className="py-20 bg-white">
-      <div className="container mx-auto px-4">
+    <section id="speakers" className="py-20 bg-white relative">
+      {/* Background Image */}
+      <div className="absolute inset-0 opacity-5">
+        <img 
+          src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=1920&h=1080&fit=crop"
+          alt="Event background"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-inta-navy mb-4">Featured Speakers</h2>
@@ -156,14 +164,14 @@ const SpeakersSection = () => {
           {filteredSpeakers.map((speaker) => (
             <Card 
               key={speaker.id} 
-              className="hover:shadow-lg transition-shadow duration-300 animate-fade-in"
+              className="hover:shadow-xl transition-all duration-300 animate-fade-in hover:scale-105"
               data-speaker-letter={speaker.name.charAt(0).toUpperCase()}
             >
               <CardContent className="p-6">
                 {/* Speaker Image and Basic Info */}
                 <div className="text-center mb-4">
-                  <Avatar className="w-20 h-20 mx-auto mb-3">
-                    <AvatarImage src={speaker.image} alt={speaker.name} />
+                  <Avatar className="w-24 h-24 mx-auto mb-3 ring-4 ring-inta-blue/20">
+                    <AvatarImage src={speaker.image} alt={speaker.name} className="object-cover" />
                     <AvatarFallback className="bg-inta-blue text-white text-lg font-semibold">
                       {speaker.initials}
                     </AvatarFallback>

@@ -1,5 +1,4 @@
-
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -7,42 +6,107 @@ import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Search, LinkedinIcon, Twitter, ExternalLink } from 'lucide-react';
-import { apiService, Speaker } from '@/services/api';
-import { useToast } from '@/hooks/use-toast';
 
 const SpeakersSection = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('all');
-  const [speakers, setSpeakers] = useState<Speaker[]>([]);
-  const [loading, setLoading] = useState(true);
-  const { toast } = useToast();
 
-  useEffect(() => {
-    const fetchSpeakers = async () => {
-      setLoading(true);
-      try {
-        const data = await apiService.getSpeakers();
-        setSpeakers(data);
-      } catch (error) {
-        console.error('Error loading speakers:', error);
-        toast({
-          title: 'Error',
-          description: 'Failed to load speakers data',
-          variant: 'destructive'
-        });
-      } finally {
-        setLoading(false);
+  const speakers = [
+    {
+      id: 1,
+      name: 'Dr. Sarah Chen',
+      title: 'Chief Innovation Officer',
+      company: 'TechLegal Innovations',
+      track: 'AI Innovation',
+      bio: 'Leading expert in AI applications for legal technology with 15+ years of experience in intellectual property law.',
+      image: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=400&h=400&fit=crop&crop=face',
+      initials: 'SC',
+      sessions: ['AI and the Future of Trademark Law', 'Machine Learning in IP Analysis'],
+      social: {
+        linkedin: '#',
+        twitter: '#'
       }
-    };
+    },
+    {
+      id: 2,
+      name: 'Mark Rodriguez',
+      title: 'Senior Partner',
+      company: 'Global IP Associates',
+      track: 'AI Innovation',
+      bio: 'International trademark attorney specializing in cross-border brand protection and enforcement strategies.',
+      image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=400&fit=crop&crop=face',
+      initials: 'MR',
+      sessions: ['AI and the Future of Trademark Law'],
+      social: {
+        linkedin: '#',
+        twitter: '#'
+      }
+    },
+    {
+      id: 3,
+      name: 'Alice Wang',
+      title: 'Director of Brand Protection',
+      company: 'Multinational Corp',
+      track: 'Brand Protection',
+      bio: 'Expert in global brand protection with extensive experience in anti-counterfeiting and enforcement.',
+      image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=400&fit=crop&crop=face',
+      initials: 'AW',
+      sessions: ['Global Brand Protection Strategies', 'Anti-Counterfeiting Measures'],
+      social: {
+        linkedin: '#'
+      }
+    },
+    {
+      id: 4,
+      name: 'James Miller',
+      title: 'IP Technology Consultant',
+      company: 'Innovation Partners',
+      track: 'Digital Innovation',
+      bio: 'Technology consultant helping organizations modernize their IP management and protection strategies.',
+      image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=400&fit=crop&crop=face',
+      initials: 'JM',
+      sessions: ['Digital Transformation in IP Management'],
+      social: {
+        linkedin: '#',
+        twitter: '#'
+      }
+    },
+    {
+      id: 5,
+      name: 'Elena Rodriguez',
+      title: 'Legal Tech Director',
+      company: 'FutureLaw Inc',
+      track: 'AI Innovation',
+      bio: 'Pioneering the integration of AI and machine learning in legal practice management.',
+      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b2e5?w=400&h=400&fit=crop&crop=face',
+      initials: 'ER',
+      sessions: ['Future of Legal Practice'],
+      social: {
+        linkedin: '#'
+      }
+    },
+    {
+      id: 6,
+      name: 'Michael Thompson',
+      title: 'Brand Strategy Lead',
+      company: 'Global Brands Co',
+      track: 'Brand Protection',
+      bio: 'Strategic brand protection expert with focus on digital transformation.',
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
+      initials: 'MT',
+      sessions: ['Digital Brand Protection'],
+      social: {
+        linkedin: '#',
+        twitter: '#'
+      }
+    }
+  ];
 
-    fetchSpeakers();
-  }, [toast]);
-
-  // Extract unique tracks from speakers
   const filters = [
     { value: 'all', label: 'All Speakers' },
-    ...Array.from(new Set(speakers.map(speaker => speaker.track)))
-      .map(track => ({ value: track, label: track }))
+    { value: 'AI Innovation', label: 'AI Innovation' },
+    { value: 'Brand Protection', label: 'Brand Protection' },
+    { value: 'Digital Innovation', label: 'Digital Innovation' }
   ];
 
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
@@ -61,19 +125,6 @@ const SpeakersSection = () => {
       speakerElements[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
-
-  if (loading) {
-    return (
-      <section id="speakers" className="py-12 bg-white relative min-h-screen">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-inta-navy mb-4">Loading Speakers...</h2>
-            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-inta-blue mx-auto"></div>
-          </div>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section id="speakers" className="py-12 bg-white relative min-h-screen">

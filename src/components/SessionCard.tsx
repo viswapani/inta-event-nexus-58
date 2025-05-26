@@ -1,7 +1,7 @@
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Clock, MapPin, Users, Calendar, bookmark, alarm-clock } from 'lucide-react';
+import { Clock, MapPin, Users, Calendar, Bookmark, AlarmClock } from 'lucide-react';
 import { useBookmarkStatus, useAddBookmark, useRemoveBookmark, useUpdateBookmarkAlarms } from '@/hooks/useBookmarks';
 import AlarmDialog from './AlarmDialog';
 
@@ -78,13 +78,13 @@ const SessionCard = ({
             )}
             {isBookmarked && (
               <Badge variant="secondary" className="bg-green-100 text-green-700 px-3 py-1 text-sm">
-                <bookmark className="w-3 h-3 mr-1" />
+                <Bookmark className="w-3 h-3 mr-1" />
                 Bookmarked
               </Badge>
             )}
             {bookmark && bookmark.alarms.some(alarm => alarm.enabled) && (
               <Badge variant="secondary" className="bg-orange-100 text-orange-700 px-3 py-1 text-sm">
-                <alarm-clock className="w-3 h-3 mr-1" />
+                <AlarmClock className="w-3 h-3 mr-1" />
                 {bookmark.alarms.filter(alarm => alarm.enabled).length} Alarm{bookmark.alarms.filter(alarm => alarm.enabled).length !== 1 ? 's' : ''}
               </Badge>
             )}
@@ -114,7 +114,7 @@ const SessionCard = ({
               disabled={addBookmarkMutation.isPending || removeBookmarkMutation.isPending}
               className={isBookmarked ? "bg-green-100 text-green-700 hover:bg-green-200" : "border-inta-gray text-inta-gray hover:bg-inta-gray hover:text-white"}
             >
-              <bookmark className="w-4 h-4 mr-2" />
+              <Bookmark className="w-4 h-4 mr-2" />
               {isBookmarked ? 'Bookmarked' : 'Bookmark'}
             </Button>
             
@@ -126,7 +126,7 @@ const SessionCard = ({
                 onAlarmsUpdate={handleAlarmsUpdate}
                 trigger={
                   <Button size="sm" variant="outline" className="border-orange-300 text-orange-600 hover:bg-orange-50">
-                    <alarm-clock className="w-4 h-4 mr-2" />
+                    <AlarmClock className="w-4 h-4 mr-2" />
                     Alarms ({bookmark.alarms.filter(alarm => alarm.enabled).length})
                   </Button>
                 }

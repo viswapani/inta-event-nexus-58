@@ -1,10 +1,9 @@
-
 import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
-import { alarm-clock, Clock, Plus, X } from 'lucide-react';
+import { AlarmClock, Clock, Plus, X } from 'lucide-react';
 
 interface BookmarkAlarm {
   id: string;
@@ -74,7 +73,7 @@ const AlarmDialog = ({ sessionTitle, sessionTime, alarms, onAlarmsUpdate, trigge
       <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <alarm-clock className="w-5 h-5" />
+            <AlarmClock className="w-5 h-5" />
             Set Alarms
           </DialogTitle>
         </DialogHeader>

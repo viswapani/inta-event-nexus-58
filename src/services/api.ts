@@ -1,4 +1,3 @@
-
 // Centralized API configuration
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
   ? 'https://your-api-domain.com/api' 
@@ -38,6 +37,12 @@ export const API_ENDPOINTS = {
   
   // Chatbot endpoint
   CHAT: (eventId: string) => `${API_BASE_URL}/events/${eventId}/chat`,
+  
+  // Bookmark endpoints
+  BOOKMARKS: (eventId: string) => `${API_BASE_URL}/events/${eventId}/bookmarks`,
+  ADD_BOOKMARK: (eventId: string) => `${API_BASE_URL}/events/${eventId}/bookmarks/add`,
+  REMOVE_BOOKMARK: (eventId: string, bookmarkId: string) => `${API_BASE_URL}/events/${eventId}/bookmarks/${bookmarkId}`,
+  UPDATE_BOOKMARK_ALARMS: (eventId: string, bookmarkId: string) => `${API_BASE_URL}/events/${eventId}/bookmarks/${bookmarkId}/alarms`,
   
   // Common endpoints
   NEWSLETTER_SIGNUP: `${API_BASE_URL}/newsletter/signup`,

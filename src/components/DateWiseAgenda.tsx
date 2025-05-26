@@ -74,6 +74,9 @@ const DateWiseAgenda = ({ programs, searchTerm, selectedTrack }: DateWiseAgendaP
                   session={session}
                   showProgram={true}
                   programTitle={session.program}
+                  eventId="event-2028"
+                  sessionId={`${date}-${index}`}
+                  sessionDate={date}
                 />
               ))}
             </div>

@@ -1,7 +1,9 @@
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Clock, MapPin, Users, Calendar } from 'lucide-react';
+import { Clock, MapPin, Users, Calendar, bookmark, alarm-clock } from 'lucide-react';
+import { useBookmarkStatus, useAddBookmark, useRemoveBookmark, useUpdateBookmarkAlarms } from '@/hooks/useBookmarks';
+import AlarmDialog from './AlarmDialog';
 
 interface SessionCardProps {
   session: {
@@ -14,9 +16,49 @@ interface SessionCardProps {
   };
   showProgram?: boolean;
   programTitle?: string;
+  eventId?: string;
+  sessionId?: string;
+  sessionDate?: string;
 }
 
-const SessionCard = ({ session, showProgram = false, programTitle }: SessionCardProps) => {
+const SessionCard = ({ 
+  session, 
+  showProgram = false, 
+  programTitle,
+  eventId = 'event-2028',
+  sessionId = `session-${session.title.replace(/\s+/g, '-').toLowerCase()}`,
+  sessionDate = 'March 15, 2028'
+}: SessionCardProps) => {
+  const { isBookmarked, bookmark } = useBookmarkStatus(eventId, sessionId);
+  const addBookmarkMutation = useAddBookmark(eventId);
+  const removeBookmarkMutation = useRemoveBookmark(eventId);
+  const updateAlarmsMutation = useUpdateBookmarkAlarms(eventId);
+
+  const handleBookmarkToggle = () => {
+    if (isBookmarked && bookmark) {
+      removeBookmarkMutation.mutate(bookmark.id);
+    } else {
+      addBookmarkMutation.mutate({
+        sessionId,
+        sessionTitle: session.title,
+        sessionTime: session.time,
+        sessionDate,
+        location: session.location,
+        track: session.track,
+        alarms: [],
+      });
+    }
+  };
+
+  const handleAlarmsUpdate = (alarms: any[]) => {
+    if (bookmark) {
+      updateAlarmsMutation.mutate({
+        bookmarkId: bookmark.id,
+        alarms,
+      });
+    }
+  };
+
   return (
     <div className="p-6 hover:bg-gray-50 transition-colors">
       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
@@ -32,6 +74,18 @@ const SessionCard = ({ session, showProgram = false, programTitle }: SessionCard
             {showProgram && programTitle && (
               <Badge variant="secondary" className="bg-gray-100 text-gray-700 px-3 py-1 text-sm">
                 {programTitle}
+              </Badge>
+            )}
+            {isBookmarked && (
+              <Badge variant="secondary" className="bg-green-100 text-green-700 px-3 py-1 text-sm">
+                <bookmark className="w-3 h-3 mr-1" />
+                Bookmarked
+              </Badge>
+            )}
+            {bookmark && bookmark.alarms.some(alarm => alarm.enabled) && (
+              <Badge variant="secondary" className="bg-orange-100 text-orange-700 px-3 py-1 text-sm">
+                <alarm-clock className="w-3 h-3 mr-1" />
+                {bookmark.alarms.filter(alarm => alarm.enabled).length} Alarm{bookmark.alarms.filter(alarm => alarm.enabled).length !== 1 ? 's' : ''}
               </Badge>
             )}
           </div>
@@ -53,6 +107,32 @@ const SessionCard = ({ session, showProgram = false, programTitle }: SessionCard
           </div>
 
           <div className="flex flex-wrap gap-3">
+            <Button 
+              size="sm" 
+              variant={isBookmarked ? "secondary" : "outline"}
+              onClick={handleBookmarkToggle}
+              disabled={addBookmarkMutation.isPending || removeBookmarkMutation.isPending}
+              className={isBookmarked ? "bg-green-100 text-green-700 hover:bg-green-200" : "border-inta-gray text-inta-gray hover:bg-inta-gray hover:text-white"}
+            >
+              <bookmark className="w-4 h-4 mr-2" />
+              {isBookmarked ? 'Bookmarked' : 'Bookmark'}
+            </Button>
+            
+            {isBookmarked && bookmark && (
+              <AlarmDialog
+                sessionTitle={session.title}
+                sessionTime={session.time}
+                alarms={bookmark.alarms}
+                onAlarmsUpdate={handleAlarmsUpdate}
+                trigger={
+                  <Button size="sm" variant="outline" className="border-orange-300 text-orange-600 hover:bg-orange-50">
+                    <alarm-clock className="w-4 h-4 mr-2" />
+                    Alarms ({bookmark.alarms.filter(alarm => alarm.enabled).length})
+                  </Button>
+                }
+              />
+            )}
+
             <Button size="sm" className="bg-inta-blue hover:bg-inta-navy">
               <Calendar className="w-4 h-4 mr-2" />
               Add to Calendar

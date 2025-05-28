@@ -6,7 +6,7 @@ import AgendaSection from "@/components/AgendaSection";
 import SpeakersSection from "@/components/SpeakersSection";
 import VenueSection from "@/components/VenueSection";
 import SponsorsSection from "@/components/SponsorsSection";
-import RegistrationForm from "@/components/RegistrationForm";
+import RegistrationSection from "@/components/RegistrationSection";
 import ChatbotSection from "@/components/ChatbotSection";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -16,23 +16,44 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-white">
       <Header />
+      
+      {/* 1. Hero - First impression with event overview */}
       <HeroSection />
+      
+      {/* 2. Countdown - Creates urgency and importance */}
       <CountdownSection />
-      <RegistrationForm />
+      
+      {/* 3. Video Highlights - Shows event value through past success */}
       <VideoHighlightsSection />
+      
+      {/* 4. Agenda - Core content that attendees care about */}
       <section id="agenda">
         <AgendaSection />
       </section>
+      
+      {/* 5. Speakers - Authority and credibility */}
       <section id="speakers">
         <SpeakersSection />
       </section>
+      
+      {/* 6. Venue - Practical information */}
       <VenueSection />
+      
+      {/* 7. Registration - Call to action after value demonstration */}
+      <section id="registration">
+        <RegistrationSection />
+      </section>
+      
+      {/* 8. Sponsors - Social proof and partnerships */}
       <section id="sponsors">
         <SponsorsSection />
       </section>
+      
+      {/* 9. AI Assistant - Support and engagement tool */}
       <section id="chatbot">
         <ChatbotSection />
       </section>
+      
       <Footer />
       <BottomActionBar />
       

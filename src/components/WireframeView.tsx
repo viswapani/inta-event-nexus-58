@@ -126,51 +126,204 @@ const WireframeView = () => {
           </div>
         </div>
 
-        {/* Agenda Section */}
+        {/* Agenda Section with Tabs */}
         <div className="bg-white border-2 border-dashed border-gray-300 p-6 rounded-lg">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">Event Agenda</h2>
-          <div className="space-y-4">
-            <div className="flex justify-center space-x-4 mb-6">
-              <Button className="bg-blue-600">Day 1</Button>
-              <Button variant="outline">Day 2</Button>
-              <Button variant="outline">Day 3</Button>
+          
+          {/* Agenda Filters */}
+          <div className="mb-6 space-y-4">
+            <div className="flex flex-wrap gap-4">
+              <input 
+                placeholder="Search sessions, speakers, tracks..." 
+                className="flex-1 min-w-64 px-4 py-2 border rounded-lg"
+              />
+              <select className="px-4 py-2 border rounded-lg">
+                <option>All Tracks</option>
+                <option>AI Innovation</option>
+                <option>Brand Protection</option>
+                <option>Digital Innovation</option>
+              </select>
             </div>
-            <div className="space-y-3">
-              <div className="bg-gray-50 p-4 rounded border-l-4 border-blue-600">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h4 className="font-semibold">Opening Keynote: Future of IP Law</h4>
-                    <p className="text-sm text-gray-600">9:00 AM - 10:00 AM • Main Auditorium</p>
-                    <p className="text-sm text-blue-600">Speaker: Dr. Sarah Johnson</p>
+          </div>
+
+          {/* Tab Navigation */}
+          <div className="mb-6">
+            <div className="flex bg-gray-100 rounded-lg p-1">
+              <Button className="flex-1 bg-blue-600 text-white">View by Programs</Button>
+              <Button variant="ghost" className="flex-1">View by Date</Button>
+            </div>
+          </div>
+
+          {/* View by Programs Content */}
+          <div className="space-y-4">
+            <div className="bg-gray-50 border rounded-lg">
+              <div className="p-4 border-b bg-blue-50">
+                <h3 className="text-lg font-semibold text-blue-800">Main Conference Program</h3>
+                <p className="text-sm text-blue-600">Core sessions, keynotes, and networking events</p>
+              </div>
+              <div className="p-4 space-y-3">
+                <div className="bg-white p-3 rounded border-l-4 border-blue-600">
+                  <div className="flex justify-between">
+                    <div>
+                      <h4 className="font-medium">Opening Keynote: AI and the Future of Trademark Law</h4>
+                      <p className="text-sm text-gray-600">9:00 AM - 10:30 AM • Main Auditorium</p>
+                      <p className="text-sm text-blue-600">Dr. Sarah Chen, Mark Rodriguez</p>
+                    </div>
+                    <Button size="sm" variant="outline">Bookmark</Button>
                   </div>
-                  <Button size="sm" variant="outline">Add to Calendar</Button>
+                </div>
+                <div className="bg-white p-3 rounded border-l-4 border-green-600">
+                  <div className="flex justify-between">
+                    <div>
+                      <h4 className="font-medium">Global Brand Protection Strategies</h4>
+                      <p className="text-sm text-gray-600">11:00 AM - 12:30 PM • Conference Room A</p>
+                      <p className="text-sm text-green-600">Alice Wang, James Miller, Roberto Silva</p>
+                    </div>
+                    <Button size="sm" variant="outline">Bookmark</Button>
+                  </div>
                 </div>
               </div>
-              <div className="bg-gray-50 p-4 rounded border-l-4 border-green-600">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h4 className="font-semibold">Panel: AI and Trademark Protection</h4>
-                    <p className="text-sm text-gray-600">10:30 AM - 11:30 AM • Conference Room A</p>
-                    <p className="text-sm text-green-600">4 Expert Panelists</p>
-                  </div>
-                  <Button size="sm" variant="outline">Add to Calendar</Button>
-                </div>
+            </div>
+
+            <div className="bg-gray-50 border rounded-lg">
+              <div className="p-4 border-b bg-purple-50">
+                <h3 className="text-lg font-semibold text-purple-800">Young Professionals Program</h3>
+                <p className="text-sm text-purple-600">Specialized sessions for emerging IP professionals</p>
               </div>
-              <div className="bg-gray-50 p-4 rounded border-l-4 border-purple-600">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h4 className="font-semibold">Workshop: Patent Filing Strategies</h4>
-                    <p className="text-sm text-gray-600">2:00 PM - 4:00 PM • Workshop Room 1</p>
-                    <p className="text-sm text-purple-600">Interactive Session</p>
+              <div className="p-4 space-y-3">
+                <div className="bg-white p-3 rounded border-l-4 border-purple-600">
+                  <div className="flex justify-between">
+                    <div>
+                      <h4 className="font-medium">Career Development in IP Law</h4>
+                      <p className="text-sm text-gray-600">2:00 PM - 3:30 PM • Meeting Room C</p>
+                      <p className="text-sm text-purple-600">Jennifer Adams, Michael Brown</p>
+                    </div>
+                    <Button size="sm" variant="outline">Bookmark</Button>
                   </div>
-                  <Button size="sm" variant="outline">Add to Calendar</Button>
                 </div>
               </div>
             </div>
           </div>
+
           <div className="bg-indigo-50 p-3 rounded mt-4">
-            <p className="text-sm font-semibold text-indigo-800">AGENDA SECTION</p>
-            <p className="text-xs text-indigo-600">Complete event schedule with day-wise filters, session details, speaker information, venue, timing, and personal calendar integration. Users can bookmark sessions and create personal agendas.</p>
+            <p className="text-sm font-semibold text-indigo-800">AGENDA - VIEW BY PROGRAMS</p>
+            <p className="text-xs text-indigo-600">Organizes sessions by program tracks (Main Conference, Young Professionals, Corporate Counsel, etc.). Users can expand each program to see its sessions and bookmark individual sessions.</p>
+          </div>
+        </div>
+
+        {/* View by Date Section */}
+        <div className="bg-white border-2 border-dashed border-gray-300 p-6 rounded-lg">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">Agenda - View by Date</h2>
+          
+          {/* Tab Navigation (Date View Active) */}
+          <div className="mb-6">
+            <div className="flex bg-gray-100 rounded-lg p-1">
+              <Button variant="ghost" className="flex-1">View by Programs</Button>
+              <Button className="flex-1 bg-blue-600 text-white">View by Date</Button>
+            </div>
+          </div>
+
+          {/* Date-wise Content */}
+          <div className="space-y-6">
+            <div className="bg-gray-50 border rounded-lg">
+              <div className="p-4 bg-blue-600 text-white">
+                <h3 className="text-xl font-semibold flex items-center">
+                  <span className="w-6 h-6 mr-3">📅</span>
+                  Wednesday, May 28, 2025
+                </h3>
+              </div>
+              <div className="divide-y">
+                <div className="p-4 flex justify-between items-start">
+                  <div className="flex-1">
+                    <div className="flex items-start space-x-4">
+                      <div className="text-sm font-mono text-gray-500 w-24">9:00 AM</div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold">Opening Keynote: AI and the Future of Trademark Law</h4>
+                        <p className="text-sm text-gray-600">Main Auditorium • Main Conference Program</p>
+                        <p className="text-sm text-blue-600">Dr. Sarah Chen, Mark Rodriguez</p>
+                        <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mt-1">AI Innovation</span>
+                      </div>
+                    </div>
+                  </div>
+                  <Button size="sm" variant="outline">Bookmark</Button>
+                </div>
+                
+                <div className="p-4 flex justify-between items-start">
+                  <div className="flex-1">
+                    <div className="flex items-start space-x-4">
+                      <div className="text-sm font-mono text-gray-500 w-24">11:00 AM</div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold">Global Brand Protection Strategies</h4>
+                        <p className="text-sm text-gray-600">Conference Room A • Main Conference Program</p>
+                        <p className="text-sm text-green-600">Alice Wang, James Miller, Roberto Silva</p>
+                        <span className="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded mt-1">Brand Protection</span>
+                      </div>
+                    </div>
+                  </div>
+                  <Button size="sm" variant="outline">Bookmark</Button>
+                </div>
+
+                <div className="p-4 flex justify-between items-start">
+                  <div className="flex-1">
+                    <div className="flex items-start space-x-4">
+                      <div className="text-sm font-mono text-gray-500 w-24">2:00 PM</div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold">Career Development in IP Law</h4>
+                        <p className="text-sm text-gray-600">Meeting Room C • Young Professionals Program</p>
+                        <p className="text-sm text-purple-600">Jennifer Adams, Michael Brown</p>
+                        <span className="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded mt-1">Career Development</span>
+                      </div>
+                    </div>
+                  </div>
+                  <Button size="sm" variant="outline">Bookmark</Button>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 border rounded-lg">
+              <div className="p-4 bg-blue-600 text-white">
+                <h3 className="text-xl font-semibold flex items-center">
+                  <span className="w-6 h-6 mr-3">📅</span>
+                  Thursday, May 29, 2025
+                </h3>
+              </div>
+              <div className="divide-y">
+                <div className="p-4 flex justify-between items-start">
+                  <div className="flex-1">
+                    <div className="flex items-start space-x-4">
+                      <div className="text-sm font-mono text-gray-500 w-24">9:00 AM</div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold">Digital Evidence Collection Workshop</h4>
+                        <p className="text-sm text-gray-600">Tech Lab B • Specialized Workshops</p>
+                        <p className="text-sm text-orange-600">Lisa Thompson, David Park</p>
+                        <span className="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded mt-1">Digital Innovation</span>
+                      </div>
+                    </div>
+                  </div>
+                  <Button size="sm" variant="outline">Bookmark</Button>
+                </div>
+
+                <div className="p-4 flex justify-between items-start">
+                  <div className="flex-1">
+                    <div className="flex items-start space-x-4">
+                      <div className="text-sm font-mono text-gray-500 w-24">11:00 AM</div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold">Managing Global IP Portfolios</h4>
+                        <p className="text-sm text-gray-600">Executive Boardroom • Corporate Counsel Program</p>
+                        <p className="text-sm text-teal-600">Rebecca Kim, John Anderson</p>
+                        <span className="inline-block bg-teal-100 text-teal-800 text-xs px-2 py-1 rounded mt-1">Portfolio Management</span>
+                      </div>
+                    </div>
+                  </div>
+                  <Button size="sm" variant="outline">Bookmark</Button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-cyan-50 p-3 rounded mt-4">
+            <p className="text-sm font-semibold text-cyan-800">AGENDA - VIEW BY DATE</p>
+            <p className="text-xs text-cyan-600">Chronological view of all sessions across all programs organized by date and time. Shows session details, tracks, locations, and which program each session belongs to. Users can bookmark individual sessions.</p>
           </div>
         </div>
 
@@ -362,9 +515,9 @@ const WireframeView = () => {
 
         {/* Page Info */}
         <div className="text-center text-gray-500 text-sm space-y-2 py-8">
-          <p className="text-lg font-semibold">INTA Event 2025 - Detailed Wireframe</p>
-          <p>Complete Event Management System Layout with Visual Content</p>
-          <p className="text-xs">This wireframe shows the full user journey from landing to registration with actual content examples</p>
+          <p className="text-lg font-semibold">INTA Event 2025 - Complete Wireframe</p>
+          <p>Full Event Management System Layout with Visual Content</p>
+          <p className="text-xs">This wireframe shows the complete user journey including both agenda viewing options (by programs and by date)</p>
         </div>
       </div>
     </div>

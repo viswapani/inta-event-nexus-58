@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
@@ -184,7 +185,7 @@ const AgendaSection = () => {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-inta-navy mb-3">2025 Annual Meeting Schedule</h2>
+          <h2 className="text-3xl font-bold text-inta-navy mb-3">Today's Agenda</h2>
           <p className="text-lg text-inta-gray max-w-2xl mx-auto">
             Join us for three days of comprehensive programming designed for IP professionals.
           </p>
@@ -217,15 +218,19 @@ const AgendaSection = () => {
           </TabsList>
           
           <TabsContent value="programs">
-            <ProgramAccordion programs={filteredPrograms} />
+            <div className="agenda-view">
+              <ProgramAccordion programs={filteredPrograms} />
+            </div>
           </TabsContent>
           
           <TabsContent value="dates">
-            <DateWiseAgenda 
-              programs={programs}
-              searchTerm={searchTerm}
-              selectedTrack={selectedTrack}
-            />
+            <div className="agenda-view">
+              <DateWiseAgenda 
+                programs={programs}
+                searchTerm={searchTerm}
+                selectedTrack={selectedTrack}
+              />
+            </div>
           </TabsContent>
         </Tabs>
 
@@ -246,6 +251,16 @@ const AgendaSection = () => {
             </Button>
           </div>
         </div>
+
+        <style jsx>{`
+          .agenda-view :global(.view-details-btn) {
+            background-color: #f97316;
+            color: white;
+          }
+          .agenda-view :global(.view-details-btn:hover) {
+            background-color: #ea580c;
+          }
+        `}</style>
       </div>
     </section>
   );

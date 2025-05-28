@@ -79,16 +79,16 @@ const RegistrationForm = () => {
   const selectedPlan = plans.find(plan => plan.id === form.watch('plan')) || plans[0];
 
   return (
-    <section id="registration" className="py-12 bg-gradient-to-br from-inta-light to-white">
+    <section id="registration" className="py-12 bg-gradient-to-br from-orange-500 via-orange-400 to-orange-600">
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-inta-navy mb-2">Register Now</h2>
-          <p className="text-inta-gray">Secure your spot at INTA Annual Meeting 2025</p>
+          <h2 className="text-3xl font-bold text-white mb-2">Register Now</h2>
+          <p className="text-white/90">Secure your spot at INTA Annual Meeting 2025</p>
         </div>
 
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Registration Form */}
-          <Card className="border-2 border-inta-accent/20">
+          <Card className="border-2 border-white/30 bg-white/95 backdrop-blur-sm shadow-2xl">
             <CardHeader>
               <CardTitle className="text-xl text-inta-navy">Registration Details</CardTitle>
             </CardHeader>
@@ -229,7 +229,7 @@ const RegistrationForm = () => {
 
           {/* Quick Stats & Benefits */}
           <div className="space-y-6">
-            <Card className="border-2 border-blue-100">
+            <Card className="border-2 border-white/30 bg-white/95 backdrop-blur-sm shadow-2xl">
               <CardHeader>
                 <CardTitle className="text-lg text-inta-navy flex items-center gap-2">
                   <Users className="w-5 h-5" />
@@ -254,7 +254,7 @@ const RegistrationForm = () => {
               </CardContent>
             </Card>
 
-            <Card className="border-2 border-green-100">
+            <Card className="border-2 border-white/30 bg-white/95 backdrop-blur-sm shadow-2xl">
               <CardHeader>
                 <CardTitle className="text-lg text-inta-navy">What's Included</CardTitle>
               </CardHeader>
@@ -284,7 +284,7 @@ const RegistrationForm = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-inta-light border-2 border-inta-accent/30">
+            <Card className="bg-white/90 border-2 border-white/50 backdrop-blur-sm shadow-2xl">
               <CardContent className="p-4 text-center">
                 <h3 className="font-semibold text-inta-navy mb-1">100% Satisfaction Guarantee</h3>
                 <p className="text-sm text-inta-gray">

@@ -3,11 +3,10 @@ import HeroSection from "@/components/HeroSection";
 import CountdownSection from "@/components/CountdownSection";
 import VideoHighlightsSection from "@/components/VideoHighlightsSection";
 import AgendaSection from "@/components/AgendaSection";
-import Favorites from "@/components/Favorites";
 import SpeakersSection from "@/components/SpeakersSection";
 import VenueSection from "@/components/VenueSection";
 import SponsorsSection from "@/components/SponsorsSection";
-import RegistrationSection from "@/components/RegistrationSection";
+import RegistrationForm from "@/components/RegistrationForm";
 import ChatbotSection from "@/components/ChatbotSection";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -19,6 +18,7 @@ const Index = () => {
       <Header />
       <HeroSection />
       <CountdownSection />
+      <RegistrationForm />
       <VideoHighlightsSection />
       <section id="agenda">
         <AgendaSection />
@@ -30,7 +30,6 @@ const Index = () => {
       <section id="sponsors">
         <SponsorsSection />
       </section>
-      <RegistrationSection />
       <section id="chatbot">
         <ChatbotSection />
       </section>

@@ -25,6 +25,14 @@ const Header = () => {
     { name: 'AI Assistant', href: '#chatbot', icon: MessageCircle },
   ];
 
+  const scrollToRegistration = () => {
+    const registrationSection = document.getElementById('registration');
+    if (registrationSection) {
+      registrationSection.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMenuOpen(false);
+  };
+
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 glass-effect">
@@ -33,7 +41,7 @@ const Header = () => {
             {/* Logo */}
             <div className="flex items-center">
               <div className="bg-inta-navy text-white px-3 py-1 rounded-md font-bold text-sm">
-                INTA
+                TA
               </div>
             </div>
 
@@ -76,7 +84,10 @@ const Header = () => {
                 <span className="hidden lg:inline">Profile</span>
               </Button>
               
-              <Button className="bg-inta-blue hover:bg-inta-navy text-white">
+              <Button 
+                className="bg-inta-blue hover:bg-inta-navy text-white"
+                onClick={scrollToRegistration}
+              >
                 Register Now
               </Button>
             </nav>
@@ -126,7 +137,10 @@ const Header = () => {
                   </a>
                 ))}
                 <div className="pt-4 border-t border-gray-200">
-                  <Button className="bg-inta-blue hover:bg-inta-navy text-white w-full">
+                  <Button 
+                    className="bg-inta-blue hover:bg-inta-navy text-white w-full"
+                    onClick={scrollToRegistration}
+                  >
                     Register Now
                   </Button>
                 </div>

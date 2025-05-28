@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { Calendar, Users, Globe, ArrowRight, Play } from 'lucide-react';
 import { useState, useEffect } from 'react';
@@ -81,7 +82,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
       {/* Enhanced Video/Image Background Slider */}
       <div className="absolute inset-0">
         {videoSlides.map((slide, index) => (
@@ -161,9 +162,9 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Seamless Video/Image Display - Moved up more */}
+          {/* Compact Video/Image Display */}
           <div className="mb-6 animate-slide-in">
-            <div className="max-w-6xl mx-auto mb-4">
+            <div className="max-w-4xl mx-auto mb-4">
               <div className="relative group cursor-pointer">
                 <div className="aspect-video rounded-xl overflow-hidden bg-black relative shadow-2xl">
                   {mainVideoContent.map((content, index) => (
@@ -229,30 +230,23 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Enhanced CTA Buttons */}
-          <div className="animate-slide-in mb-10">
-            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-8">
-              <Button 
-                size="lg" 
-                className="bg-inta-accent hover:bg-inta-orange text-inta-navy font-bold text-xl px-10 py-6 h-auto shadow-2xl hover:shadow-inta-accent/25 transition-all duration-300 hover:scale-105"
-              >
-                Register Now
-                <ArrowRight className="w-6 h-6 ml-3" />
-              </Button>
+          {/* Simple CTA */}
+          <div className="animate-slide-in mb-8">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="border-2 border-white text-white hover:bg-white hover:text-inta-navy font-bold text-xl px-10 py-6 h-auto bg-white/10 backdrop-blur-sm transition-all duration-300 hover:scale-105"
+                className="border-2 border-white text-white hover:bg-white hover:text-inta-navy font-bold text-lg px-8 py-4 h-auto bg-white/10 backdrop-blur-sm transition-all duration-300 hover:scale-105"
               >
-                <Play className="w-6 h-6 mr-3" />
+                <Play className="w-5 h-5 mr-2" />
                 Watch Preview
               </Button>
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="border-2 border-inta-accent text-inta-accent hover:bg-inta-accent hover:text-inta-navy font-bold text-xl px-10 py-6 h-auto bg-transparent transition-all duration-300 hover:scale-105"
+                className="border-2 border-inta-accent text-inta-accent hover:bg-inta-accent hover:text-inta-navy font-bold text-lg px-8 py-4 h-auto bg-transparent transition-all duration-300 hover:scale-105"
               >
-                <Calendar className="w-6 h-6 mr-3" />
+                <Calendar className="w-5 h-5 mr-2" />
                 View Agenda
               </Button>
             </div>
@@ -263,18 +257,18 @@ const HeroSection = () => {
             {stats.map((stat, index) => (
               <div 
                 key={stat.label} 
-                className="text-center p-8 rounded-2xl bg-white/15 backdrop-blur-md border border-white/30 hover:bg-white/20 transition-all duration-300 hover:scale-105 shadow-xl"
+                className="text-center p-6 rounded-2xl bg-white/15 backdrop-blur-md border border-white/30 hover:bg-white/20 transition-all duration-300 hover:scale-105 shadow-xl"
                 style={{ animationDelay: `${index * 200}ms` }}
               >
-                <div className="mb-6">
-                  <div className="w-20 h-20 mx-auto bg-inta-accent/20 rounded-full flex items-center justify-center mb-4">
-                    <stat.icon className="w-10 h-10 text-inta-accent" />
+                <div className="mb-4">
+                  <div className="w-16 h-16 mx-auto bg-inta-accent/20 rounded-full flex items-center justify-center mb-3">
+                    <stat.icon className="w-8 h-8 text-inta-accent" />
                   </div>
                 </div>
-                <div className="text-5xl font-bold text-white mb-3 bg-gradient-to-r from-white to-orange-200 bg-clip-text text-transparent">
+                <div className="text-4xl font-bold text-white mb-2 bg-gradient-to-r from-white to-orange-200 bg-clip-text text-transparent">
                   {stat.value}
                 </div>
-                <div className="text-orange-200 text-xl font-medium">{stat.label}</div>
+                <div className="text-orange-200 text-lg font-medium">{stat.label}</div>
               </div>
             ))}
           </div>

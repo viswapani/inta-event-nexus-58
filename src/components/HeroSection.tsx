@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { Calendar, Users, Globe, ArrowRight, Play } from 'lucide-react';
 import { useState, useEffect } from 'react';
@@ -128,36 +127,36 @@ const HeroSection = () => {
         <div className="text-center text-white">
           {/* Dynamic Content Based on Current Slide */}
           <div className="animate-fade-in">
-            <div className="mb-6">
-              <div className="inline-block px-6 py-3 bg-inta-accent/20 backdrop-blur-sm rounded-full border border-inta-accent/30 mb-6">
+            <div className="mb-4">
+              <div className="inline-block px-6 py-3 bg-inta-accent/20 backdrop-blur-sm rounded-full border border-inta-accent/30 mb-4">
                 <span className="text-inta-accent font-semibold text-lg">Annual Meeting 2025</span>
               </div>
             </div>
-            <h1 className="text-7xl md:text-8xl font-bold mb-6 leading-tight bg-gradient-to-r from-white via-orange-100 to-inta-accent bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight bg-gradient-to-r from-white via-orange-100 to-inta-accent bg-clip-text text-transparent">
               INTA 2025
             </h1>
-            <p className="text-3xl md:text-4xl mb-4 text-orange-200 font-light">
+            <p className="text-2xl md:text-3xl mb-3 text-orange-200 font-light">
               {videoSlides[currentSlide].title}
             </p>
-            <p className="text-xl md:text-2xl mb-8 text-orange-100/90">
+            <p className="text-lg md:text-xl mb-6 text-orange-100/90">
               {videoSlides[currentSlide].subtitle}
             </p>
-            <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-xl mb-8 text-orange-100">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-lg mb-4 text-orange-100">
               <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
-                <Calendar className="w-6 h-6 mr-2 text-inta-accent" />
+                <Calendar className="w-5 h-5 mr-2 text-inta-accent" />
                 <span>May 28-30, 2025</span>
               </div>
               <div className="hidden md:block w-2 h-2 bg-inta-accent rounded-full animate-pulse"></div>
               <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
-                <Globe className="w-6 h-6 mr-2 text-inta-accent" />
+                <Globe className="w-5 h-5 mr-2 text-inta-accent" />
                 <span>San Francisco, CA</span>
               </div>
             </div>
           </div>
 
-          {/* Seamless Video/Image Display */}
-          <div className="mb-12 animate-slide-in">
-            <div className="max-w-6xl mx-auto mb-8">
+          {/* Seamless Video/Image Display - Moved up */}
+          <div className="mb-8 animate-slide-in">
+            <div className="max-w-6xl mx-auto mb-6">
               <div className="relative group cursor-pointer">
                 <div className="aspect-video rounded-xl overflow-hidden bg-black relative shadow-2xl">
                   {mainVideoContent.map((content, index) => (
@@ -205,7 +204,7 @@ const HeroSection = () => {
                 </div>
                 
                 {/* Content navigation dots */}
-                <div className="flex justify-center mt-6 space-x-3">
+                <div className="flex justify-center mt-4 space-x-3">
                   {mainVideoContent.map((_, i) => (
                     <button
                       key={i}
@@ -224,7 +223,7 @@ const HeroSection = () => {
           </div>
 
           {/* Enhanced CTA Buttons */}
-          <div className="animate-slide-in mb-16">
+          <div className="animate-slide-in mb-12">
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-8">
               <Button 
                 size="lg" 

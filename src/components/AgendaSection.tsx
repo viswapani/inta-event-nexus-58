@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
@@ -255,11 +254,20 @@ const AgendaSection = () => {
 
       <style>{`
         .agenda-view .view-details-btn {
-          background-color: #f97316;
-          color: white;
+          background-color: #f97316 !important;
+          color: white !important;
         }
         .agenda-view .view-details-btn:hover {
-          background-color: #ea580c;
+          background-color: #ea580c !important;
+        }
+        .agenda-view button[class*="view-details"], 
+        .agenda-view button:contains("Session Details") {
+          background-color: #f97316 !important;
+          color: white !important;
+        }
+        .agenda-view button[class*="view-details"]:hover,
+        .agenda-view button:contains("Session Details"):hover {
+          background-color: #ea580c !important;
         }
       `}</style>
     </section>

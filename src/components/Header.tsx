@@ -38,11 +38,9 @@ const Header = () => {
       <header className="fixed top-0 left-0 right-0 z-50 glass-effect">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            {/* Logo */}
+            {/* Empty left space where logo was */}
             <div className="flex items-center">
-              <div className="bg-inta-navy text-white px-3 py-1 rounded-md font-bold text-sm">
-                TA
-              </div>
+              {/* Logo removed */}
             </div>
 
             {/* Desktop Navigation */}
@@ -83,34 +81,38 @@ const Header = () => {
                 <User className="w-4 h-4" />
                 <span className="hidden lg:inline">Profile</span>
               </Button>
-              
+            </nav>
+
+            {/* Prominent Register Now Button */}
+            <div className="flex items-center gap-2">
               <Button 
-                className="bg-inta-blue hover:bg-inta-navy text-white"
+                className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-2 text-lg shadow-lg"
                 onClick={scrollToRegistration}
               >
                 Register Now
               </Button>
-            </nav>
-
-            {/* Mobile Menu Button */}
-            <div className="md:hidden flex items-center gap-2">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setIsSearchOpen(true)}
-              >
-                <Search className="w-5 h-5 text-inta-navy" />
-              </Button>
-              <button
-                className="p-2"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-              >
-                {isMenuOpen ? (
-                  <X className="w-6 h-6 text-inta-navy" />
-                ) : (
-                  <Menu className="w-6 h-6 text-inta-navy" />
-                )}
-              </button>
+              
+              {/* Mobile Menu Button */}
+              <div className="md:hidden">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setIsSearchOpen(true)}
+                  className="mr-2"
+                >
+                  <Search className="w-5 h-5 text-inta-navy" />
+                </Button>
+                <button
+                  className="p-2"
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                >
+                  {isMenuOpen ? (
+                    <X className="w-6 h-6 text-inta-navy" />
+                  ) : (
+                    <Menu className="w-6 h-6 text-inta-navy" />
+                  )}
+                </button>
+              </div>
             </div>
           </div>
 
@@ -138,7 +140,7 @@ const Header = () => {
                 ))}
                 <div className="pt-4 border-t border-gray-200">
                   <Button 
-                    className="bg-inta-blue hover:bg-inta-navy text-white w-full"
+                    className="bg-orange-500 hover:bg-orange-600 text-white w-full"
                     onClick={scrollToRegistration}
                   >
                     Register Now

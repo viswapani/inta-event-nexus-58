@@ -134,7 +134,7 @@ const HeroSection = () => {
         <div className="absolute -bottom-8 left-40 w-72 h-72 bg-inta-accent rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"></div>
       </div>
 
-      <div className="container mx-auto px-4 pt-16 relative z-10">
+      <div className="w-full px-4 pt-16 relative z-10">
         <div className="text-center text-white">
           {/* Dynamic Content Based on Current Slide */}
           <div className="animate-fade-in">
@@ -160,11 +160,11 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Compact Video/Image Display */}
+          {/* Full Width Video/Image Display */}
           <div className="mb-6 animate-slide-in">
-            <div className="max-w-2xl mx-auto mb-4">
+            <div className="w-full mb-4">
               <div className="relative group cursor-pointer">
-                <div className="aspect-video rounded-xl overflow-hidden bg-black relative shadow-2xl">
+                <div className="aspect-video rounded-xl overflow-hidden bg-black relative shadow-2xl w-full">
                   {mainVideoContent.map((content, index) => (
                     <div
                       key={index}
@@ -229,22 +229,22 @@ const HeroSection = () => {
           </div>
 
           {/* Compact Stats with Visual Effects */}
-          <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto animate-fade-in">
+          <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto animate-fade-in">
             {stats.map((stat, index) => (
               <div 
                 key={stat.label} 
-                className="text-center p-3 rounded-xl bg-white/15 backdrop-blur-md border border-white/30 hover:bg-white/20 transition-all duration-300 hover:scale-105 shadow-xl"
+                className="text-center p-2 rounded-xl bg-white/15 backdrop-blur-md border border-white/30 hover:bg-white/20 transition-all duration-300 hover:scale-105 shadow-xl"
                 style={{ animationDelay: `${index * 200}ms` }}
               >
-                <div className="mb-2">
-                  <div className="w-10 h-10 mx-auto bg-inta-accent/20 rounded-full flex items-center justify-center mb-2">
-                    <stat.icon className="w-5 h-5 text-inta-accent" />
+                <div className="mb-1">
+                  <div className="w-8 h-8 mx-auto bg-inta-accent/20 rounded-full flex items-center justify-center mb-1">
+                    <stat.icon className="w-4 h-4 text-inta-accent" />
                   </div>
                 </div>
-                <div className="text-2xl font-bold text-white mb-1 bg-gradient-to-r from-white to-orange-200 bg-clip-text text-transparent">
+                <div className="text-lg font-bold text-white mb-1 bg-gradient-to-r from-white to-orange-200 bg-clip-text text-transparent">
                   {stat.value}
                 </div>
-                <div className="text-orange-200 text-sm font-medium">{stat.label}</div>
+                <div className="text-orange-200 text-xs font-medium">{stat.label}</div>
               </div>
             ))}
           </div>

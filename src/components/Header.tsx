@@ -76,7 +76,7 @@ const Header = () => {
               <Button
                 variant="outline"
                 size="sm"
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 mr-8"
               >
                 <User className="w-4 h-4" />
                 <span className="hidden lg:inline">Profile</span>

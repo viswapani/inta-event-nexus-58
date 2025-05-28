@@ -1,9 +1,7 @@
-
 import { useState, useEffect } from 'react';
 import { Calendar, Clock, MapPin, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-
 interface CountdownSectionProps {
   eventData?: {
     name: string;
@@ -12,15 +10,15 @@ interface CountdownSectionProps {
     location: string;
   };
 }
-
 interface CurrentDaySession {
   time: string;
   title: string;
   location: string;
   track: string;
 }
-
-const CountdownSection = ({ eventData }: CountdownSectionProps) => {
+const CountdownSection = ({
+  eventData
+}: CountdownSectionProps) => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -34,51 +32,44 @@ const CountdownSection = ({ eventData }: CountdownSectionProps) => {
     const urlParams = new URLSearchParams(window.location.search);
     const startDate = urlParams.get('startDate');
     const endDate = urlParams.get('endDate');
-    
     if (startDate && endDate) {
       return {
         startDate: new Date(startDate),
         endDate: new Date(endDate)
       };
     }
-    
+
     // Default to current date if no URL params (showing as active event)
     const today = new Date();
     return {
       startDate: today,
-      endDate: new Date(today.getTime() + (2 * 24 * 60 * 60 * 1000)) // 2 days from today
+      endDate: new Date(today.getTime() + 2 * 24 * 60 * 60 * 1000) // 2 days from today
     };
   };
 
   // Mock current day sessions - in real implementation, this would come from API
   const getCurrentDaySessions = (): CurrentDaySession[] => {
-    return [
-      {
-        time: '9:00 AM - 10:30 AM',
-        title: 'Opening Keynote: AI and the Future of Trademark Law',
-        location: 'Main Auditorium',
-        track: 'AI Innovation'
-      },
-      {
-        time: '11:00 AM - 12:30 PM',
-        title: 'Global Brand Protection Strategies',
-        location: 'Conference Room A',
-        track: 'Brand Protection'
-      },
-      {
-        time: '2:00 PM - 3:30 PM',
-        title: 'Digital Evidence Collection Workshop',
-        location: 'Tech Lab B',
-        track: 'Digital Innovation'
-      }
-    ];
+    return [{
+      time: '9:00 AM - 10:30 AM',
+      title: 'Opening Keynote: AI and the Future of Trademark Law',
+      location: 'Main Auditorium',
+      track: 'AI Innovation'
+    }, {
+      time: '11:00 AM - 12:30 PM',
+      title: 'Global Brand Protection Strategies',
+      location: 'Conference Room A',
+      track: 'Brand Protection'
+    }, {
+      time: '2:00 PM - 3:30 PM',
+      title: 'Digital Evidence Collection Workshop',
+      location: 'Tech Lab B',
+      track: 'Digital Innovation'
+    }];
   };
-
   useEffect(() => {
     const urlDates = getEventDatesFromURL();
     const targetDate = eventData ? new Date(eventData.startDate) : urlDates.startDate;
     const endDate = eventData ? new Date(eventData.endDate) : urlDates.endDate;
-    
     const timer = setInterval(() => {
       const now = new Date();
       const startTime = targetDate.getTime();
@@ -90,48 +81,53 @@ const CountdownSection = ({ eventData }: CountdownSectionProps) => {
         setIsEventActive(true);
       } else if (currentTime < startTime) {
         setIsEventActive(false);
-        
+
         // Calculate countdown for future events
         const distance = startTime - currentTime;
-        
         if (distance > 0) {
           const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-          setTimeLeft({ days, hours, minutes, seconds });
+          const hours = Math.floor(distance % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
+          const minutes = Math.floor(distance % (1000 * 60 * 60) / (1000 * 60));
+          const seconds = Math.floor(distance % (1000 * 60) / 1000);
+          setTimeLeft({
+            days,
+            hours,
+            minutes,
+            seconds
+          });
         }
       } else {
         // Event has passed
         setIsEventActive(false);
       }
     }, 1000);
-
     return () => clearInterval(timer);
   }, [eventData]);
-
   const eventName = eventData?.name || 'INTA 2025 Annual Meeting';
   const location = eventData?.location || 'San Francisco, CA';
-  
+
   // Format dates for display
   const formatEventDates = () => {
     if (eventData) {
       return `${eventData.startDate} - ${eventData.endDate}`;
     }
-    
     const urlDates = getEventDatesFromURL();
-    const startStr = urlDates.startDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    const endStr = urlDates.endDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    const startStr = urlDates.startDate.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    });
+    const endStr = urlDates.endDate.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    });
     return `${startStr} - ${endStr}`;
   };
-
   const currentDaySessions = getCurrentDaySessions();
-
   if (isEventActive) {
     // Show current day agenda when event is active
-    return (
-      <section className="py-16 bg-gradient-to-r from-inta-navy via-inta-blue to-inta-navy text-white">
+    return <section className="py-16 bg-gradient-to-r from-inta-navy via-inta-blue to-inta-navy text-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
             <h2 className="text-4xl font-bold mb-4">Today's Agenda</h2>
@@ -140,7 +136,12 @@ const CountdownSection = ({ eventData }: CountdownSectionProps) => {
             <div className="flex flex-col md:flex-row items-center justify-center gap-6 text-lg mt-4">
               <div className="flex items-center">
                 <Calendar className="w-6 h-6 mr-2 text-inta-accent" />
-                <span>{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                <span>{new Date().toLocaleDateString('en-US', {
+                  weekday: 'long',
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}</span>
               </div>
               <div className="flex items-center">
                 <MapPin className="w-6 h-6 mr-2 text-inta-accent" />
@@ -150,8 +151,7 @@ const CountdownSection = ({ eventData }: CountdownSectionProps) => {
           </div>
 
           <div className="grid gap-4 max-w-4xl mx-auto mb-8">
-            {currentDaySessions.map((session, index) => (
-              <Card key={index} className="bg-white/10 backdrop-blur-sm border border-white/20 text-white">
+            {currentDaySessions.map((session, index) => <Card key={index} className="bg-white/10 backdrop-blur-sm border border-white/20 text-white">
                 <CardContent className="p-6">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                     <div className="flex-1">
@@ -168,35 +168,26 @@ const CountdownSection = ({ eventData }: CountdownSectionProps) => {
                         {session.location}
                       </p>
                     </div>
-                    <Button 
-                      variant="outline" 
-                      className="border-white text-white hover:bg-white hover:text-inta-navy"
-                    >
+                    <Button variant="outline" className="border-white text-white hover:text-inta-navy bg-orange-400 hover:bg-orange-300">
                       View Details
                     </Button>
                   </div>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
 
           <div className="text-center">
-            <Button 
-              className="bg-inta-accent hover:bg-yellow-500 text-inta-navy font-bold"
-              size="lg"
-            >
+            <Button className="bg-inta-accent hover:bg-yellow-500 text-inta-navy font-bold" size="lg">
               View Full Agenda
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </div>
         </div>
-      </section>
-    );
+      </section>;
   }
 
   // Show countdown for future events
-  return (
-    <section className="py-16 bg-gradient-to-r from-inta-navy via-inta-blue to-inta-navy text-white">
+  return <section className="py-16 bg-gradient-to-r from-inta-navy via-inta-blue to-inta-navy text-white">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-4xl font-bold mb-4">Event Countdown</h2>
         <p className="text-xl mb-8 text-blue-200">Don't miss {eventName}</p>
@@ -231,8 +222,6 @@ const CountdownSection = ({ eventData }: CountdownSectionProps) => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default CountdownSection;

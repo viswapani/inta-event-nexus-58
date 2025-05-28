@@ -37,6 +37,14 @@ const Header = () => {
     <>
       <header className="fixed top-0 left-0 right-0 z-50 glass-effect">
         <div className="container mx-auto px-4">
+          {/* INTA Logo Header */}
+          <div className="flex items-center justify-center py-3 border-b border-gray-200">
+            <div className="text-2xl font-bold text-inta-navy">
+              <span className="text-inta-blue">INTA</span>
+              <span className="text-gray-600 ml-2 text-lg">International Trademark Association</span>
+            </div>
+          </div>
+
           <div className="flex items-center justify-between h-16">
             {/* Empty left space where logo was */}
             <div className="flex items-center">
@@ -76,7 +84,7 @@ const Header = () => {
               <Button
                 variant="outline"
                 size="sm"
-                className="flex items-center gap-2 mr-8"
+                className="flex items-center gap-2 mr-4"
               >
                 <User className="w-4 h-4" />
                 <span className="hidden lg:inline">Profile</span>
@@ -87,7 +95,7 @@ const Header = () => {
             <div className="flex items-center gap-4">
               <Button 
                 size="sm"
-                className="bg-orange-500 hover:bg-orange-600 text-white font-bold ml-2"
+                className="bg-orange-500 hover:bg-orange-600 text-white font-bold ml-4 h-9"
                 onClick={scrollToRegistration}
               >
                 Register Now

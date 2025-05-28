@@ -38,7 +38,7 @@ const Header = () => {
       <header className="fixed top-0 left-0 right-0 z-50 glass-effect">
         <div className="container mx-auto px-4">
           {/* INTA Logo Header */}
-          <div className="flex items-center justify-center py-3 border-b border-gray-200">
+          <div className="flex items-center justify-start py-3 border-b border-gray-200">
             <div className="text-2xl font-bold text-inta-navy">
               <span className="text-inta-blue">INTA</span>
               <span className="text-gray-600 ml-2 text-lg">International Trademark Association</span>

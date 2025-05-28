@@ -140,7 +140,7 @@ const VenueSection = ({ venueData, hotelsData }: VenueSectionProps) => {
               
               <div className="h-96 lg:h-auto relative overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                  src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                   alt="Moscone Convention Center"
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                 />

@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
@@ -11,6 +12,49 @@ const AgendaSection = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTrack, setSelectedTrack] = useState('all');
 
+  // Get dates from URL parameters
+  const getEventDatesFromURL = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const startDate = urlParams.get('startDate');
+    const endDate = urlParams.get('endDate');
+    
+    if (startDate && endDate) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      
+      // Generate dates between start and end
+      const dates = [];
+      const currentDate = new Date(start);
+      
+      while (currentDate <= end) {
+        dates.push(new Date(currentDate).toLocaleDateString('en-US', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        }));
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+      
+      return {
+        dates,
+        hasUrlDates: true
+      };
+    }
+
+    // Default dates
+    return {
+      dates: [
+        'Wednesday, May 28, 2025',
+        'Thursday, May 29, 2025',
+        'Friday, May 30, 2025'
+      ],
+      hasUrlDates: false
+    };
+  };
+
+  const eventDates = getEventDatesFromURL();
+  
   const programs = [
     {
       id: 'main-conference',
@@ -18,7 +62,7 @@ const AgendaSection = () => {
       description: 'Core sessions, keynotes, and networking events',
       days: [
         {
-          date: 'Wednesday, May 28, 2025',
+          date: eventDates.dates[0] || 'Wednesday, May 28, 2025',
           sessions: [
             {
               time: '8:00 AM - 9:00 AM',
@@ -55,7 +99,7 @@ const AgendaSection = () => {
           ]
         },
         {
-          date: 'Thursday, May 29, 2025',
+          date: eventDates.dates[1] || 'Thursday, May 29, 2025',
           sessions: [
             {
               time: '9:00 AM - 10:30 AM',
@@ -83,7 +127,7 @@ const AgendaSection = () => {
       description: 'Specialized sessions for emerging IP professionals',
       days: [
         {
-          date: 'Wednesday, May 28, 2025',
+          date: eventDates.dates[0] || 'Wednesday, May 28, 2025',
           sessions: [
             {
               time: '2:00 PM - 3:30 PM',
@@ -111,7 +155,7 @@ const AgendaSection = () => {
       description: 'In-house perspective on IP management and strategy',
       days: [
         {
-          date: 'Thursday, May 29, 2025',
+          date: eventDates.dates[1] || 'Thursday, May 29, 2025',
           sessions: [
             {
               time: '9:00 AM - 10:30 AM',
@@ -139,7 +183,7 @@ const AgendaSection = () => {
       description: 'Hands-on training and skill-building sessions',
       days: [
         {
-          date: 'Friday, May 30, 2025',
+          date: eventDates.dates[2] || 'Friday, May 30, 2025',
           sessions: [
             {
               time: '9:00 AM - 12:00 PM',

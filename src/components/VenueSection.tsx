@@ -80,17 +80,17 @@ const VenueSection = ({ venueData, hotelsData }: VenueSectionProps) => {
   };
 
   return (
-    <section id="venue" className="py-20 bg-gradient-to-br from-inta-light via-white to-blue-50 relative overflow-hidden">
+    <section id="venue" className="py-20 bg-gradient-to-br from-inta-light via-white to-orange-50 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-0 w-full h-full bg-blue-50"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-orange-50"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Enhanced Header */}
         <div className="text-center mb-20">
-          <div className="inline-block px-6 py-3 bg-inta-blue/10 rounded-full border border-inta-blue/20 mb-6">
-            <span className="text-inta-blue font-semibold">Location & Stay</span>
+          <div className="inline-block px-6 py-3 bg-inta-orange/10 rounded-full border border-inta-orange/20 mb-6">
+            <span className="text-inta-orange font-semibold">Location & Stay</span>
           </div>
           <h2 className="text-5xl font-bold text-inta-navy mb-6">Venue & Accommodation</h2>
           <p className="text-xl text-inta-gray max-w-3xl mx-auto leading-relaxed">
@@ -106,7 +106,7 @@ const VenueSection = ({ venueData, hotelsData }: VenueSectionProps) => {
                 <CardHeader className="px-0 pt-0">
                   <CardTitle className="text-4xl text-inta-navy mb-6 font-bold">{venue.name}</CardTitle>
                   <div className="flex items-start mb-6">
-                    <MapPin className="w-7 h-7 text-inta-blue mr-4 mt-1" />
+                    <MapPin className="w-7 h-7 text-inta-orange mr-4 mt-1" />
                     <p className="text-inta-gray text-xl leading-relaxed">{venue.address}</p>
                   </div>
                 </CardHeader>
@@ -117,7 +117,7 @@ const VenueSection = ({ venueData, hotelsData }: VenueSectionProps) => {
                     <h4 className="font-bold text-inta-navy mb-4 text-lg">Venue Amenities</h4>
                     <div className="flex flex-wrap gap-3">
                       {venue.amenities.map((amenity, index) => (
-                        <Badge key={index} variant="outline" className="flex items-center gap-2 px-4 py-2 text-sm border-inta-blue/30 hover:bg-inta-blue/5 transition-colors">
+                        <Badge key={index} variant="outline" className="flex items-center gap-2 px-4 py-2 text-sm border-inta-orange/30 hover:bg-inta-orange/5 transition-colors">
                           {getAmenityIcon(amenity)}
                           {amenity}
                         </Badge>
@@ -126,7 +126,7 @@ const VenueSection = ({ venueData, hotelsData }: VenueSectionProps) => {
                   </div>
 
                   <div className="flex gap-4">
-                    <Button className="bg-inta-blue hover:bg-inta-navy text-white shadow-lg hover:shadow-xl transition-all duration-300">
+                    <Button className="bg-inta-orange hover:bg-inta-orange-dark text-white shadow-lg hover:shadow-xl transition-all duration-300">
                       <ExternalLink className="w-5 h-5 mr-2" />
                       View on Google Maps
                     </Button>
@@ -183,7 +183,7 @@ const VenueSection = ({ venueData, hotelsData }: VenueSectionProps) => {
                     <CardTitle className="text-xl text-inta-navy font-bold">{hotel.name}</CardTitle>
                     <div className="flex items-center">
                       {[...Array(hotel.rating)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                        <Star key={i} className="w-4 h-4 text-inta-orange fill-current" />
                       ))}
                     </div>
                   </div>
@@ -204,7 +204,7 @@ const VenueSection = ({ venueData, hotelsData }: VenueSectionProps) => {
                       ))}
                     </div>
                   </div>
-                  <Button className="w-full bg-inta-accent hover:bg-yellow-500 text-inta-navy font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
+                  <Button className="w-full bg-inta-accent hover:bg-inta-orange text-inta-navy font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
                     <ExternalLink className="w-4 h-4 mr-2" />
                     Book Now
                   </Button>
@@ -215,18 +215,18 @@ const VenueSection = ({ venueData, hotelsData }: VenueSectionProps) => {
         </div>
 
         {/* Enhanced Booking Assistance */}
-        <div className="mt-20 bg-gradient-to-r from-inta-navy to-inta-blue rounded-2xl p-10 text-center shadow-2xl text-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-blue-900/20 opacity-20"></div>
+        <div className="mt-20 bg-gradient-to-r from-inta-navy to-inta-orange rounded-2xl p-10 text-center shadow-2xl text-white relative overflow-hidden">
+          <div className="absolute inset-0 bg-orange-900/20 opacity-20"></div>
           <div className="relative z-10">
             <h3 className="text-3xl font-bold mb-4">Need Booking Assistance?</h3>
-            <p className="text-blue-200 mb-8 text-lg max-w-2xl mx-auto">
+            <p className="text-orange-200 mb-8 text-lg max-w-2xl mx-auto">
               Our dedicated concierge team is here to help you find the perfect accommodation and make your stay unforgettable.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="outline" className="border-white text-white hover:bg-white hover:text-inta-navy bg-white/10 backdrop-blur-sm">
                 Contact Concierge
               </Button>
-              <Button className="bg-inta-accent hover:bg-yellow-500 text-inta-navy font-semibold">
+              <Button className="bg-inta-accent hover:bg-inta-orange text-inta-navy font-semibold">
                 <Play className="w-4 h-4 mr-2" />
                 Virtual Consultation
               </Button>

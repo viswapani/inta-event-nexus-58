@@ -31,13 +31,13 @@ const HeroSection = () => {
           }}
         />
         {/* Enhanced overlay with gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-inta-navy/95 via-inta-blue/90 to-inta-navy/95"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-inta-navy/95 via-inta-orange/90 to-inta-navy/95"></div>
       </div>
 
       {/* Animated Background Elements */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 left-20 w-96 h-96 bg-inta-accent rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-80 h-80 bg-inta-blue rounded-full mix-blend-multiply filter blur-2xl animate-pulse animation-delay-2000"></div>
+        <div className="absolute top-40 right-20 w-80 h-80 bg-inta-orange rounded-full mix-blend-multiply filter blur-2xl animate-pulse animation-delay-2000"></div>
         <div className="absolute -bottom-8 left-40 w-72 h-72 bg-inta-accent rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"></div>
       </div>
 
@@ -50,13 +50,13 @@ const HeroSection = () => {
                 <span className="text-inta-accent font-semibold text-lg">Annual Meeting 2025</span>
               </div>
             </div>
-            <h1 className="text-7xl md:text-8xl font-bold mb-6 leading-tight bg-gradient-to-r from-white via-blue-100 to-inta-accent bg-clip-text text-transparent">
+            <h1 className="text-7xl md:text-8xl font-bold mb-6 leading-tight bg-gradient-to-r from-white via-orange-100 to-inta-accent bg-clip-text text-transparent">
               INTA 2025
             </h1>
-            <p className="text-3xl md:text-4xl mb-4 text-blue-200 font-light">
+            <p className="text-3xl md:text-4xl mb-4 text-orange-200 font-light">
               Intellectual Property Excellence
             </p>
-            <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-xl mb-8 text-blue-100">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-xl mb-8 text-orange-100">
               <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
                 <Calendar className="w-6 h-6 mr-2 text-inta-accent" />
                 <span>May 28-30, 2025</span>
@@ -74,7 +74,7 @@ const HeroSection = () => {
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-8">
               <Button 
                 size="lg" 
-                className="bg-inta-accent hover:bg-yellow-500 text-inta-navy font-bold text-xl px-10 py-6 h-auto shadow-2xl hover:shadow-inta-accent/25 transition-all duration-300 hover:scale-105"
+                className="bg-inta-accent hover:bg-inta-orange text-inta-navy font-bold text-xl px-10 py-6 h-auto shadow-2xl hover:shadow-inta-accent/25 transition-all duration-300 hover:scale-105"
               >
                 Register Now
                 <ArrowRight className="w-6 h-6 ml-3" />
@@ -111,10 +111,10 @@ const HeroSection = () => {
                     <stat.icon className="w-10 h-10 text-inta-accent" />
                   </div>
                 </div>
-                <div className="text-5xl font-bold text-white mb-3 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+                <div className="text-5xl font-bold text-white mb-3 bg-gradient-to-r from-white to-orange-200 bg-clip-text text-transparent">
                   {stat.value}
                 </div>
-                <div className="text-blue-200 text-xl font-medium">{stat.label}</div>
+                <div className="text-orange-200 text-xl font-medium">{stat.label}</div>
               </div>
             ))}
           </div>

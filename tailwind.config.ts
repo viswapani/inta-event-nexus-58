@@ -64,11 +64,14 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				inta: {
-					navy: '#1a365d',
-					blue: '#2563eb',
-					accent: '#f59e0b',
-					light: '#f8fafc',
-					gray: '#64748b'
+					navy: '#1a1a1a',
+					orange: '#ff6900',
+					'orange-light': '#ff8533',
+					'orange-dark': '#cc5200',
+					accent: '#ffb366',
+					light: '#fff5f0',
+					gray: '#64748b',
+					'gray-dark': '#475569'
 				}
 			},
 			borderRadius: {

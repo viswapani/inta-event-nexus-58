@@ -16,21 +16,33 @@ const HeroSection = () => {
     {
       type: 'video',
       src: 'https://player.vimeo.com/external/434045526.sd.mp4?s=c27eecc69a27dbc4ff2b87d38afc35f1a9e7c02d&profile_id=164&oauth2_token_id=57447761',
-      poster: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=2112&q=80',
+      poster: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=2112&q=80',
       title: 'Innovation in IP Law',
       subtitle: 'Shaping the Future of Intellectual Property'
     },
     {
       type: 'image',
-      src: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2112&q=80',
-      title: 'Global Network',
-      subtitle: 'Connect with Industry Leaders Worldwide'
+      src: 'https://images.unsplash.com/photo-1431540015161-0bf868a2d407?ixlib=rb-4.0.3&auto=format&fit=crop&w=2112&q=80',
+      title: 'Global Conference Center',
+      subtitle: 'World-Class Event Venue'
     },
     {
       type: 'image',
-      src: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=2112&q=80',
-      title: 'Knowledge Summit',
-      subtitle: 'Elevate Your Expertise to New Heights'
+      src: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2112&q=80',
+      title: 'Technology & Innovation',
+      subtitle: 'Digital Transformation in Law'
+    },
+    {
+      type: 'image',
+      src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2112&q=80',
+      title: 'Modern Conference Hall',
+      subtitle: 'Premium Event Experience'
+    },
+    {
+      type: 'image',
+      src: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2112&q=80',
+      title: 'Legal Technology',
+      subtitle: 'Coding the Future of Law'
     }
   ];
 
@@ -39,18 +51,18 @@ const HeroSection = () => {
     {
       type: 'video',
       src: 'https://player.vimeo.com/external/434045526.sd.mp4?s=c27eecc69a27dbc4ff2b87d38afc35f1a9e7c02d&profile_id=164&oauth2_token_id=57447761',
-      poster: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      poster: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
       title: 'INTA 2024 Highlights'
     },
     {
       type: 'image',
-      src: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-      title: 'Speaker Insights'
+      src: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      title: 'Conference Insights'
     },
     {
       type: 'image',
-      src: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-      title: 'Innovation Showcase'
+      src: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      title: 'Digital Innovation'
     }
   ];
 

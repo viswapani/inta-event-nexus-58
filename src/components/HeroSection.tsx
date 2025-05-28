@@ -1,40 +1,95 @@
 
 import { Button } from '@/components/ui/button';
 import { Calendar, Users, Globe, ArrowRight, Play } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 const HeroSection = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  
   const stats = [
     { icon: Users, label: 'Speakers', value: '150+' },
     { icon: Calendar, label: 'Sessions', value: '75+' },
     { icon: Globe, label: 'Countries', value: '50+' },
   ];
 
+  const videoSlides = [
+    {
+      type: 'video',
+      src: 'https://player.vimeo.com/external/434045526.sd.mp4?s=c27eecc69a27dbc4ff2b87d38afc35f1a9e7c02d&profile_id=164&oauth2_token_id=57447761',
+      poster: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=2112&q=80',
+      title: 'Innovation in IP Law',
+      subtitle: 'Shaping the Future of Intellectual Property'
+    },
+    {
+      type: 'image',
+      src: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2112&q=80',
+      title: 'Global Network',
+      subtitle: 'Connect with Industry Leaders Worldwide'
+    },
+    {
+      type: 'image',
+      src: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=2112&q=80',
+      title: 'Knowledge Summit',
+      subtitle: 'Elevate Your Expertise to New Heights'
+    }
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % videoSlides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Video Background */}
+      {/* Enhanced Video/Image Background Slider */}
       <div className="absolute inset-0">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover"
-          poster="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=2112&q=80"
-        >
-          <source src="https://player.vimeo.com/external/434045526.sd.mp4?s=c27eecc69a27dbc4ff2b87d38afc35f1a9e7c02d&profile_id=164&oauth2_token_id=57447761" type="video/mp4" />
-        </video>
-        {/* Fallback background image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=2112&q=80')`
-          }}
-        />
-        {/* Enhanced overlay with gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-inta-navy/95 via-inta-orange/90 to-inta-navy/95"></div>
+        {videoSlides.map((slide, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentSlide ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            {slide.type === 'video' ? (
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+                poster={slide.poster}
+              >
+                <source src={slide.src} type="video/mp4" />
+              </video>
+            ) : (
+              <div
+                className="w-full h-full bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: `url('${slide.src}')` }}
+              />
+            )}
+            
+            {/* Slide-specific overlay with gradient */}
+            <div className="absolute inset-0 bg-gradient-to-br from-inta-navy/95 via-inta-orange/85 to-inta-navy/95"></div>
+            
+            {/* Slide indicators */}
+            <div className="absolute bottom-8 right-8 flex space-x-2 z-20">
+              {videoSlides.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentSlide(i)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    i === currentSlide ? 'bg-inta-accent scale-125' : 'bg-white/50 hover:bg-white/70'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
 
-      {/* Animated Background Elements */}
+      {/* Enhanced Animated Background Elements */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 left-20 w-96 h-96 bg-inta-accent rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
         <div className="absolute top-40 right-20 w-80 h-80 bg-inta-orange rounded-full mix-blend-multiply filter blur-2xl animate-pulse animation-delay-2000"></div>
@@ -43,7 +98,7 @@ const HeroSection = () => {
 
       <div className="container mx-auto px-4 pt-20 relative z-10">
         <div className="text-center text-white">
-          {/* Main Content with Enhanced Typography */}
+          {/* Dynamic Content Based on Current Slide */}
           <div className="animate-fade-in">
             <div className="mb-6">
               <div className="inline-block px-6 py-3 bg-inta-accent/20 backdrop-blur-sm rounded-full border border-inta-accent/30 mb-6">
@@ -54,7 +109,10 @@ const HeroSection = () => {
               INTA 2025
             </h1>
             <p className="text-3xl md:text-4xl mb-4 text-orange-200 font-light">
-              Intellectual Property Excellence
+              {videoSlides[currentSlide].title}
+            </p>
+            <p className="text-xl md:text-2xl mb-8 text-orange-100/90">
+              {videoSlides[currentSlide].subtitle}
             </p>
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-xl mb-8 text-orange-100">
               <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
@@ -65,6 +123,56 @@ const HeroSection = () => {
               <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
                 <Globe className="w-6 h-6 mr-2 text-inta-accent" />
                 <span>San Francisco, CA</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Video Highlights Section Above CTA Buttons */}
+          <div className="mb-12 animate-slide-in">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-8">
+              <div className="relative group cursor-pointer">
+                <div className="aspect-video rounded-xl overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 hover:border-inta-accent/50 transition-all duration-300">
+                  <img 
+                    src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                    alt="Event Highlights"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-inta-navy/40 group-hover:bg-inta-orange/40 transition-colors duration-300"></div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Play className="w-12 h-12 text-white group-hover:text-inta-accent group-hover:scale-110 transition-all duration-300" />
+                  </div>
+                </div>
+                <p className="text-orange-200 mt-3 font-medium">2024 Highlights</p>
+              </div>
+              
+              <div className="relative group cursor-pointer">
+                <div className="aspect-video rounded-xl overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 hover:border-inta-accent/50 transition-all duration-300">
+                  <img 
+                    src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                    alt="Speaker Insights"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-inta-navy/40 group-hover:bg-inta-orange/40 transition-colors duration-300"></div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Play className="w-12 h-12 text-white group-hover:text-inta-accent group-hover:scale-110 transition-all duration-300" />
+                  </div>
+                </div>
+                <p className="text-orange-200 mt-3 font-medium">Speaker Insights</p>
+              </div>
+              
+              <div className="relative group cursor-pointer">
+                <div className="aspect-video rounded-xl overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 hover:border-inta-accent/50 transition-all duration-300">
+                  <img 
+                    src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                    alt="Innovation Showcase"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-inta-navy/40 group-hover:bg-inta-orange/40 transition-colors duration-300"></div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Play className="w-12 h-12 text-white group-hover:text-inta-accent group-hover:scale-110 transition-all duration-300" />
+                  </div>
+                </div>
+                <p className="text-orange-200 mt-3 font-medium">Innovation Showcase</p>
               </div>
             </div>
           </div>

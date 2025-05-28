@@ -19,21 +19,21 @@ const AgendaResourcesSection = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Button 
           onClick={() => handleDownload('Floorplan')}
-          className="bg-inta-blue hover:bg-inta-navy text-white h-16 text-lg font-semibold"
+          className="bg-inta-navy hover:bg-gray-800 text-white h-16 text-lg font-semibold"
         >
           <Download className="w-6 h-6 mr-3" />
           Download the Floorplan
         </Button>
         <Button 
           onClick={() => handleDownload('Mobile App')}
-          className="bg-inta-accent hover:bg-orange-600 text-white h-16 text-lg font-semibold"
+          className="bg-inta-accent hover:bg-orange-600 text-inta-navy h-16 text-lg font-semibold"
         >
           <Smartphone className="w-6 h-6 mr-3" />
           Download the Mobile App
         </Button>
         <Button 
           onClick={() => handleDownload('Schedule-at-a-Glance')}
-          className="bg-inta-navy hover:bg-gray-800 text-white h-16 text-lg font-semibold"
+          className="bg-inta-orange hover:bg-inta-orange-dark text-white h-16 text-lg font-semibold"
         >
           <FileText className="w-6 h-6 mr-3" />
           Schedule-at-a-Glance

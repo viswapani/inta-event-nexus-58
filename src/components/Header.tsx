@@ -70,15 +70,15 @@ const Header = () => {
                 </a>)}
               
               {/* Desktop Search */}
-              <Button variant="outline" size="sm" onClick={() => setIsSearchOpen(true)} className="flex items-center gap-2 border-white text-white hover:text-orange-600 bg-slate-50">
+              <Button variant="outline" size="sm" onClick={() => setIsSearchOpen(true)} className="flex items-center gap-2 border-white bg-slate-50 text-orange-500">
                 <Search className="w-4 h-4" />
-                <span className="hidden lg:inline">Search</span>
+                <span className="hidden lg:inline font-bold text-base text-orange-500">Search</span>
               </Button>
               
               {/* Profile */}
-              <Button variant="outline" size="sm" className="flex items-center gap-2 mr-4 border-white text-white hover:text-orange-600 bg-neutral-50">
+              <Button variant="outline" size="sm" className="flex items-center gap-2 mr-4 border-white bg-neutral-50 text-orange-500">
                 <User className="w-4 h-4" />
-                <span className="hidden lg:inline">Profile</span>
+                <span className="hidden lg:inline text-orange-500">Profile</span>
               </Button>
             </nav>
 

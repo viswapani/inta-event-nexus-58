@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -185,9 +186,8 @@ const SponsorsSection = () => {
           </TabsList>
 
           <TabsContent value="sponsors" className="space-y-8">
-            <Tabs defaultValue="all" className="w-full">
+            <Tabs defaultValue="platinum" className="w-full">
               <TabsList className="grid w-full grid-cols-4 mb-8">
-                <TabsTrigger value="all">All Sponsors</TabsTrigger>
                 <TabsTrigger value="platinum" className="flex items-center gap-2">
                   <Crown className="w-4 h-4" />
                   Platinum
@@ -200,7 +200,50 @@ const SponsorsSection = () => {
                   <Medal className="w-4 h-4" />
                   Silver
                 </TabsTrigger>
+                <TabsTrigger value="all">All Sponsors</TabsTrigger>
               </TabsList>
+
+              <TabsContent value="platinum" className="space-y-8">
+                <div className="flex items-center justify-center mb-8">
+                  <Badge className="bg-gradient-to-r from-gray-600 to-gray-800 text-white px-8 py-3 text-xl font-bold flex items-center gap-2">
+                    <Crown className="w-6 h-6" />
+                    Platinum Partners
+                  </Badge>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                  {sponsors.platinum.map((sponsor, index) => (
+                    <SponsorCard key={index} sponsor={sponsor} tier="platinum" />
+                  ))}
+                </div>
+              </TabsContent>
+
+              <TabsContent value="gold" className="space-y-8">
+                <div className="flex items-center justify-center mb-8">
+                  <Badge className="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-8 py-3 text-xl font-bold flex items-center gap-2">
+                    <Award className="w-6 h-6" />
+                    Gold Partners
+                  </Badge>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {sponsors.gold.map((sponsor, index) => (
+                    <SponsorCard key={index} sponsor={sponsor} tier="gold" />
+                  ))}
+                </div>
+              </TabsContent>
+
+              <TabsContent value="silver" className="space-y-8">
+                <div className="flex items-center justify-center mb-8">
+                  <Badge className="bg-gradient-to-r from-gray-400 to-gray-500 text-white px-8 py-3 text-xl font-bold flex items-center gap-2">
+                    <Medal className="w-6 h-6" />
+                    Silver Partners
+                  </Badge>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {sponsors.silver.map((sponsor, index) => (
+                    <SponsorCard key={index} sponsor={sponsor} tier="silver" />
+                  ))}
+                </div>
+              </TabsContent>
 
               <TabsContent value="all" className="space-y-12">
                 {/* Platinum Sponsors */}
@@ -246,48 +289,6 @@ const SponsorsSection = () => {
                       <SponsorCard key={index} sponsor={sponsor} tier="silver" />
                     ))}
                   </div>
-                </div>
-              </TabsContent>
-
-              <TabsContent value="platinum" className="space-y-8">
-                <div className="flex items-center justify-center mb-8">
-                  <Badge className="bg-gradient-to-r from-gray-600 to-gray-800 text-white px-8 py-3 text-xl font-bold flex items-center gap-2">
-                    <Crown className="w-6 h-6" />
-                    Platinum Partners
-                  </Badge>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                  {sponsors.platinum.map((sponsor, index) => (
-                    <SponsorCard key={index} sponsor={sponsor} tier="platinum" />
-                  ))}
-                </div>
-              </TabsContent>
-
-              <TabsContent value="gold" className="space-y-8">
-                <div className="flex items-center justify-center mb-8">
-                  <Badge className="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-8 py-3 text-xl font-bold flex items-center gap-2">
-                    <Award className="w-6 h-6" />
-                    Gold Partners
-                  </Badge>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {sponsors.gold.map((sponsor, index) => (
-                    <SponsorCard key={index} sponsor={sponsor} tier="gold" />
-                  ))}
-                </div>
-              </TabsContent>
-
-              <TabsContent value="silver" className="space-y-8">
-                <div className="flex items-center justify-center mb-8">
-                  <Badge className="bg-gradient-to-r from-gray-400 to-gray-500 text-white px-8 py-3 text-xl font-bold flex items-center gap-2">
-                    <Medal className="w-6 h-6" />
-                    Silver Partners
-                  </Badge>
-                </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {sponsors.silver.map((sponsor, index) => (
-                    <SponsorCard key={index} sponsor={sponsor} tier="silver" />
-                  ))}
                 </div>
               </TabsContent>
             </Tabs>

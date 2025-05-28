@@ -34,15 +34,15 @@ const HeroSection = () => {
           {/* Main Content */}
           <div className="animate-fade-in">
             <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
-              INTA EVENT 2028
+              INTA 2025
             </h1>
             <p className="text-2xl md:text-3xl mb-4 text-blue-200 font-light">
-              Global Innovation & Technology Summit
+              Annual Meeting
             </p>
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-xl mb-8 text-blue-100">
               <div className="flex items-center">
                 <Calendar className="w-6 h-6 mr-2 text-inta-accent" />
-                <span>March 15-17, 2028</span>
+                <span>May 28-30, 2025</span>
               </div>
               <div className="hidden md:block w-2 h-2 bg-inta-accent rounded-full"></div>
               <div className="flex items-center">

@@ -18,7 +18,7 @@ const AgendaSection = () => {
       description: 'Core sessions, keynotes, and networking events',
       days: [
         {
-          date: 'Friday, March 15, 2025',
+          date: 'Wednesday, May 28, 2025',
           sessions: [
             {
               time: '8:00 AM - 9:00 AM',
@@ -55,7 +55,7 @@ const AgendaSection = () => {
           ]
         },
         {
-          date: 'Saturday, March 16, 2025',
+          date: 'Thursday, May 29, 2025',
           sessions: [
             {
               time: '9:00 AM - 10:30 AM',
@@ -83,7 +83,7 @@ const AgendaSection = () => {
       description: 'Specialized sessions for emerging IP professionals',
       days: [
         {
-          date: 'Friday, March 15, 2025',
+          date: 'Wednesday, May 28, 2025',
           sessions: [
             {
               time: '2:00 PM - 3:30 PM',
@@ -111,7 +111,7 @@ const AgendaSection = () => {
       description: 'In-house perspective on IP management and strategy',
       days: [
         {
-          date: 'Saturday, March 16, 2025',
+          date: 'Thursday, May 29, 2025',
           sessions: [
             {
               time: '9:00 AM - 10:30 AM',
@@ -139,7 +139,7 @@ const AgendaSection = () => {
       description: 'Hands-on training and skill-building sessions',
       days: [
         {
-          date: 'Sunday, March 17, 2025',
+          date: 'Friday, May 30, 2025',
           sessions: [
             {
               time: '9:00 AM - 12:00 PM',

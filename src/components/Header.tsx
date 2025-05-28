@@ -83,10 +83,11 @@ const Header = () => {
               </Button>
             </nav>
 
-            {/* Prominent Register Now Button with increased spacing */}
+            {/* Register Now Button with consistent height and right spacing */}
             <div className="flex items-center gap-4">
               <Button 
-                className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-2 text-lg shadow-lg"
+                size="sm"
+                className="bg-orange-500 hover:bg-orange-600 text-white font-bold ml-2"
                 onClick={scrollToRegistration}
               >
                 Register Now

@@ -3,6 +3,49 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const WireframeView = () => {
+  // Get dates from URL parameters - same logic as AgendaSection
+  const getEventDatesFromURL = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const startDate = urlParams.get('startDate');
+    const endDate = urlParams.get('endDate');
+    
+    if (startDate && endDate) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      
+      // Generate dates between start and end
+      const dates = [];
+      const currentDate = new Date(start);
+      
+      while (currentDate <= end) {
+        dates.push(new Date(currentDate).toLocaleDateString('en-US', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        }));
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+      
+      return {
+        dates,
+        hasUrlDates: true
+      };
+    }
+
+    // Default dates
+    return {
+      dates: [
+        'Wednesday, May 28, 2025',
+        'Thursday, May 29, 2025',
+        'Friday, May 30, 2025'
+      ],
+      hasUrlDates: false
+    };
+  };
+
+  const eventDates = getEventDatesFromURL();
+
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-6xl mx-auto space-y-8">
@@ -66,33 +109,59 @@ const WireframeView = () => {
           </div>
         </div>
 
-        {/* Countdown Section */}
+        {/* Countdown Section - Dynamic based on URL params */}
         <div className="bg-white border-2 border-dashed border-gray-300 p-6 rounded-lg">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">Event Starts In</h2>
-            <div className="flex justify-center space-x-6">
-              <div className="bg-blue-600 text-white p-4 rounded-lg text-center">
-                <div className="text-3xl font-bold">45</div>
-                <div className="text-sm">Days</div>
+          {eventDates.hasUrlDates ? (
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-gray-800 mb-6">Event Starts In</h2>
+              <div className="flex justify-center space-x-6">
+                <div className="bg-blue-600 text-white p-4 rounded-lg text-center">
+                  <div className="text-3xl font-bold">45</div>
+                  <div className="text-sm">Days</div>
+                </div>
+                <div className="bg-blue-600 text-white p-4 rounded-lg text-center">
+                  <div className="text-3xl font-bold">12</div>
+                  <div className="text-sm">Hours</div>
+                </div>
+                <div className="bg-blue-600 text-white p-4 rounded-lg text-center">
+                  <div className="text-3xl font-bold">30</div>
+                  <div className="text-sm">Minutes</div>
+                </div>
+                <div className="bg-blue-600 text-white p-4 rounded-lg text-center">
+                  <div className="text-3xl font-bold">15</div>
+                  <div className="text-sm">Seconds</div>
+                </div>
               </div>
-              <div className="bg-blue-600 text-white p-4 rounded-lg text-center">
-                <div className="text-3xl font-bold">12</div>
-                <div className="text-sm">Hours</div>
-              </div>
-              <div className="bg-blue-600 text-white p-4 rounded-lg text-center">
-                <div className="text-3xl font-bold">30</div>
-                <div className="text-sm">Minutes</div>
-              </div>
-              <div className="bg-blue-600 text-white p-4 rounded-lg text-center">
-                <div className="text-3xl font-bold">15</div>
-                <div className="text-sm">Seconds</div>
+              <div className="bg-purple-50 p-3 rounded mt-4">
+                <p className="text-sm font-semibold text-purple-800">COUNTDOWN TIMER</p>
+                <p className="text-xs text-purple-600">Real-time countdown to event start date with animated numbers. Creates urgency and excitement. Updates automatically every second. Shows when future dates are provided in URL.</p>
               </div>
             </div>
-          </div>
-          <div className="bg-purple-50 p-3 rounded mt-4">
-            <p className="text-sm font-semibold text-purple-800">COUNTDOWN TIMER</p>
-            <p className="text-xs text-purple-600">Real-time countdown to event start date with animated numbers. Creates urgency and excitement. Updates automatically every second.</p>
-          </div>
+          ) : (
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-gray-800 mb-6">Today's Agenda</h2>
+              <div className="bg-gray-100 p-6 rounded-lg">
+                <div className="space-y-4">
+                  <div className="bg-white p-4 rounded border-l-4 border-blue-600">
+                    <h3 className="font-semibold">9:00 AM - Opening Keynote</h3>
+                    <p className="text-sm text-gray-600">AI and the Future of Trademark Law</p>
+                  </div>
+                  <div className="bg-white p-4 rounded border-l-4 border-green-600">
+                    <h3 className="font-semibold">11:00 AM - Panel Discussion</h3>
+                    <p className="text-sm text-gray-600">Global Brand Protection Strategies</p>
+                  </div>
+                  <div className="bg-white p-4 rounded border-l-4 border-orange-600">
+                    <h3 className="font-semibold">2:00 PM - Workshop</h3>
+                    <p className="text-sm text-gray-600">Digital Evidence Collection</p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-indigo-50 p-3 rounded mt-4">
+                <p className="text-sm font-semibold text-indigo-800">TODAY'S AGENDA</p>
+                <p className="text-xs text-indigo-600">Shows today's schedule when no future dates are provided in URL. Displays current day's sessions with time, title, and track indicators.</p>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Video Highlights */}
@@ -130,7 +199,7 @@ const WireframeView = () => {
           </div>
         </div>
 
-        {/* Agenda Section with Tabs - View by Programs */}
+        {/* Agenda Section with Dynamic Dates */}
         <div className="bg-white border-2 border-dashed border-gray-300 p-6 rounded-lg">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">Event Agenda</h2>
           
@@ -158,6 +227,19 @@ const WireframeView = () => {
             </div>
           </div>
 
+          {/* Dynamic Date Display */}
+          <div className="mb-4 p-3 bg-blue-50 rounded">
+            <p className="text-sm font-semibold text-blue-800">
+              Event Dates: {eventDates.dates.length > 1 ? 
+                `${eventDates.dates[0]} - ${eventDates.dates[eventDates.dates.length - 1]}` : 
+                eventDates.dates[0]
+              }
+            </p>
+            {eventDates.hasUrlDates && (
+              <p className="text-xs text-blue-600">Dates loaded from URL parameters</p>
+            )}
+          </div>
+
           {/* View by Programs Content */}
           <div className="space-y-4">
             <div className="bg-gray-50 border rounded-lg">
@@ -170,7 +252,7 @@ const WireframeView = () => {
                   <div className="flex justify-between">
                     <div>
                       <h4 className="font-medium">Opening Keynote: AI and the Future of Trademark Law</h4>
-                      <p className="text-sm text-gray-600">9:00 AM - 10:30 AM • Main Auditorium</p>
+                      <p className="text-sm text-gray-600">9:00 AM - 10:30 AM • Main Auditorium • {eventDates.dates[0]}</p>
                       <p className="text-sm text-blue-600">Dr. Sarah Chen, Mark Rodriguez</p>
                     </div>
                     <Button size="sm" variant="outline">Bookmark</Button>
@@ -180,27 +262,8 @@ const WireframeView = () => {
                   <div className="flex justify-between">
                     <div>
                       <h4 className="font-medium">Global Brand Protection Strategies</h4>
-                      <p className="text-sm text-gray-600">11:00 AM - 12:30 PM • Conference Room A</p>
+                      <p className="text-sm text-gray-600">11:00 AM - 12:30 PM • Conference Room A • {eventDates.dates[0]}</p>
                       <p className="text-sm text-green-600">Alice Wang, James Miller, Roberto Silva</p>
-                    </div>
-                    <Button size="sm" variant="outline">Bookmark</Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-gray-50 border rounded-lg">
-              <div className="p-4 border-b bg-purple-50">
-                <h3 className="text-lg font-semibold text-purple-800">Young Professionals Program</h3>
-                <p className="text-sm text-purple-600">Specialized sessions for emerging IP professionals</p>
-              </div>
-              <div className="p-4 space-y-3">
-                <div className="bg-white p-3 rounded border-l-4 border-purple-600">
-                  <div className="flex justify-between">
-                    <div>
-                      <h4 className="font-medium">Career Development in IP Law</h4>
-                      <p className="text-sm text-gray-600">2:00 PM - 3:30 PM • Meeting Room C</p>
-                      <p className="text-sm text-purple-600">Jennifer Adams, Michael Brown</p>
                     </div>
                     <Button size="sm" variant="outline">Bookmark</Button>
                   </div>
@@ -210,180 +273,8 @@ const WireframeView = () => {
           </div>
 
           <div className="bg-indigo-50 p-3 rounded mt-4">
-            <p className="text-sm font-semibold text-indigo-800">AGENDA - VIEW BY PROGRAMS</p>
-            <p className="text-xs text-indigo-600">Organizes sessions by program tracks (Main Conference, Young Professionals, Corporate Counsel, etc.). Users can expand each program to see its sessions and bookmark individual sessions.</p>
-          </div>
-        </div>
-
-        {/* View by Date Section */}
-        <div className="bg-white border-2 border-dashed border-gray-300 p-6 rounded-lg">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">Agenda - View by Date</h2>
-          
-          {/* Tab Navigation (Date View Active) */}
-          <div className="mb-6">
-            <div className="flex bg-gray-100 rounded-lg p-1">
-              <Button variant="ghost" className="flex-1">View by Programs</Button>
-              <Button className="flex-1 bg-blue-600 text-white">View by Date</Button>
-            </div>
-          </div>
-
-          {/* Date-wise Content */}
-          <div className="space-y-6">
-            <div className="bg-gray-50 border rounded-lg">
-              <div className="p-4 bg-blue-600 text-white">
-                <h3 className="text-xl font-semibold flex items-center">
-                  <span className="w-6 h-6 mr-3">📅</span>
-                  Wednesday, May 28, 2025
-                </h3>
-              </div>
-              <div className="divide-y">
-                <div className="p-4 flex justify-between items-start">
-                  <div className="flex-1">
-                    <div className="flex items-start space-x-4">
-                      <div className="text-sm font-mono text-gray-500 w-24">9:00 AM</div>
-                      <div className="flex-1">
-                        <h4 className="font-semibold">Opening Keynote: AI and the Future of Trademark Law</h4>
-                        <p className="text-sm text-gray-600">Main Auditorium • Main Conference Program</p>
-                        <p className="text-sm text-blue-600">Dr. Sarah Chen, Mark Rodriguez</p>
-                        <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mt-1">AI Innovation</span>
-                      </div>
-                    </div>
-                  </div>
-                  <Button size="sm" variant="outline">Bookmark</Button>
-                </div>
-                
-                <div className="p-4 flex justify-between items-start">
-                  <div className="flex-1">
-                    <div className="flex items-start space-x-4">
-                      <div className="text-sm font-mono text-gray-500 w-24">11:00 AM</div>
-                      <div className="flex-1">
-                        <h4 className="font-semibold">Global Brand Protection Strategies</h4>
-                        <p className="text-sm text-gray-600">Conference Room A • Main Conference Program</p>
-                        <p className="text-sm text-green-600">Alice Wang, James Miller, Roberto Silva</p>
-                        <span className="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded mt-1">Brand Protection</span>
-                      </div>
-                    </div>
-                  </div>
-                  <Button size="sm" variant="outline">Bookmark</Button>
-                </div>
-
-                <div className="p-4 flex justify-between items-start">
-                  <div className="flex-1">
-                    <div className="flex items-start space-x-4">
-                      <div className="text-sm font-mono text-gray-500 w-24">2:00 PM</div>
-                      <div className="flex-1">
-                        <h4 className="font-semibold">Career Development in IP Law</h4>
-                        <p className="text-sm text-gray-600">Meeting Room C • Young Professionals Program</p>
-                        <p className="text-sm text-purple-600">Jennifer Adams, Michael Brown</p>
-                        <span className="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded mt-1">Career Development</span>
-                      </div>
-                    </div>
-                  </div>
-                  <Button size="sm" variant="outline">Bookmark</Button>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-gray-50 border rounded-lg">
-              <div className="p-4 bg-blue-600 text-white">
-                <h3 className="text-xl font-semibold flex items-center">
-                  <span className="w-6 h-6 mr-3">📅</span>
-                  Thursday, May 29, 2025
-                </h3>
-              </div>
-              <div className="divide-y">
-                <div className="p-4 flex justify-between items-start">
-                  <div className="flex-1">
-                    <div className="flex items-start space-x-4">
-                      <div className="text-sm font-mono text-gray-500 w-24">9:00 AM</div>
-                      <div className="flex-1">
-                        <h4 className="font-semibold">Digital Evidence Collection Workshop</h4>
-                        <p className="text-sm text-gray-600">Tech Lab B • Specialized Workshops</p>
-                        <p className="text-sm text-orange-600">Lisa Thompson, David Park</p>
-                        <span className="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded mt-1">Digital Innovation</span>
-                      </div>
-                    </div>
-                  </div>
-                  <Button size="sm" variant="outline">Bookmark</Button>
-                </div>
-
-                <div className="p-4 flex justify-between items-start">
-                  <div className="flex-1">
-                    <div className="flex items-start space-x-4">
-                      <div className="text-sm font-mono text-gray-500 w-24">11:00 AM</div>
-                      <div className="flex-1">
-                        <h4 className="font-semibold">Managing Global IP Portfolios</h4>
-                        <p className="text-sm text-gray-600">Executive Boardroom • Corporate Counsel Program</p>
-                        <p className="text-sm text-teal-600">Rebecca Kim, John Anderson</p>
-                        <span className="inline-block bg-teal-100 text-teal-800 text-xs px-2 py-1 rounded mt-1">Portfolio Management</span>
-                      </div>
-                    </div>
-                  </div>
-                  <Button size="sm" variant="outline">Bookmark</Button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-cyan-50 p-3 rounded mt-4">
-            <p className="text-sm font-semibold text-cyan-800">AGENDA - VIEW BY DATE</p>
-            <p className="text-xs text-cyan-600">Chronological view of all sessions across all programs organized by date and time. Shows session details, tracks, locations, and which program each session belongs to. Users can bookmark individual sessions.</p>
-          </div>
-        </div>
-
-        {/* Favorites Section */}
-        <div className="bg-white border-2 border-dashed border-gray-300 p-6 rounded-lg">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">My Favorites</h2>
-          <div className="space-y-4">
-            <div className="bg-yellow-50 p-4 rounded border">
-              <div className="flex justify-between items-center mb-3">
-                <h3 className="font-semibold text-yellow-800">Bookmarked Sessions (3)</h3>
-                <Button size="sm" variant="outline">View All</Button>
-              </div>
-              <div className="space-y-2">
-                <div className="bg-white p-2 rounded text-sm">
-                  <span className="font-medium">Opening Keynote: AI and the Future of Trademark Law</span>
-                  <span className="text-gray-500 ml-2">May 28, 9:00 AM</span>
-                </div>
-                <div className="bg-white p-2 rounded text-sm">
-                  <span className="font-medium">Global Brand Protection Strategies</span>
-                  <span className="text-gray-500 ml-2">May 28, 11:00 AM</span>
-                </div>
-                <div className="bg-white p-2 rounded text-sm">
-                  <span className="font-medium">Career Development in IP Law</span>
-                  <span className="text-gray-500 ml-2">May 28, 2:00 PM</span>
-                </div>
-              </div>
-            </div>
-            
-            <div className="bg-yellow-50 p-4 rounded border">
-              <div className="flex justify-between items-center mb-3">
-                <h3 className="font-semibold text-yellow-800">Favorite Speakers (2)</h3>
-                <Button size="sm" variant="outline">View All</Button>
-              </div>
-              <div className="grid grid-cols-2 gap-2">
-                <div className="bg-white p-2 rounded text-sm text-center">
-                  <img 
-                    src="https://images.unsplash.com/photo-1535713875002-d1d11994c94?w=50&h=50&fit=crop&crop=face"
-                    alt="Dr. Sarah Chen"
-                    className="w-10 h-10 rounded-full mx-auto mb-1"
-                  />
-                  <span className="font-medium text-xs">Dr. Sarah Chen</span>
-                </div>
-                <div className="bg-white p-2 rounded text-sm text-center">
-                  <img 
-                    src="https://images.unsplash.com/photo-1535713875002-d1d11994c95?w=50&h=50&fit=crop&crop=face"
-                    alt="Prof. Michael Brown"
-                    className="w-10 h-10 rounded-full mx-auto mb-1"
-                  />
-                  <span className="font-medium text-xs">Prof. Michael Brown</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="bg-yellow-50 p-3 rounded mt-4">
-            <p className="text-sm font-semibold text-yellow-800">FAVORITES SECTION</p>
-            <p className="text-xs text-yellow-600">Personalized area where users can view their bookmarked sessions, favorite speakers, and saved content. Enables custom agenda creation and personal event planning. Shows bookmark count in header navigation.</p>
+            <p className="text-sm font-semibold text-indigo-800">AGENDA SECTION</p>
+            <p className="text-xs text-indigo-600">Displays event agenda with dates dynamically loaded from URL parameters. Shows program-based and date-based views with search and filtering capabilities. Dates reflect URL parameters when provided.</p>
           </div>
         </div>
 
@@ -412,7 +303,7 @@ const WireframeView = () => {
           </div>
           <div className="bg-teal-50 p-3 rounded mt-4">
             <p className="text-sm font-semibold text-teal-800">SPEAKERS SECTION</p>
-            <p className="text-xs text-teal-600">Showcase of keynote speakers and panelists with professional photos, credentials, bios, and their session details. Users can follow speakers and view their complete profiles. Links to their presentations and social profiles.</p>
+            <p className="text-xs text-teal-600">Showcase of keynote speakers and panelists with professional photos, credentials, bios, and their session details. Users can follow speakers and view their complete profiles.</p>
           </div>
         </div>
 
@@ -443,19 +334,32 @@ const WireframeView = () => {
                   <Button size="sm" variant="ghost">Details</Button>
                 </div>
               </div>
-              <div className="bg-gray-50 p-3 rounded">
-                <h4 className="font-medium">Marriott Copley Place</h4>
-                <p className="text-sm text-gray-600">0.8 miles • $349/night</p>
-                <div className="flex gap-2 mt-2">
-                  <Button size="sm" variant="outline">Book Now</Button>
-                  <Button size="sm" variant="ghost">Details</Button>
-                </div>
-              </div>
             </div>
           </div>
           <div className="bg-cyan-50 p-3 rounded mt-4">
             <p className="text-sm font-semibold text-cyan-800">VENUE & ACCOMMODATION</p>
-            <p className="text-xs text-cyan-600">Event location details with maps, directions, parking information, and curated list of nearby hotels with special rates for attendees. Integration with booking platforms and travel planning tools.</p>
+            <p className="text-xs text-cyan-600">Event location details with maps, directions, parking information, and curated list of nearby hotels with special rates for attendees.</p>
+          </div>
+        </div>
+
+        {/* Registration Section */}
+        <div className="bg-white border-2 border-dashed border-gray-300 p-6 rounded-lg">
+          <div className="text-center space-y-4">
+            <h2 className="text-3xl font-bold text-gray-800">Don't Miss Out!</h2>
+            <p className="text-lg text-gray-600">Early bird pricing ends in 10 days</p>
+            <div className="bg-green-100 p-4 rounded inline-block">
+              <span className="text-2xl font-bold text-green-800">$599</span>
+              <span className="text-sm text-green-600 ml-2">Early Bird Price</span>
+              <span className="text-xs text-gray-500 block">Regular price: $799</span>
+            </div>
+            <div className="flex justify-center gap-4">
+              <Button size="lg" className="bg-green-600 hover:bg-green-700 px-12">Register Now</Button>
+              <Button size="lg" variant="outline" className="px-8">Group Rates</Button>
+            </div>
+          </div>
+          <div className="bg-emerald-50 p-3 rounded mt-4">
+            <p className="text-sm font-semibold text-emerald-800">REGISTRATION CTA</p>
+            <p className="text-xs text-emerald-600">Strategically placed after demonstrating value. Features pricing information, registration deadlines, group discounts, and prominent registration button.</p>
           </div>
         </div>
 
@@ -487,21 +391,9 @@ const WireframeView = () => {
             </div>
           </div>
 
-          {/* Media Partners */}
-          <div>
-            <h3 className="text-lg font-semibold text-gray-700 mb-3">Media Partners</h3>
-            <div className="grid grid-cols-6 gap-4">
-              {[1, 2, 3, 4, 5, 6].map((media) => (
-                <div key={media} className="bg-blue-50 p-3 rounded flex items-center justify-center h-12 border">
-                  <span className="text-xs font-medium text-gray-600">Media {media}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
           <div className="bg-pink-50 p-3 rounded mt-4">
             <p className="text-sm font-semibold text-pink-800">SPONSORS & MEDIA SECTION</p>
-            <p className="text-xs text-pink-600">Display of sponsor logos organized by sponsorship tiers (Platinum, Gold, Silver) and media partners. Clickable logos linking to sponsor information, special offers for attendees, and media coverage details.</p>
+            <p className="text-xs text-pink-600">Display of sponsor logos organized by sponsorship tiers. Supporting element that builds trust and credibility.</p>
           </div>
         </div>
 
@@ -517,19 +409,12 @@ const WireframeView = () => {
                 <p className="text-sm">What sessions cover AI and patents?</p>
               </div>
               <div className="bg-blue-100 p-3 rounded-lg max-w-md">
-                <p className="text-sm">I found 3 sessions on AI and patents:</p>
+                <p className="text-sm">I found 3 sessions on AI and patents for {eventDates.dates[0]}:</p>
                 <ul className="text-xs mt-2 space-y-1">
                   <li>• "AI and the Future of Trademark Law" - Wed 9:00 AM</li>
                   <li>• "Digital Evidence Collection Workshop" - Thu 9:00 AM</li>
                   <li>• "Patent Analytics with AI" - Fri 2:00 PM</li>
                 </ul>
-                <p className="text-xs mt-2 text-blue-600">Would you like me to bookmark any of these?</p>
-              </div>
-              <div className="bg-gray-200 p-3 rounded-lg max-w-xs ml-auto">
-                <p className="text-sm">Yes, bookmark the first two please</p>
-              </div>
-              <div className="bg-blue-100 p-3 rounded-lg max-w-xs">
-                <p className="text-sm">✅ Done! I've bookmarked both sessions for you.</p>
               </div>
             </div>
           </div>
@@ -541,130 +426,9 @@ const WireframeView = () => {
             />
             <Button className="rounded-l-none bg-blue-600">Send</Button>
           </div>
-          <div className="flex gap-2 mt-3">
-            <Button size="sm" variant="outline">Find networking events</Button>
-            <Button size="sm" variant="outline">Show my schedule</Button>
-            <Button size="sm" variant="outline">Venue directions</Button>
-          </div>
           <div className="bg-blue-50 p-3 rounded mt-4">
             <p className="text-sm font-semibold text-blue-800">AI ASSISTANT</p>
-            <p className="text-xs text-blue-600">Interactive chatbot to help attendees find sessions, speakers, venue information, manage bookmarks, and answer event-related questions. Powered by AI with event-specific knowledge base. Accessible from main navigation.</p>
-          </div>
-        </div>
-
-        {/* Search Functionality Wireframe */}
-        <div className="bg-white border-2 border-dashed border-gray-300 p-6 rounded-lg">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Search Functionality</h2>
-          <div className="space-y-4">
-            <div className="border rounded-lg p-4">
-              <div className="flex items-center gap-2 mb-4">
-                <input 
-                  type="text" 
-                  placeholder="Search sessions, speakers, sponsors..." 
-                  className="flex-1 px-4 py-2 border rounded-lg"
-                  defaultValue="AI trademark"
-                />
-                <Button>Search</Button>
-              </div>
-              <div className="space-y-3">
-                <div className="bg-gray-50 p-3 rounded">
-                  <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Session</span>
-                  <h4 className="font-medium mt-1">AI and the Future of Trademark Law</h4>
-                  <p className="text-sm text-gray-600">Keynote session exploring how artificial intelligence...</p>
-                </div>
-                <div className="bg-gray-50 p-3 rounded">
-                  <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Speaker</span>
-                  <h4 className="font-medium mt-1">Dr. Sarah Chen</h4>
-                  <p className="text-sm text-gray-600">Leading expert in AI applications for trademark law...</p>
-                </div>
-                <div className="bg-gray-50 p-3 rounded">
-                  <span className="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">Track</span>
-                  <h4 className="font-medium mt-1">AI Innovation Track</h4>
-                  <p className="text-sm text-gray-600">All sessions related to artificial intelligence...</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="bg-gray-50 p-3 rounded mt-4">
-            <p className="text-sm font-semibold text-gray-800">SEARCH FUNCTIONALITY</p>
-            <p className="text-xs text-gray-600">Global search accessible from header navigation. Searches across sessions, speakers, sponsors, tracks, and content. Provides categorized results with quick access to relevant information.</p>
-          </div>
-        </div>
-
-        {/* User Profile Section */}
-        <div className="bg-white border-2 border-dashed border-gray-300 p-6 rounded-lg">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">User Profile & My Event</h2>
-          <div className="grid grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <div className="bg-gray-50 p-4 rounded">
-                <h3 className="font-semibold mb-2">Profile Information</h3>
-                <div className="space-y-2 text-sm">
-                  <p><span className="font-medium">Name:</span> John Doe</p>
-                  <p><span className="font-medium">Company:</span> IP Law Firm LLC</p>
-                  <p><span className="font-medium">Registration:</span> Full Conference</p>
-                  <p><span className="font-medium">Badge:</span> Ready for pickup</p>
-                </div>
-                <Button size="sm" className="mt-2">Edit Profile</Button>
-              </div>
-              
-              <div className="bg-blue-50 p-4 rounded">
-                <h3 className="font-semibold mb-2">My Schedule</h3>
-                <div className="space-y-1 text-sm">
-                  <p>• Opening Keynote (Wed 9:00 AM)</p>
-                  <p>• Brand Protection Panel (Wed 11:00 AM)</p>
-                  <p>• Networking Lunch (Wed 12:30 PM)</p>
-                </div>
-                <Button size="sm" className="mt-2" variant="outline">View Full Schedule</Button>
-              </div>
-            </div>
-            
-            <div className="space-y-4">
-              <div className="bg-green-50 p-4 rounded">
-                <h3 className="font-semibold mb-2">Networking</h3>
-                <div className="space-y-2 text-sm">
-                  <p>• 5 Connection requests sent</p>
-                  <p>• 3 New messages</p>
-                  <p>• 2 Meeting requests</p>
-                </div>
-                <Button size="sm" className="mt-2" variant="outline">Manage Connections</Button>
-              </div>
-              
-              <div className="bg-yellow-50 p-4 rounded">
-                <h3 className="font-semibold mb-2">Event Resources</h3>
-                <div className="space-y-1 text-sm">
-                  <p>• Event mobile app</p>
-                  <p>• Digital event guide</p>
-                  <p>• Session recordings</p>
-                  <p>• Presentation downloads</p>
-                </div>
-                <Button size="sm" className="mt-2" variant="outline">Access Resources</Button>
-              </div>
-            </div>
-          </div>
-          <div className="bg-slate-50 p-3 rounded mt-4">
-            <p className="text-sm font-semibold text-slate-800">USER PROFILE & MY EVENT</p>
-            <p className="text-xs text-slate-600">Personal dashboard accessible from header navigation. Shows user information, personalized schedule, networking activity, and access to event resources. Central hub for attendee's event experience.</p>
-          </div>
-        </div>
-
-        {/* Registration Section */}
-        <div className="bg-white border-2 border-dashed border-gray-300 p-6 rounded-lg">
-          <div className="text-center space-y-4">
-            <h2 className="text-3xl font-bold text-gray-800">Don't Miss Out!</h2>
-            <p className="text-lg text-gray-600">Early bird pricing ends in 10 days</p>
-            <div className="bg-green-100 p-4 rounded inline-block">
-              <span className="text-2xl font-bold text-green-800">$599</span>
-              <span className="text-sm text-green-600 ml-2">Early Bird Price</span>
-              <span className="text-xs text-gray-500 block">Regular price: $799</span>
-            </div>
-            <div className="flex justify-center gap-4">
-              <Button size="lg" className="bg-green-600 hover:bg-green-700 px-12">Register Now</Button>
-              <Button size="lg" variant="outline" className="px-8">Group Rates</Button>
-            </div>
-          </div>
-          <div className="bg-emerald-50 p-3 rounded mt-4">
-            <p className="text-sm font-semibold text-emerald-800">REGISTRATION CTA</p>
-            <p className="text-xs text-emerald-600">Final call-to-action with pricing information, registration deadlines, group discounts, and prominent registration button. Emphasizes urgency and value proposition throughout the site.</p>
+            <p className="text-xs text-blue-600">Interactive chatbot to help attendees find sessions, speakers, venue information. Supporting element that provides assistance and enhances user experience.</p>
           </div>
         </div>
 
@@ -721,46 +485,20 @@ const WireframeView = () => {
           </div>
           <div className="bg-gray-50 p-3 rounded mt-4">
             <p className="text-sm font-semibold text-gray-800">FOOTER SECTION</p>
-            <p className="text-xs text-gray-600">Comprehensive footer with organized links to event information, resources, support contacts, and legal pages. Includes social media links, copyright information, and accessibility features.</p>
-          </div>
-        </div>
-
-        {/* Mobile Bottom Action Bar */}
-        <div className="bg-white border-2 border-dashed border-gray-300 p-6 rounded-lg">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Mobile Bottom Action Bar</h2>
-          <div className="bg-gray-100 rounded-lg p-4">
-            <div className="grid grid-cols-4 gap-4 text-center">
-              <div className="space-y-1">
-                <div className="w-6 h-6 bg-blue-500 rounded mx-auto"></div>
-                <span className="text-xs font-medium">Agenda</span>
-              </div>
-              <div className="space-y-1 relative">
-                <div className="w-6 h-6 bg-red-500 rounded mx-auto relative">
-                  <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">3</span>
-                </div>
-                <span className="text-xs font-medium">Favorites</span>
-              </div>
-              <div className="space-y-1">
-                <div className="w-6 h-6 bg-gray-500 rounded mx-auto"></div>
-                <span className="text-xs font-medium">Search</span>
-              </div>
-              <div className="space-y-1">
-                <div className="w-6 h-6 bg-green-500 rounded mx-auto"></div>
-                <span className="text-xs font-medium">My Event</span>
-              </div>
-            </div>
-          </div>
-          <div className="bg-indigo-50 p-3 rounded mt-4">
-            <p className="text-sm font-semibold text-indigo-800">MOBILE BOTTOM ACTION BAR</p>
-            <p className="text-xs text-indigo-600">Fixed bottom navigation for mobile devices with quick access to primary functions: Agenda, Favorites (with badge count), Search, and My Event profile. Provides consistent mobile navigation experience.</p>
+            <p className="text-xs text-gray-600">Comprehensive footer with organized links to event information, resources, support contacts, and legal pages. Includes social media links and copyright information.</p>
           </div>
         </div>
 
         {/* Page Info */}
         <div className="text-center text-gray-500 text-sm space-y-2 py-8">
-          <p className="text-lg font-semibold">INTA Event 2025 - Complete Wireframe</p>
-          <p>Full Event Management System Layout with All Navigation Items</p>
-          <p className="text-xs">This wireframe includes all header menu items (Agenda, Favorites, Speakers, Sponsors & Media, AI Assistant, Search, Profile) with detailed functionality and mobile-responsive design patterns</p>
+          <p className="text-lg font-semibold">INTA Event 2025 - Updated Wireframe</p>
+          <p>Reorganized Layout Following UX Best Practices</p>
+          <p className="text-xs">
+            Flow: Hero → Countdown/Today's Agenda → Video Highlights → Agenda → Speakers → Venue → Registration → Sponsors → AI Assistant
+          </p>
+          <p className="text-xs">
+            Dynamic date handling: Shows countdown for future dates, today's agenda for current/past dates
+          </p>
         </div>
       </div>
     </div>

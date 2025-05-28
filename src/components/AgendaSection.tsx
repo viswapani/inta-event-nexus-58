@@ -180,13 +180,13 @@ const AgendaSection = () => {
   })).filter(program => program.days.length > 0);
 
   return (
-    <section id="agenda" className="py-16 bg-gradient-to-br from-inta-light to-white">
+    <section id="agenda" className="py-8 bg-gradient-to-br from-inta-light to-white">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-5xl font-bold text-inta-navy mb-6">2025 Annual Meeting Schedule</h2>
-          <p className="text-xl text-inta-gray max-w-3xl mx-auto leading-relaxed">
-            Join us for three days of comprehensive programming designed for IP professionals at every stage of their career.
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-inta-navy mb-3">2025 Annual Meeting Schedule</h2>
+          <p className="text-lg text-inta-gray max-w-2xl mx-auto">
+            Join us for three days of comprehensive programming designed for IP professionals.
           </p>
         </div>
 
@@ -200,8 +200,8 @@ const AgendaSection = () => {
         />
 
         {/* Tabbed View for Programs and Date-wise */}
-        <Tabs defaultValue="programs" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-2 bg-gradient-to-r from-inta-orange to-inta-orange-light shadow-lg h-14 p-1">
+        <Tabs defaultValue="programs" className="space-y-4">
+          <TabsList className="grid w-full grid-cols-2 bg-gradient-to-r from-inta-orange to-inta-orange-light shadow-lg h-12 p-1">
             <TabsTrigger 
               value="programs" 
               className="text-lg font-semibold transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-inta-navy data-[state=active]:shadow-md data-[state=inactive]:text-white data-[state=inactive]:bg-transparent hover:bg-white/20"
@@ -229,19 +229,19 @@ const AgendaSection = () => {
           </TabsContent>
         </Tabs>
 
-        {/* Additional Information */}
-        <div className="mt-12 bg-gradient-to-r from-inta-navy to-inta-blue rounded-lg p-8 text-white text-center">
-          <h3 className="text-2xl font-bold mb-4">Stay Connected</h3>
-          <p className="text-lg mb-6">
-            Download our mobile app for real-time updates, networking opportunities, and interactive features.
+        {/* Additional Information - Compact */}
+        <div className="mt-8 bg-gradient-to-r from-inta-navy to-inta-blue rounded-lg p-6 text-white text-center">
+          <h3 className="text-xl font-bold mb-3">Stay Connected</h3>
+          <p className="text-base mb-4">
+            Download our mobile app for real-time updates and networking.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button className="bg-white text-inta-navy hover:bg-gray-100 font-semibold">
-              <Smartphone className="w-5 h-5 mr-2" />
+              <Smartphone className="w-4 h-4 mr-2" />
               iOS App Store
             </Button>
             <Button className="bg-white text-inta-navy hover:bg-gray-100 font-semibold">
-              <Smartphone className="w-5 h-5 mr-2" />
+              <Smartphone className="w-4 h-4 mr-2" />
               Google Play Store
             </Button>
           </div>

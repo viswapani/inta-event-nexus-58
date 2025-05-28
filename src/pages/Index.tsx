@@ -23,9 +23,6 @@ const Index = () => {
       <section id="agenda">
         <AgendaSection />
       </section>
-      <section id="favorites">
-        <Favorites eventId="event-2028" />
-      </section>
       <section id="speakers">
         <SpeakersSection />
       </section>

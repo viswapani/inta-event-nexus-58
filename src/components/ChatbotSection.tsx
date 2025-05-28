@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -80,43 +79,43 @@ const ChatbotSection = () => {
   };
 
   return (
-    <section id="chatbot" className="py-20 bg-white">
+    <section id="chatbot" className="py-12 bg-white">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-inta-navy mb-4">AI Event Assistant</h2>
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-inta-navy mb-3">AI Event Assistant</h2>
           <p className="text-lg text-inta-gray max-w-2xl mx-auto">
-            Get instant answers about sessions, speakers, and event logistics with our AI-powered assistant.
+            Get instant answers about sessions, speakers, and event logistics.
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Features */}
           <div className="lg:col-span-1">
-            <Card className="mb-6">
+            <Card className="mb-4">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
                   <Sparkles className="w-5 h-5 text-inta-accent" />
                   <span>AI Features</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-3">
                 <div className="flex items-start space-x-3">
-                  <Calendar className="w-5 h-5 text-inta-blue mt-1" />
+                  <Calendar className="w-4 h-4 text-inta-blue mt-1" />
                   <div>
                     <h3 className="font-semibold text-sm">Smart Scheduling</h3>
                     <p className="text-xs text-inta-gray">Get personalized agenda recommendations</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <Users className="w-5 h-5 text-inta-blue mt-1" />
+                  <Users className="w-4 h-4 text-inta-blue mt-1" />
                   <div>
                     <h3 className="font-semibold text-sm">Speaker Matching</h3>
                     <p className="text-xs text-inta-gray">Find speakers by expertise and interests</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <MessageCircle className="w-5 h-5 text-inta-blue mt-1" />
+                  <MessageCircle className="w-4 h-4 text-inta-blue mt-1" />
                   <div>
                     <h3 className="font-semibold text-sm">Instant Q&A</h3>
                     <p className="text-xs text-inta-gray">Get answers about event logistics</p>
@@ -128,14 +127,14 @@ const ChatbotSection = () => {
             {/* Quick Actions */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Quick Actions</CardTitle>
+                <CardTitle className="text-base">Quick Actions</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
+              <CardContent className="space-y-2">
                 {quickActions.map((action, index) => (
                   <Button
                     key={index}
                     variant="outline"
-                    className="w-full justify-start text-left h-auto p-3"
+                    className="w-full justify-start text-left h-auto p-2"
                     onClick={() => handleQuickAction(action.action)}
                   >
                     <action.icon className="w-4 h-4 mr-2 flex-shrink-0" />
@@ -148,8 +147,8 @@ const ChatbotSection = () => {
 
           {/* Chat Interface */}
           <div className="lg:col-span-2">
-            <Card className="h-[600px] flex flex-col">
-              <CardHeader className="border-b">
+            <Card className="h-[400px] flex flex-col">
+              <CardHeader className="border-b pb-3">
                 <CardTitle className="flex items-center space-x-2">
                   <div className="w-8 h-8 bg-inta-blue rounded-full flex items-center justify-center">
                     <MessageCircle className="w-4 h-4 text-white" />
@@ -162,7 +161,7 @@ const ChatbotSection = () => {
               </CardHeader>
 
               {/* Messages */}
-              <CardContent className="flex-1 overflow-y-auto p-4 space-y-4">
+              <CardContent className="flex-1 overflow-y-auto p-4 space-y-3">
                 {messages.map((message) => (
                   <div
                     key={message.id}
@@ -197,7 +196,7 @@ const ChatbotSection = () => {
               </CardContent>
 
               {/* Input */}
-              <div className="border-t p-4">
+              <div className="border-t p-3">
                 <div className="flex space-x-2">
                   <Input
                     placeholder="Ask me about sessions, speakers, or event details..."

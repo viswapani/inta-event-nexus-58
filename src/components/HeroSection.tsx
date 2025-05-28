@@ -40,9 +40,9 @@ const HeroSection = () => {
     },
     {
       type: 'image',
-      src: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2112&q=80',
-      title: 'Legal Technology',
-      subtitle: 'Coding the Future of Law'
+      src: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2112&q=80',
+      title: 'Expert Panel Session',
+      subtitle: 'Leading Industry Speakers Share Insights'
     }
   ];
 
@@ -61,8 +61,8 @@ const HeroSection = () => {
     },
     {
       type: 'image',
-      src: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-      title: 'Digital Innovation'
+      src: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      title: 'Panel Discussion'
     }
   ];
 

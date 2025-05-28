@@ -29,12 +29,29 @@ const CountdownSection = ({ eventData }: CountdownSectionProps) => {
   });
   const [isEventActive, setIsEventActive] = useState(false);
 
+  // Get dates from URL parameters
+  const getEventDatesFromURL = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const startDate = urlParams.get('startDate');
+    const endDate = urlParams.get('endDate');
+    
+    if (startDate && endDate) {
+      return {
+        startDate: new Date(startDate),
+        endDate: new Date(endDate)
+      };
+    }
+    
+    // Default to current date if no URL params (showing as active event)
+    const today = new Date();
+    return {
+      startDate: today,
+      endDate: new Date(today.getTime() + (2 * 24 * 60 * 60 * 1000)) // 2 days from today
+    };
+  };
+
   // Mock current day sessions - in real implementation, this would come from API
   const getCurrentDaySessions = (): CurrentDaySession[] => {
-    const today = new Date();
-    const dayOfWeek = today.getDay();
-    
-    // Mock sessions for current day
     return [
       {
         time: '9:00 AM - 10:30 AM',
@@ -58,8 +75,9 @@ const CountdownSection = ({ eventData }: CountdownSectionProps) => {
   };
 
   useEffect(() => {
-    const targetDate = eventData ? new Date(eventData.startDate) : new Date('2025-05-28');
-    const endDate = eventData ? new Date(eventData.endDate) : new Date('2025-05-30');
+    const urlDates = getEventDatesFromURL();
+    const targetDate = eventData ? new Date(eventData.startDate) : urlDates.startDate;
+    const endDate = eventData ? new Date(eventData.endDate) : urlDates.endDate;
     
     const timer = setInterval(() => {
       const now = new Date();
@@ -70,7 +88,7 @@ const CountdownSection = ({ eventData }: CountdownSectionProps) => {
       // Check if event is currently active
       if (currentTime >= startTime && currentTime <= endTime) {
         setIsEventActive(true);
-      } else {
+      } else if (currentTime < startTime) {
         setIsEventActive(false);
         
         // Calculate countdown for future events
@@ -84,6 +102,9 @@ const CountdownSection = ({ eventData }: CountdownSectionProps) => {
 
           setTimeLeft({ days, hours, minutes, seconds });
         }
+      } else {
+        // Event has passed
+        setIsEventActive(false);
       }
     }, 1000);
 
@@ -92,7 +113,18 @@ const CountdownSection = ({ eventData }: CountdownSectionProps) => {
 
   const eventName = eventData?.name || 'INTA 2025 Annual Meeting';
   const location = eventData?.location || 'San Francisco, CA';
-  const dates = eventData ? `${eventData.startDate} - ${eventData.endDate}` : 'May 28-30, 2025';
+  
+  // Format dates for display
+  const formatEventDates = () => {
+    if (eventData) {
+      return `${eventData.startDate} - ${eventData.endDate}`;
+    }
+    
+    const urlDates = getEventDatesFromURL();
+    const startStr = urlDates.startDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    const endStr = urlDates.endDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    return `${startStr} - ${endStr}`;
+  };
 
   const currentDaySessions = getCurrentDaySessions();
 
@@ -191,7 +223,7 @@ const CountdownSection = ({ eventData }: CountdownSectionProps) => {
         <div className="flex flex-col md:flex-row items-center justify-center gap-6 text-lg">
           <div className="flex items-center">
             <Calendar className="w-6 h-6 mr-2 text-inta-accent" />
-            <span>{dates}</span>
+            <span>{formatEventDates()}</span>
           </div>
           <div className="flex items-center">
             <MapPin className="w-6 h-6 mr-2 text-inta-accent" />

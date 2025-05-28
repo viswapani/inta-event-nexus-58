@@ -123,17 +123,12 @@ const HeroSection = () => {
         <div className="absolute -bottom-8 left-40 w-72 h-72 bg-inta-accent rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"></div>
       </div>
 
-      <div className="container mx-auto px-4 pt-20 relative z-10">
+      <div className="container mx-auto px-4 pt-16 relative z-10">
         <div className="text-center text-white">
           {/* Dynamic Content Based on Current Slide */}
           <div className="animate-fade-in">
-            <div className="mb-4">
-              <div className="inline-block px-6 py-3 bg-inta-accent/20 backdrop-blur-sm rounded-full border border-inta-accent/30 mb-4">
-                <span className="text-inta-accent font-semibold text-lg">Annual Meeting 2025</span>
-              </div>
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight bg-gradient-to-r from-white via-orange-100 to-inta-accent bg-clip-text text-transparent">
-              INTA 2025
+            <h1 className="text-5xl md:text-6xl font-bold mb-4 leading-tight bg-gradient-to-r from-white via-orange-100 to-inta-accent bg-clip-text text-transparent">
+              INTA Annual Meeting 2025
             </h1>
             <p className="text-2xl md:text-3xl mb-3 text-orange-200 font-light">
               {videoSlides[currentSlide].title}
@@ -141,7 +136,7 @@ const HeroSection = () => {
             <p className="text-lg md:text-xl mb-6 text-orange-100/90">
               {videoSlides[currentSlide].subtitle}
             </p>
-            <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-lg mb-4 text-orange-100">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-lg mb-6 text-orange-100">
               <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
                 <Calendar className="w-5 h-5 mr-2 text-inta-accent" />
                 <span>May 28-30, 2025</span>
@@ -154,9 +149,9 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Seamless Video/Image Display - Moved up */}
-          <div className="mb-8 animate-slide-in">
-            <div className="max-w-6xl mx-auto mb-6">
+          {/* Seamless Video/Image Display - Moved up more */}
+          <div className="mb-6 animate-slide-in">
+            <div className="max-w-6xl mx-auto mb-4">
               <div className="relative group cursor-pointer">
                 <div className="aspect-video rounded-xl overflow-hidden bg-black relative shadow-2xl">
                   {mainVideoContent.map((content, index) => (
@@ -223,7 +218,7 @@ const HeroSection = () => {
           </div>
 
           {/* Enhanced CTA Buttons */}
-          <div className="animate-slide-in mb-12">
+          <div className="animate-slide-in mb-10">
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-8">
               <Button 
                 size="lg" 

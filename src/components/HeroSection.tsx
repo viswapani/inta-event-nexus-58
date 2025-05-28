@@ -155,73 +155,70 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Large TV Screen Video/Image Display */}
+          {/* Seamless Video/Image Display */}
           <div className="mb-12 animate-slide-in">
-            <div className="max-w-5xl mx-auto mb-8">
+            <div className="max-w-6xl mx-auto mb-8">
               <div className="relative group cursor-pointer">
-                {/* TV Screen Frame */}
-                <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 p-8 rounded-3xl shadow-2xl">
-                  <div className="aspect-video rounded-2xl overflow-hidden bg-black relative border-4 border-gray-700">
-                    {mainVideoContent.map((content, index) => (
-                      <div
-                        key={index}
-                        className={`absolute inset-0 transition-opacity duration-1000 ${
-                          index === currentMainVideo ? 'opacity-100' : 'opacity-0'
-                        }`}
-                      >
-                        {content.type === 'video' ? (
-                          <video
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            className="w-full h-full object-cover"
-                            poster={content.poster}
-                          >
-                            <source src={content.src} type="video/mp4" />
-                          </video>
-                        ) : (
-                          <img 
-                            src={content.src}
-                            alt={content.title}
-                            className="w-full h-full object-cover"
-                          />
-                        )}
-                        
-                        {/* Content overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                        <div className="absolute bottom-6 left-6 right-6">
-                          <h3 className="text-white text-2xl font-bold mb-2">{content.title}</h3>
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-2">
-                              <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
-                              <span className="text-white/80 text-sm">LIVE</span>
-                            </div>
-                            {content.type === 'video' && (
-                              <Play className="w-8 h-8 text-white/80" />
-                            )}
+                <div className="aspect-video rounded-xl overflow-hidden bg-black relative shadow-2xl">
+                  {mainVideoContent.map((content, index) => (
+                    <div
+                      key={index}
+                      className={`absolute inset-0 transition-opacity duration-1000 ${
+                        index === currentMainVideo ? 'opacity-100' : 'opacity-0'
+                      }`}
+                    >
+                      {content.type === 'video' ? (
+                        <video
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className="w-full h-full object-cover"
+                          poster={content.poster}
+                        >
+                          <source src={content.src} type="video/mp4" />
+                        </video>
+                      ) : (
+                        <img 
+                          src={content.src}
+                          alt={content.title}
+                          className="w-full h-full object-cover"
+                        />
+                      )}
+                      
+                      {/* Content overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                      <div className="absolute bottom-6 left-6 right-6">
+                        <h3 className="text-white text-2xl font-bold mb-2">{content.title}</h3>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-2">
+                            <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                            <span className="text-white/80 text-sm">LIVE</span>
                           </div>
+                          {content.type === 'video' && (
+                            <Play className="w-8 h-8 text-white/80" />
+                          )}
                         </div>
                       </div>
-                    ))}
-                  </div>
-                  
-                  {/* TV Controls */}
-                  <div className="flex justify-center mt-4 space-x-2">
-                    {mainVideoContent.map((_, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setCurrentMainVideo(i)}
-                        className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                          i === currentMainVideo ? 'bg-inta-accent scale-125' : 'bg-gray-500 hover:bg-gray-400'
-                        }`}
-                      />
-                    ))}
-                  </div>
+                    </div>
+                  ))}
                 </div>
                 
-                {/* Glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-inta-orange/20 via-inta-accent/20 to-inta-orange/20 rounded-3xl blur-xl -z-10 group-hover:blur-2xl transition-all duration-300"></div>
+                {/* Content navigation dots */}
+                <div className="flex justify-center mt-6 space-x-3">
+                  {mainVideoContent.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setCurrentMainVideo(i)}
+                      className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                        i === currentMainVideo ? 'bg-inta-accent scale-125' : 'bg-white/50 hover:bg-white/70'
+                      }`}
+                    />
+                  ))}
+                </div>
+                
+                {/* Subtle glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-inta-orange/10 via-inta-accent/10 to-inta-orange/10 rounded-xl blur-xl -z-10 group-hover:blur-2xl transition-all duration-300"></div>
               </div>
             </div>
           </div>

@@ -1,6 +1,7 @@
 
 import HeroSection from "@/components/HeroSection";
 import CountdownSection from "@/components/CountdownSection";
+import VideoHighlightsSection from "@/components/VideoHighlightsSection";
 import AgendaSection from "@/components/AgendaSection";
 import Favorites from "@/components/Favorites";
 import SpeakersSection from "@/components/SpeakersSection";
@@ -18,6 +19,7 @@ const Index = () => {
       <Header />
       <HeroSection />
       <CountdownSection />
+      <VideoHighlightsSection />
       <section id="agenda">
         <AgendaSection />
       </section>

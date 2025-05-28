@@ -201,11 +201,17 @@ const AgendaSection = () => {
 
         {/* Tabbed View for Programs and Date-wise */}
         <Tabs defaultValue="programs" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-2 bg-white shadow-md h-14">
-            <TabsTrigger value="programs" className="text-lg font-semibold data-[state=active]:bg-inta-blue data-[state=active]:text-white">
+          <TabsList className="grid w-full grid-cols-2 bg-gradient-to-r from-inta-orange to-inta-orange-light shadow-lg h-14 p-1">
+            <TabsTrigger 
+              value="programs" 
+              className="text-lg font-semibold transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-inta-navy data-[state=active]:shadow-md data-[state=inactive]:text-white data-[state=inactive]:bg-transparent hover:bg-white/20"
+            >
               View by Programs
             </TabsTrigger>
-            <TabsTrigger value="dates" className="text-lg font-semibold data-[state=active]:bg-inta-blue data-[state=active]:text-white">
+            <TabsTrigger 
+              value="dates" 
+              className="text-lg font-semibold transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-inta-navy data-[state=active]:shadow-md data-[state=inactive]:text-white data-[state=inactive]:bg-transparent hover:bg-white/20"
+            >
               View by Date
             </TabsTrigger>
           </TabsList>

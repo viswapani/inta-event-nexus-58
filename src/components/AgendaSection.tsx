@@ -251,17 +251,17 @@ const AgendaSection = () => {
             </Button>
           </div>
         </div>
-
-        <style jsx>{`
-          .agenda-view :global(.view-details-btn) {
-            background-color: #f97316;
-            color: white;
-          }
-          .agenda-view :global(.view-details-btn:hover) {
-            background-color: #ea580c;
-          }
-        `}</style>
       </div>
+
+      <style>{`
+        .agenda-view .view-details-btn {
+          background-color: #f97316;
+          color: white;
+        }
+        .agenda-view .view-details-btn:hover {
+          background-color: #ea580c;
+        }
+      `}</style>
     </section>
   );
 };

@@ -15,15 +15,19 @@ const WireframeView = () => {
               className="w-20 h-8 object-cover rounded"
             />
             <div className="flex space-x-4 items-center">
-              <span className="text-sm text-gray-600 px-3 py-1 bg-gray-100 rounded">Home</span>
               <span className="text-sm text-gray-600 px-3 py-1 bg-gray-100 rounded">Agenda</span>
+              <span className="text-sm text-gray-600 px-3 py-1 bg-gray-100 rounded">Favorites (3)</span>
               <span className="text-sm text-gray-600 px-3 py-1 bg-gray-100 rounded">Speakers</span>
-              <Button size="sm" className="bg-blue-500 hover:bg-blue-600">Register</Button>
+              <span className="text-sm text-gray-600 px-3 py-1 bg-gray-100 rounded">Sponsors & Media</span>
+              <span className="text-sm text-gray-600 px-3 py-1 bg-gray-100 rounded">AI Assistant</span>
+              <span className="text-sm text-gray-600 px-3 py-1 bg-gray-100 rounded">Search</span>
+              <span className="text-sm text-gray-600 px-3 py-1 bg-gray-100 rounded">Profile</span>
+              <Button size="sm" className="bg-blue-500 hover:bg-blue-600">Register Now</Button>
             </div>
           </div>
           <div className="bg-blue-50 p-3 rounded">
             <p className="text-sm font-semibold text-blue-800">HEADER SECTION</p>
-            <p className="text-xs text-blue-600">Contains the INTA logo, main navigation menu (Home, Agenda, Speakers, Venue, etc.), and prominent registration/login button. Sticky navigation for easy access.</p>
+            <p className="text-xs text-blue-600">Contains the INTA logo, main navigation menu (Agenda, Favorites with badge count, Speakers, Sponsors & Media, AI Assistant), search, profile, and prominent registration button. Sticky navigation for easy access.</p>
           </div>
         </div>
 
@@ -126,11 +130,11 @@ const WireframeView = () => {
           </div>
         </div>
 
-        {/* Agenda Section with Tabs */}
+        {/* Agenda Section with Tabs - View by Programs */}
         <div className="bg-white border-2 border-dashed border-gray-300 p-6 rounded-lg">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">Event Agenda</h2>
           
-          {/* Agenda Filters */}
+          {/* Agenda Search and Filters */}
           <div className="mb-6 space-y-4">
             <div className="flex flex-wrap gap-4">
               <input 
@@ -329,20 +333,57 @@ const WireframeView = () => {
 
         {/* Favorites Section */}
         <div className="bg-white border-2 border-dashed border-gray-300 p-6 rounded-lg">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">My Favorites</h2>
-          <div className="grid grid-cols-2 gap-4">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">My Favorites</h2>
+          <div className="space-y-4">
             <div className="bg-yellow-50 p-4 rounded border">
-              <h4 className="font-semibold text-yellow-800">Bookmarked Sessions (3)</h4>
-              <p className="text-sm text-yellow-600">AI in IP Law, Patent Workshop, Closing Keynote</p>
+              <div className="flex justify-between items-center mb-3">
+                <h3 className="font-semibold text-yellow-800">Bookmarked Sessions (3)</h3>
+                <Button size="sm" variant="outline">View All</Button>
+              </div>
+              <div className="space-y-2">
+                <div className="bg-white p-2 rounded text-sm">
+                  <span className="font-medium">Opening Keynote: AI and the Future of Trademark Law</span>
+                  <span className="text-gray-500 ml-2">May 28, 9:00 AM</span>
+                </div>
+                <div className="bg-white p-2 rounded text-sm">
+                  <span className="font-medium">Global Brand Protection Strategies</span>
+                  <span className="text-gray-500 ml-2">May 28, 11:00 AM</span>
+                </div>
+                <div className="bg-white p-2 rounded text-sm">
+                  <span className="font-medium">Career Development in IP Law</span>
+                  <span className="text-gray-500 ml-2">May 28, 2:00 PM</span>
+                </div>
+              </div>
             </div>
+            
             <div className="bg-yellow-50 p-4 rounded border">
-              <h4 className="font-semibold text-yellow-800">Favorite Speakers (2)</h4>
-              <p className="text-sm text-yellow-600">Dr. Sarah Johnson, Prof. Michael Chen</p>
+              <div className="flex justify-between items-center mb-3">
+                <h3 className="font-semibold text-yellow-800">Favorite Speakers (2)</h3>
+                <Button size="sm" variant="outline">View All</Button>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div className="bg-white p-2 rounded text-sm text-center">
+                  <img 
+                    src="https://images.unsplash.com/photo-1535713875002-d1d11994c94?w=50&h=50&fit=crop&crop=face"
+                    alt="Dr. Sarah Chen"
+                    className="w-10 h-10 rounded-full mx-auto mb-1"
+                  />
+                  <span className="font-medium text-xs">Dr. Sarah Chen</span>
+                </div>
+                <div className="bg-white p-2 rounded text-sm text-center">
+                  <img 
+                    src="https://images.unsplash.com/photo-1535713875002-d1d11994c95?w=50&h=50&fit=crop&crop=face"
+                    alt="Prof. Michael Brown"
+                    className="w-10 h-10 rounded-full mx-auto mb-1"
+                  />
+                  <span className="font-medium text-xs">Prof. Michael Brown</span>
+                </div>
+              </div>
             </div>
           </div>
           <div className="bg-yellow-50 p-3 rounded mt-4">
             <p className="text-sm font-semibold text-yellow-800">FAVORITES SECTION</p>
-            <p className="text-xs text-yellow-600">Personalized area where users can view their bookmarked sessions, favorite speakers, and saved content. Enables custom agenda creation and personal event planning.</p>
+            <p className="text-xs text-yellow-600">Personalized area where users can view their bookmarked sessions, favorite speakers, and saved content. Enables custom agenda creation and personal event planning. Shows bookmark count in header navigation.</p>
           </div>
         </div>
 
@@ -361,13 +402,17 @@ const WireframeView = () => {
                   <h4 className="font-semibold">Dr. Speaker {speaker}</h4>
                   <p className="text-sm text-gray-600">IP Law Expert</p>
                   <p className="text-xs text-blue-600">Harvard Law School</p>
+                  <Button size="sm" variant="outline" className="mt-2">Follow</Button>
                 </div>
               </div>
             ))}
           </div>
+          <div className="text-center mt-6">
+            <Button variant="outline">View All Speakers</Button>
+          </div>
           <div className="bg-teal-50 p-3 rounded mt-4">
             <p className="text-sm font-semibold text-teal-800">SPEAKERS SECTION</p>
-            <p className="text-xs text-teal-600">Showcase of keynote speakers and panelists with professional photos, credentials, bios, and their session details. Links to their presentations and social profiles.</p>
+            <p className="text-xs text-teal-600">Showcase of keynote speakers and panelists with professional photos, credentials, bios, and their session details. Users can follow speakers and view their complete profiles. Links to their presentations and social profiles.</p>
           </div>
         </div>
 
@@ -383,41 +428,222 @@ const WireframeView = () => {
               />
               <h3 className="font-semibold text-lg">Boston Convention Center</h3>
               <p className="text-sm text-gray-600">415 Summer Street, Boston, MA 02210</p>
-              <Button size="sm" className="mt-2" variant="outline">Get Directions</Button>
+              <div className="flex gap-2 mt-2">
+                <Button size="sm" variant="outline">Get Directions</Button>
+                <Button size="sm" variant="outline">Parking Info</Button>
+              </div>
             </div>
             <div className="space-y-4">
               <h3 className="font-semibold text-lg">Recommended Hotels</h3>
               <div className="bg-gray-50 p-3 rounded">
                 <h4 className="font-medium">Hilton Boston Back Bay</h4>
                 <p className="text-sm text-gray-600">0.5 miles • $299/night</p>
-                <Button size="sm" className="mt-1" variant="outline">Book Now</Button>
+                <div className="flex gap-2 mt-2">
+                  <Button size="sm" variant="outline">Book Now</Button>
+                  <Button size="sm" variant="ghost">Details</Button>
+                </div>
               </div>
               <div className="bg-gray-50 p-3 rounded">
                 <h4 className="font-medium">Marriott Copley Place</h4>
                 <p className="text-sm text-gray-600">0.8 miles • $349/night</p>
-                <Button size="sm" className="mt-1" variant="outline">Book Now</Button>
+                <div className="flex gap-2 mt-2">
+                  <Button size="sm" variant="outline">Book Now</Button>
+                  <Button size="sm" variant="ghost">Details</Button>
+                </div>
               </div>
             </div>
           </div>
           <div className="bg-cyan-50 p-3 rounded mt-4">
             <p className="text-sm font-semibold text-cyan-800">VENUE & ACCOMMODATION</p>
-            <p className="text-xs text-cyan-600">Event location details with maps, directions, parking information, and curated list of nearby hotels with special rates for attendees. Integration with booking platforms.</p>
+            <p className="text-xs text-cyan-600">Event location details with maps, directions, parking information, and curated list of nearby hotels with special rates for attendees. Integration with booking platforms and travel planning tools.</p>
           </div>
         </div>
 
-        {/* Sponsors Section */}
+        {/* Sponsors & Media Section */}
         <div className="bg-white border-2 border-dashed border-gray-300 p-6 rounded-lg">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">Our Sponsors</h2>
-          <div className="grid grid-cols-6 gap-4">
-            {[1, 2, 3, 4, 5, 6].map((sponsor) => (
-              <div key={sponsor} className="bg-gray-100 p-4 rounded flex items-center justify-center h-16">
-                <span className="text-sm font-medium text-gray-600">Sponsor {sponsor}</span>
-              </div>
-            ))}
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">Our Sponsors & Media Partners</h2>
+          
+          {/* Platinum Sponsors */}
+          <div className="mb-6">
+            <h3 className="text-lg font-semibold text-gray-700 mb-3">Platinum Sponsors</h3>
+            <div className="grid grid-cols-3 gap-4">
+              {[1, 2, 3].map((sponsor) => (
+                <div key={sponsor} className="bg-gradient-to-br from-gray-100 to-gray-200 p-6 rounded flex items-center justify-center h-20 border">
+                  <span className="text-lg font-bold text-gray-600">Platinum {sponsor}</span>
+                </div>
+              ))}
+            </div>
           </div>
+
+          {/* Gold Sponsors */}
+          <div className="mb-6">
+            <h3 className="text-lg font-semibold text-gray-700 mb-3">Gold Sponsors</h3>
+            <div className="grid grid-cols-4 gap-4">
+              {[1, 2, 3, 4].map((sponsor) => (
+                <div key={sponsor} className="bg-yellow-50 p-4 rounded flex items-center justify-center h-16 border">
+                  <span className="text-sm font-medium text-gray-600">Gold {sponsor}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Media Partners */}
+          <div>
+            <h3 className="text-lg font-semibold text-gray-700 mb-3">Media Partners</h3>
+            <div className="grid grid-cols-6 gap-4">
+              {[1, 2, 3, 4, 5, 6].map((media) => (
+                <div key={media} className="bg-blue-50 p-3 rounded flex items-center justify-center h-12 border">
+                  <span className="text-xs font-medium text-gray-600">Media {media}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className="bg-pink-50 p-3 rounded mt-4">
-            <p className="text-sm font-semibold text-pink-800">SPONSORS SECTION</p>
-            <p className="text-xs text-pink-600">Display of sponsor logos organized by sponsorship tiers (Platinum, Gold, Silver). Clickable logos linking to sponsor information and special offers for attendees.</p>
+            <p className="text-sm font-semibold text-pink-800">SPONSORS & MEDIA SECTION</p>
+            <p className="text-xs text-pink-600">Display of sponsor logos organized by sponsorship tiers (Platinum, Gold, Silver) and media partners. Clickable logos linking to sponsor information, special offers for attendees, and media coverage details.</p>
+          </div>
+        </div>
+
+        {/* AI Assistant Section */}
+        <div className="bg-white border-2 border-dashed border-gray-300 p-6 rounded-lg">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">AI Event Assistant</h2>
+          <div className="bg-gray-50 border rounded p-4 h-64 mb-4 overflow-y-auto">
+            <div className="space-y-3">
+              <div className="bg-blue-100 p-3 rounded-lg max-w-xs">
+                <p className="text-sm">👋 Hi! I'm your INTA 2025 assistant. How can I help you today?</p>
+              </div>
+              <div className="bg-gray-200 p-3 rounded-lg max-w-xs ml-auto">
+                <p className="text-sm">What sessions cover AI and patents?</p>
+              </div>
+              <div className="bg-blue-100 p-3 rounded-lg max-w-md">
+                <p className="text-sm">I found 3 sessions on AI and patents:</p>
+                <ul className="text-xs mt-2 space-y-1">
+                  <li>• "AI and the Future of Trademark Law" - Wed 9:00 AM</li>
+                  <li>• "Digital Evidence Collection Workshop" - Thu 9:00 AM</li>
+                  <li>• "Patent Analytics with AI" - Fri 2:00 PM</li>
+                </ul>
+                <p className="text-xs mt-2 text-blue-600">Would you like me to bookmark any of these?</p>
+              </div>
+              <div className="bg-gray-200 p-3 rounded-lg max-w-xs ml-auto">
+                <p className="text-sm">Yes, bookmark the first two please</p>
+              </div>
+              <div className="bg-blue-100 p-3 rounded-lg max-w-xs">
+                <p className="text-sm">✅ Done! I've bookmarked both sessions for you.</p>
+              </div>
+            </div>
+          </div>
+          <div className="flex gap-2">
+            <input 
+              type="text" 
+              placeholder="Ask about sessions, speakers, venue, networking..." 
+              className="flex-1 px-3 py-2 border rounded-l focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <Button className="rounded-l-none bg-blue-600">Send</Button>
+          </div>
+          <div className="flex gap-2 mt-3">
+            <Button size="sm" variant="outline">Find networking events</Button>
+            <Button size="sm" variant="outline">Show my schedule</Button>
+            <Button size="sm" variant="outline">Venue directions</Button>
+          </div>
+          <div className="bg-blue-50 p-3 rounded mt-4">
+            <p className="text-sm font-semibold text-blue-800">AI ASSISTANT</p>
+            <p className="text-xs text-blue-600">Interactive chatbot to help attendees find sessions, speakers, venue information, manage bookmarks, and answer event-related questions. Powered by AI with event-specific knowledge base. Accessible from main navigation.</p>
+          </div>
+        </div>
+
+        {/* Search Functionality Wireframe */}
+        <div className="bg-white border-2 border-dashed border-gray-300 p-6 rounded-lg">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Search Functionality</h2>
+          <div className="space-y-4">
+            <div className="border rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-4">
+                <input 
+                  type="text" 
+                  placeholder="Search sessions, speakers, sponsors..." 
+                  className="flex-1 px-4 py-2 border rounded-lg"
+                  defaultValue="AI trademark"
+                />
+                <Button>Search</Button>
+              </div>
+              <div className="space-y-3">
+                <div className="bg-gray-50 p-3 rounded">
+                  <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Session</span>
+                  <h4 className="font-medium mt-1">AI and the Future of Trademark Law</h4>
+                  <p className="text-sm text-gray-600">Keynote session exploring how artificial intelligence...</p>
+                </div>
+                <div className="bg-gray-50 p-3 rounded">
+                  <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Speaker</span>
+                  <h4 className="font-medium mt-1">Dr. Sarah Chen</h4>
+                  <p className="text-sm text-gray-600">Leading expert in AI applications for trademark law...</p>
+                </div>
+                <div className="bg-gray-50 p-3 rounded">
+                  <span className="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">Track</span>
+                  <h4 className="font-medium mt-1">AI Innovation Track</h4>
+                  <p className="text-sm text-gray-600">All sessions related to artificial intelligence...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="bg-gray-50 p-3 rounded mt-4">
+            <p className="text-sm font-semibold text-gray-800">SEARCH FUNCTIONALITY</p>
+            <p className="text-xs text-gray-600">Global search accessible from header navigation. Searches across sessions, speakers, sponsors, tracks, and content. Provides categorized results with quick access to relevant information.</p>
+          </div>
+        </div>
+
+        {/* User Profile Section */}
+        <div className="bg-white border-2 border-dashed border-gray-300 p-6 rounded-lg">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">User Profile & My Event</h2>
+          <div className="grid grid-cols-2 gap-6">
+            <div className="space-y-4">
+              <div className="bg-gray-50 p-4 rounded">
+                <h3 className="font-semibold mb-2">Profile Information</h3>
+                <div className="space-y-2 text-sm">
+                  <p><span className="font-medium">Name:</span> John Doe</p>
+                  <p><span className="font-medium">Company:</span> IP Law Firm LLC</p>
+                  <p><span className="font-medium">Registration:</span> Full Conference</p>
+                  <p><span className="font-medium">Badge:</span> Ready for pickup</p>
+                </div>
+                <Button size="sm" className="mt-2">Edit Profile</Button>
+              </div>
+              
+              <div className="bg-blue-50 p-4 rounded">
+                <h3 className="font-semibold mb-2">My Schedule</h3>
+                <div className="space-y-1 text-sm">
+                  <p>• Opening Keynote (Wed 9:00 AM)</p>
+                  <p>• Brand Protection Panel (Wed 11:00 AM)</p>
+                  <p>• Networking Lunch (Wed 12:30 PM)</p>
+                </div>
+                <Button size="sm" className="mt-2" variant="outline">View Full Schedule</Button>
+              </div>
+            </div>
+            
+            <div className="space-y-4">
+              <div className="bg-green-50 p-4 rounded">
+                <h3 className="font-semibold mb-2">Networking</h3>
+                <div className="space-y-2 text-sm">
+                  <p>• 5 Connection requests sent</p>
+                  <p>• 3 New messages</p>
+                  <p>• 2 Meeting requests</p>
+                </div>
+                <Button size="sm" className="mt-2" variant="outline">Manage Connections</Button>
+              </div>
+              
+              <div className="bg-yellow-50 p-4 rounded">
+                <h3 className="font-semibold mb-2">Event Resources</h3>
+                <div className="space-y-1 text-sm">
+                  <p>• Event mobile app</p>
+                  <p>• Digital event guide</p>
+                  <p>• Session recordings</p>
+                  <p>• Presentation downloads</p>
+                </div>
+                <Button size="sm" className="mt-2" variant="outline">Access Resources</Button>
+              </div>
+            </div>
+          </div>
+          <div className="bg-slate-50 p-3 rounded mt-4">
+            <p className="text-sm font-semibold text-slate-800">USER PROFILE & MY EVENT</p>
+            <p className="text-xs text-slate-600">Personal dashboard accessible from header navigation. Shows user information, personalized schedule, networking activity, and access to event resources. Central hub for attendee's event experience.</p>
           </div>
         </div>
 
@@ -429,42 +655,16 @@ const WireframeView = () => {
             <div className="bg-green-100 p-4 rounded inline-block">
               <span className="text-2xl font-bold text-green-800">$599</span>
               <span className="text-sm text-green-600 ml-2">Early Bird Price</span>
+              <span className="text-xs text-gray-500 block">Regular price: $799</span>
             </div>
-            <Button size="lg" className="bg-green-600 hover:bg-green-700 px-12">Register Now</Button>
+            <div className="flex justify-center gap-4">
+              <Button size="lg" className="bg-green-600 hover:bg-green-700 px-12">Register Now</Button>
+              <Button size="lg" variant="outline" className="px-8">Group Rates</Button>
+            </div>
           </div>
           <div className="bg-emerald-50 p-3 rounded mt-4">
             <p className="text-sm font-semibold text-emerald-800">REGISTRATION CTA</p>
-            <p className="text-xs text-emerald-600">Final call-to-action with pricing information, registration deadlines, and prominent registration button. Emphasizes urgency and value proposition.</p>
-          </div>
-        </div>
-
-        {/* Chatbot Section */}
-        <div className="bg-white border-2 border-dashed border-gray-300 p-6 rounded-lg">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">AI Event Assistant</h2>
-          <div className="bg-gray-50 border rounded p-4 h-48 mb-4 overflow-y-auto">
-            <div className="space-y-3">
-              <div className="bg-blue-100 p-2 rounded max-w-xs">
-                <p className="text-sm">Hi! I'm your INTA 2025 assistant. How can I help you today?</p>
-              </div>
-              <div className="bg-gray-200 p-2 rounded max-w-xs ml-auto">
-                <p className="text-sm">What sessions cover AI and patents?</p>
-              </div>
-              <div className="bg-blue-100 p-2 rounded max-w-xs">
-                <p className="text-sm">I found 3 sessions on AI and patents. Here are the details...</p>
-              </div>
-            </div>
-          </div>
-          <div className="flex">
-            <input 
-              type="text" 
-              placeholder="Ask about sessions, speakers, venue..." 
-              className="flex-1 px-3 py-2 border rounded-l focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <Button className="rounded-l-none bg-blue-600">Send</Button>
-          </div>
-          <div className="bg-blue-50 p-3 rounded mt-4">
-            <p className="text-sm font-semibold text-blue-800">AI ASSISTANT</p>
-            <p className="text-xs text-blue-600">Interactive chatbot to help attendees find sessions, speakers, venue information, and answer event-related questions. Powered by AI with event-specific knowledge base.</p>
+            <p className="text-xs text-emerald-600">Final call-to-action with pricing information, registration deadlines, group discounts, and prominent registration button. Emphasizes urgency and value proposition throughout the site.</p>
           </div>
         </div>
 
@@ -477,6 +677,7 @@ const WireframeView = () => {
                 <p className="text-sm text-gray-600">Schedule</p>
                 <p className="text-sm text-gray-600">Venue</p>
                 <p className="text-sm text-gray-600">Registration</p>
+                <p className="text-sm text-gray-600">Travel</p>
               </div>
             </div>
             <div className="space-y-3">
@@ -485,6 +686,7 @@ const WireframeView = () => {
                 <p className="text-sm text-gray-600">Mobile App</p>
                 <p className="text-sm text-gray-600">Event Guide</p>
                 <p className="text-sm text-gray-600">Networking</p>
+                <p className="text-sm text-gray-600">Live Stream</p>
               </div>
             </div>
             <div className="space-y-3">
@@ -493,6 +695,7 @@ const WireframeView = () => {
                 <p className="text-sm text-gray-600">Contact Us</p>
                 <p className="text-sm text-gray-600">FAQs</p>
                 <p className="text-sm text-gray-600">Tech Support</p>
+                <p className="text-sm text-gray-600">Accessibility</p>
               </div>
             </div>
             <div className="space-y-3">
@@ -501,23 +704,63 @@ const WireframeView = () => {
                 <p className="text-sm text-gray-600">Privacy Policy</p>
                 <p className="text-sm text-gray-600">Terms of Use</p>
                 <p className="text-sm text-gray-600">Code of Conduct</p>
+                <p className="text-sm text-gray-600">Cookie Policy</p>
               </div>
             </div>
           </div>
-          <div className="border-t pt-4 mt-6 text-center">
-            <p className="text-sm text-gray-500">© 2025 International Trademark Association. All rights reserved.</p>
+          <div className="border-t pt-4 mt-6">
+            <div className="flex justify-between items-center">
+              <p className="text-sm text-gray-500">© 2025 International Trademark Association. All rights reserved.</p>
+              <div className="flex space-x-4">
+                <span className="text-sm text-gray-400">Follow us:</span>
+                <span className="text-sm text-blue-600">LinkedIn</span>
+                <span className="text-sm text-blue-600">Twitter</span>
+                <span className="text-sm text-blue-600">YouTube</span>
+              </div>
+            </div>
           </div>
           <div className="bg-gray-50 p-3 rounded mt-4">
             <p className="text-sm font-semibold text-gray-800">FOOTER SECTION</p>
-            <p className="text-xs text-gray-600">Comprehensive footer with organized links to event information, resources, support contacts, and legal pages. Includes copyright and contact information.</p>
+            <p className="text-xs text-gray-600">Comprehensive footer with organized links to event information, resources, support contacts, and legal pages. Includes social media links, copyright information, and accessibility features.</p>
+          </div>
+        </div>
+
+        {/* Mobile Bottom Action Bar */}
+        <div className="bg-white border-2 border-dashed border-gray-300 p-6 rounded-lg">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Mobile Bottom Action Bar</h2>
+          <div className="bg-gray-100 rounded-lg p-4">
+            <div className="grid grid-cols-4 gap-4 text-center">
+              <div className="space-y-1">
+                <div className="w-6 h-6 bg-blue-500 rounded mx-auto"></div>
+                <span className="text-xs font-medium">Agenda</span>
+              </div>
+              <div className="space-y-1 relative">
+                <div className="w-6 h-6 bg-red-500 rounded mx-auto relative">
+                  <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">3</span>
+                </div>
+                <span className="text-xs font-medium">Favorites</span>
+              </div>
+              <div className="space-y-1">
+                <div className="w-6 h-6 bg-gray-500 rounded mx-auto"></div>
+                <span className="text-xs font-medium">Search</span>
+              </div>
+              <div className="space-y-1">
+                <div className="w-6 h-6 bg-green-500 rounded mx-auto"></div>
+                <span className="text-xs font-medium">My Event</span>
+              </div>
+            </div>
+          </div>
+          <div className="bg-indigo-50 p-3 rounded mt-4">
+            <p className="text-sm font-semibold text-indigo-800">MOBILE BOTTOM ACTION BAR</p>
+            <p className="text-xs text-indigo-600">Fixed bottom navigation for mobile devices with quick access to primary functions: Agenda, Favorites (with badge count), Search, and My Event profile. Provides consistent mobile navigation experience.</p>
           </div>
         </div>
 
         {/* Page Info */}
         <div className="text-center text-gray-500 text-sm space-y-2 py-8">
           <p className="text-lg font-semibold">INTA Event 2025 - Complete Wireframe</p>
-          <p>Full Event Management System Layout with Visual Content</p>
-          <p className="text-xs">This wireframe shows the complete user journey including both agenda viewing options (by programs and by date)</p>
+          <p>Full Event Management System Layout with All Navigation Items</p>
+          <p className="text-xs">This wireframe includes all header menu items (Agenda, Favorites, Speakers, Sponsors & Media, AI Assistant, Search, Profile) with detailed functionality and mobile-responsive design patterns</p>
         </div>
       </div>
     </div>

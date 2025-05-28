@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentMainVideo, setCurrentMainVideo] = useState(0);
   
   const stats = [
     { icon: Users, label: 'Speakers', value: '150+' },
@@ -34,11 +35,38 @@ const HeroSection = () => {
     }
   ];
 
+  // Main video/image content for the large display
+  const mainVideoContent = [
+    {
+      type: 'video',
+      src: 'https://player.vimeo.com/external/434045526.sd.mp4?s=c27eecc69a27dbc4ff2b87d38afc35f1a9e7c02d&profile_id=164&oauth2_token_id=57447761',
+      poster: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      title: 'INTA 2024 Highlights'
+    },
+    {
+      type: 'image',
+      src: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      title: 'Speaker Insights'
+    },
+    {
+      type: 'image',
+      src: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      title: 'Innovation Showcase'
+    }
+  ];
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % videoSlides.length);
     }, 5000);
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const mainVideoTimer = setInterval(() => {
+      setCurrentMainVideo((prev) => (prev + 1) % mainVideoContent.length);
+    }, 6000);
+    return () => clearInterval(mainVideoTimer);
   }, []);
 
   return (
@@ -127,52 +155,73 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Video Highlights Section Above CTA Buttons */}
+          {/* Large TV Screen Video/Image Display */}
           <div className="mb-12 animate-slide-in">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-8">
+            <div className="max-w-5xl mx-auto mb-8">
               <div className="relative group cursor-pointer">
-                <div className="aspect-video rounded-xl overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 hover:border-inta-accent/50 transition-all duration-300">
-                  <img 
-                    src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                    alt="Event Highlights"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-inta-navy/40 group-hover:bg-inta-orange/40 transition-colors duration-300"></div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Play className="w-12 h-12 text-white group-hover:text-inta-accent group-hover:scale-110 transition-all duration-300" />
+                {/* TV Screen Frame */}
+                <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 p-8 rounded-3xl shadow-2xl">
+                  <div className="aspect-video rounded-2xl overflow-hidden bg-black relative border-4 border-gray-700">
+                    {mainVideoContent.map((content, index) => (
+                      <div
+                        key={index}
+                        className={`absolute inset-0 transition-opacity duration-1000 ${
+                          index === currentMainVideo ? 'opacity-100' : 'opacity-0'
+                        }`}
+                      >
+                        {content.type === 'video' ? (
+                          <video
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="w-full h-full object-cover"
+                            poster={content.poster}
+                          >
+                            <source src={content.src} type="video/mp4" />
+                          </video>
+                        ) : (
+                          <img 
+                            src={content.src}
+                            alt={content.title}
+                            className="w-full h-full object-cover"
+                          />
+                        )}
+                        
+                        {/* Content overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                        <div className="absolute bottom-6 left-6 right-6">
+                          <h3 className="text-white text-2xl font-bold mb-2">{content.title}</h3>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-2">
+                              <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                              <span className="text-white/80 text-sm">LIVE</span>
+                            </div>
+                            {content.type === 'video' && (
+                              <Play className="w-8 h-8 text-white/80" />
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  {/* TV Controls */}
+                  <div className="flex justify-center mt-4 space-x-2">
+                    {mainVideoContent.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setCurrentMainVideo(i)}
+                        className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                          i === currentMainVideo ? 'bg-inta-accent scale-125' : 'bg-gray-500 hover:bg-gray-400'
+                        }`}
+                      />
+                    ))}
                   </div>
                 </div>
-                <p className="text-orange-200 mt-3 font-medium">2024 Highlights</p>
-              </div>
-              
-              <div className="relative group cursor-pointer">
-                <div className="aspect-video rounded-xl overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 hover:border-inta-accent/50 transition-all duration-300">
-                  <img 
-                    src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                    alt="Speaker Insights"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-inta-navy/40 group-hover:bg-inta-orange/40 transition-colors duration-300"></div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Play className="w-12 h-12 text-white group-hover:text-inta-accent group-hover:scale-110 transition-all duration-300" />
-                  </div>
-                </div>
-                <p className="text-orange-200 mt-3 font-medium">Speaker Insights</p>
-              </div>
-              
-              <div className="relative group cursor-pointer">
-                <div className="aspect-video rounded-xl overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 hover:border-inta-accent/50 transition-all duration-300">
-                  <img 
-                    src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                    alt="Innovation Showcase"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-inta-navy/40 group-hover:bg-inta-orange/40 transition-colors duration-300"></div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Play className="w-12 h-12 text-white group-hover:text-inta-accent group-hover:scale-110 transition-all duration-300" />
-                  </div>
-                </div>
-                <p className="text-orange-200 mt-3 font-medium">Innovation Showcase</p>
+                
+                {/* Glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-inta-orange/20 via-inta-accent/20 to-inta-orange/20 rounded-3xl blur-xl -z-10 group-hover:blur-2xl transition-all duration-300"></div>
               </div>
             </div>
           </div>

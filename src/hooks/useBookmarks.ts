@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { API_ENDPOINTS } from '../services/api';
+import { securityUtils } from '../lib/security';
 
 interface BookmarkAlarm {
   id: string;
@@ -22,14 +23,13 @@ interface SessionBookmark {
   createdAt: Date;
 }
 
-// Mock API calls
+// Mock API calls with secure storage
 const fetchBookmarks = async (eventId: string): Promise<SessionBookmark[]> => {
   await new Promise(resolve => setTimeout(resolve, 500));
   console.log('Fetching bookmarks for event:', eventId);
   
-  // Return mock bookmarks from localStorage for now
-  const stored = localStorage.getItem(`bookmarks_${eventId}`);
-  return stored ? JSON.parse(stored) : [];
+  // Use secure storage
+  return securityUtils.secureStorage.getItem(`bookmarks_${eventId}`, []);
 };
 
 const addBookmark = async (eventId: string, bookmarkData: Omit<SessionBookmark, 'id' | 'eventId' | 'createdAt'>): Promise<SessionBookmark> => {
@@ -43,11 +43,10 @@ const addBookmark = async (eventId: string, bookmarkData: Omit<SessionBookmark, 
     createdAt: new Date(),
   };
   
-  // Store in localStorage for now
-  const stored = localStorage.getItem(`bookmarks_${eventId}`);
-  const bookmarks = stored ? JSON.parse(stored) : [];
+  // Use secure storage
+  const bookmarks = securityUtils.secureStorage.getItem(`bookmarks_${eventId}`, []);
   bookmarks.push(bookmark);
-  localStorage.setItem(`bookmarks_${eventId}`, JSON.stringify(bookmarks));
+  securityUtils.secureStorage.setItem(`bookmarks_${eventId}`, bookmarks);
   
   return bookmark;
 };
@@ -56,26 +55,20 @@ const removeBookmark = async (eventId: string, bookmarkId: string): Promise<void
   await new Promise(resolve => setTimeout(resolve, 300));
   console.log('Removing bookmark for event:', eventId, 'bookmark:', bookmarkId);
   
-  const stored = localStorage.getItem(`bookmarks_${eventId}`);
-  if (stored) {
-    const bookmarks = JSON.parse(stored);
-    const filtered = bookmarks.filter((b: SessionBookmark) => b.id !== bookmarkId);
-    localStorage.setItem(`bookmarks_${eventId}`, JSON.stringify(filtered));
-  }
+  const bookmarks = securityUtils.secureStorage.getItem(`bookmarks_${eventId}`, []);
+  const filtered = bookmarks.filter((b: SessionBookmark) => b.id !== bookmarkId);
+  securityUtils.secureStorage.setItem(`bookmarks_${eventId}`, filtered);
 };
 
 const updateBookmarkAlarms = async (eventId: string, bookmarkId: string, alarms: BookmarkAlarm[]): Promise<void> => {
   await new Promise(resolve => setTimeout(resolve, 300));
   console.log('Updating alarms for bookmark:', bookmarkId, alarms);
   
-  const stored = localStorage.getItem(`bookmarks_${eventId}`);
-  if (stored) {
-    const bookmarks = JSON.parse(stored);
-    const updated = bookmarks.map((b: SessionBookmark) => 
-      b.id === bookmarkId ? { ...b, alarms } : b
-    );
-    localStorage.setItem(`bookmarks_${eventId}`, JSON.stringify(updated));
-  }
+  const bookmarks = securityUtils.secureStorage.getItem(`bookmarks_${eventId}`, []);
+  const updated = bookmarks.map((b: SessionBookmark) => 
+    b.id === bookmarkId ? { ...b, alarms } : b
+  );
+  securityUtils.secureStorage.setItem(`bookmarks_${eventId}`, updated);
 };
 
 export const useBookmarks = (eventId: string) => {

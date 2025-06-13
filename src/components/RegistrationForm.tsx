@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -6,8 +5,11 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '@/hooks/use-toast';
 import { CheckIcon, Clock, Users, Star } from 'lucide-react';
+import { registrationSchema, type RegistrationFormData } from '@/lib/validation';
+import { securityUtils } from '@/lib/security';
 
 interface RegistrationFormData {
   firstName: string;
@@ -22,6 +24,7 @@ const RegistrationForm = () => {
   const { toast } = useToast();
   
   const form = useForm<RegistrationFormData>({
+    resolver: zodResolver(registrationSchema),
     defaultValues: {
       firstName: '',
       lastName: '',
@@ -62,18 +65,45 @@ const RegistrationForm = () => {
   ];
 
   const onSubmit = async (data: RegistrationFormData) => {
+    // Rate limiting check
+    if (!securityUtils.rateLimiter.isAllowed('registration', 3, 300000)) { // 3 attempts per 5 minutes
+      toast({
+        title: "Too Many Attempts",
+        description: "Please wait before trying again.",
+        variant: "destructive"
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    toast({
-      title: "Registration Successful!",
-      description: "You'll receive a confirmation email shortly.",
-    });
-    
-    setIsSubmitting(false);
-    form.reset();
+    try {
+      // Sanitize inputs
+      const sanitizedData = {
+        ...data,
+        firstName: securityUtils.sanitizeInput(data.firstName),
+        lastName: securityUtils.sanitizeInput(data.lastName),
+        company: securityUtils.sanitizeInput(data.company),
+      };
+
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      toast({
+        title: "Registration Successful!",
+        description: "You'll receive a confirmation email shortly.",
+      });
+      
+      form.reset();
+    } catch (error) {
+      toast({
+        title: "Registration Failed",
+        description: securityUtils.getSecureErrorMessage(error),
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const selectedPlan = plans.find(plan => plan.id === form.watch('plan')) || plans[0];
@@ -103,7 +133,11 @@ const RegistrationForm = () => {
                         <FormItem>
                           <FormLabel>First Name</FormLabel>
                           <FormControl>
-                            <Input placeholder="John" {...field} />
+                            <Input 
+                              placeholder="John" 
+                              maxLength={50}
+                              {...field} 
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -116,7 +150,11 @@ const RegistrationForm = () => {
                         <FormItem>
                           <FormLabel>Last Name</FormLabel>
                           <FormControl>
-                            <Input placeholder="Doe" {...field} />
+                            <Input 
+                              placeholder="Doe" 
+                              maxLength={50}
+                              {...field} 
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -131,7 +169,12 @@ const RegistrationForm = () => {
                       <FormItem>
                         <FormLabel>Email</FormLabel>
                         <FormControl>
-                          <Input type="email" placeholder="john@company.com" {...field} />
+                          <Input 
+                            type="email" 
+                            placeholder="john@company.com" 
+                            maxLength={254}
+                            {...field} 
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -145,7 +188,11 @@ const RegistrationForm = () => {
                       <FormItem>
                         <FormLabel>Company</FormLabel>
                         <FormControl>
-                          <Input placeholder="Your Company" {...field} />
+                          <Input 
+                            placeholder="Your Company" 
+                            maxLength={100}
+                            {...field} 
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>

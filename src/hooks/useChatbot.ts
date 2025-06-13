@@ -1,6 +1,9 @@
+
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { API_ENDPOINTS } from '../services/api';
+import { securityUtils } from '../lib/security';
+import { chatMessageSchema } from '../lib/validation';
 
 interface ChatMessage {
   id: string;
@@ -48,12 +51,28 @@ export const useChatbot = (eventId: string) => {
   ]);
 
   const chatMutation = useMutation({
-    mutationFn: (message: string) => sendChatMessage(eventId, message),
+    mutationFn: (message: string) => {
+      // Validate message
+      const validation = chatMessageSchema.safeParse({ message });
+      if (!validation.success) {
+        throw new Error('Invalid message format');
+      }
+
+      // Rate limiting
+      if (!securityUtils.rateLimiter.isAllowed('chat', 10, 60000)) { // 10 messages per minute
+        throw new Error('Too many messages. Please wait before sending another.');
+      }
+
+      // Sanitize message
+      const sanitizedMessage = securityUtils.sanitizeInput(message);
+      
+      return sendChatMessage(eventId, sanitizedMessage);
+    },
     onSuccess: (data, variables) => {
       // Add user message
       const userMessage: ChatMessage = {
         id: Date.now().toString(),
-        text: variables,
+        text: securityUtils.sanitizeInput(variables),
         sender: 'user',
         timestamp: new Date()
       };
@@ -67,6 +86,17 @@ export const useChatbot = (eventId: string) => {
       };
 
       setMessages(prev => [...prev, userMessage, botMessage]);
+    },
+    onError: (error) => {
+      // Add error message to chat
+      const errorMessage: ChatMessage = {
+        id: Date.now().toString(),
+        text: securityUtils.getSecureErrorMessage(error),
+        sender: 'bot',
+        timestamp: new Date()
+      };
+
+      setMessages(prev => [...prev, errorMessage]);
     }
   });
 

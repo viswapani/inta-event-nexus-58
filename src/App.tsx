@@ -1,30 +1,61 @@
 
+import { Suspense, lazy } from "react";
 import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import Wireframe from "./pages/Wireframe";
+import SecurityHeaders from "./components/SecurityHeaders";
 
-const queryClient = new QueryClient();
+const Index = lazy(() => import("./pages/Index"));
+const Wireframe = lazy(() => import("./pages/Wireframe"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/wireframe" element={<Wireframe />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60 * 1000,
+      retry: 1,
+    },
+  },
+});
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <SecurityHeaders />
+        <Toaster />
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Index />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/wireframe"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Wireframe />
+                </Suspense>
+              }
+            />
+            <Route
+              path="*"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <NotFound />
+                </Suspense>
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+}
 
 export default App;

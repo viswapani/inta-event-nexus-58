@@ -1,16 +1,18 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Menu, X, Calendar, Users, Building, MessageCircle, Heart, Search, User } from 'lucide-react';
+import { Menu, X, Calendar, Users, Building, Heart, Search, User } from 'lucide-react';
 import { useBookmarks } from '@/hooks/useBookmarks';
 import { Badge } from '@/components/ui/badge';
 import SearchOverlay from './SearchOverlay';
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const {
     data: bookmarks = []
   } = useBookmarks('event-2028');
+  
   const navigationItems = [{
     name: 'Agenda',
     href: '#agenda',
@@ -28,11 +30,8 @@ const Header = () => {
     name: 'Sponsors & Media',
     href: '#sponsors',
     icon: Building
-  }, {
-    name: 'AI Assistant',
-    href: '#chatbot',
-    icon: MessageCircle
   }];
+
   const scrollToRegistration = () => {
     const registrationSection = document.getElementById('registration');
     if (registrationSection) {
@@ -42,6 +41,7 @@ const Header = () => {
     }
     setIsMenuOpen(false);
   };
+
   return <>
       <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-orange-500 via-orange-400 to-orange-600">
         <div className="container mx-auto px-4">

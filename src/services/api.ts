@@ -35,9 +35,6 @@ export const API_ENDPOINTS = {
   VENUE_INFO: (eventId: string) => `${API_BASE_URL}/events/${eventId}/venue`,
   HOTELS: (eventId: string) => `${API_BASE_URL}/events/${eventId}/hotels`,
   
-  // Chatbot endpoint
-  CHAT: (eventId: string) => `${API_BASE_URL}/events/${eventId}/chat`,
-  
   // Bookmark endpoints
   BOOKMARKS: (eventId: string) => `${API_BASE_URL}/events/${eventId}/bookmarks`,
   ADD_BOOKMARK: (eventId: string) => `${API_BASE_URL}/events/${eventId}/bookmarks/add`,

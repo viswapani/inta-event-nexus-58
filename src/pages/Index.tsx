@@ -7,7 +7,6 @@ import SpeakersSection from "@/components/SpeakersSection";
 import VenueSection from "@/components/VenueSection";
 import SponsorsSection from "@/components/SponsorsSection";
 import RegistrationSection from "@/components/RegistrationSection";
-import ChatbotSection from "@/components/ChatbotSection";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import BottomActionBar from "@/components/BottomActionBar";
@@ -47,11 +46,6 @@ const Index = () => {
       {/* 8. Sponsors - Social proof and partnerships */}
       <section id="sponsors">
         <SponsorsSection />
-      </section>
-      
-      {/* 9. AI Assistant - Support and engagement tool */}
-      <section id="chatbot">
-        <ChatbotSection />
       </section>
       
       <Footer />

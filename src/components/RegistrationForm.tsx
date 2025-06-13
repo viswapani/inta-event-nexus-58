@@ -11,14 +11,6 @@ import { CheckIcon, Clock, Users, Star } from 'lucide-react';
 import { registrationSchema, type RegistrationFormData } from '@/lib/validation';
 import { securityUtils } from '@/lib/security';
 
-interface RegistrationFormData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  company: string;
-  plan: string;
-}
-
 const RegistrationForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();

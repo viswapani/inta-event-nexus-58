@@ -1,26 +1,531 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>inta-event-nexus</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INTA Annual Meeting 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'inta-navy': '#1e3a8a',
+                        'inta-blue': '#3b82f6',
+                        'inta-orange': '#f97316',
+                        'inta-accent': '#fbbf24',
+                        'inta-light': '#fef3c7',
+                        'inta-gray': '#6b7280'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .animate-fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        .animate-slide-in {
+            animation: slideIn 0.8s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #1e3a8a 100%);
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-orange-500 via-orange-400 to-orange-600">
+        <div class="container mx-auto px-4">
+            <!-- INTA Logo Header -->
+            <div class="flex items-center justify-start py-3 border-b border-orange-300">
+                <div class="text-2xl font-bold text-white">
+                    <span class="text-white">INTA</span>
+                    <span class="text-orange-100 ml-2 text-lg">International Trademark Association</span>
+                </div>
+            </div>
 
-    <meta property="og:title" content="inta-event-nexus" />
-    <meta property="og:description" content="Lovable Generated Project" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+            <div class="flex items-center justify-between h-16">
+                <!-- Navigation -->
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="#agenda" class="flex items-center space-x-2 text-white hover:text-orange-100 transition-colors duration-200">
+                        <span class="font-medium">Agenda</span>
+                    </a>
+                    <a href="#favorites" class="flex items-center space-x-2 text-white hover:text-orange-100 transition-colors duration-200">
+                        <span class="font-medium">Favorites</span>
+                        <span class="ml-1 bg-white text-orange-600 text-xs min-w-[18px] h-4 flex items-center justify-center p-0 rounded">3</span>
+                    </a>
+                    <a href="#speakers" class="flex items-center space-x-2 text-white hover:text-orange-100 transition-colors duration-200">
+                        <span class="font-medium">Speakers</span>
+                    </a>
+                    <a href="#sponsors" class="flex items-center space-x-2 text-white hover:text-orange-100 transition-colors duration-200">
+                        <span class="font-medium">Sponsors & Media</span>
+                    </a>
+                    <button class="flex items-center gap-2 border-white bg-slate-50 text-orange-500 px-3 py-1 rounded border">
+                        <span class="font-bold text-base text-orange-500">Search</span>
+                    </button>
+                    <button class="flex items-center gap-2 border-white bg-neutral-50 text-orange-500 px-3 py-1 rounded border">
+                        <span class="text-orange-500">Profile</span>
+                    </button>
+                </nav>
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  </head>
+                <!-- Register Button -->
+                <button class="bg-white hover:bg-orange-100 text-orange-600 font-bold px-4 py-2 rounded h-9">
+                    Register Now
+                </button>
+            </div>
+        </div>
+    </header>
 
-  <body>
-    <div id="root"></div>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden gradient-bg pt-32">
+        <!-- Background Video/Image -->
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=2112&q=80" 
+                 alt="Conference venue" 
+                 class="w-full h-full object-cover opacity-30">
+        </div>
+
+        <div class="w-full px-4 relative z-10">
+            <div class="text-center text-white animate-fade-in">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">
+                    INTA Annual Meeting 2025
+                </h1>
+                <p class="text-xl md:text-2xl mb-3 text-orange-200 font-light">
+                    Innovation in IP Law
+                </p>
+                <p class="text-base md:text-lg mb-6 text-orange-100">
+                    Shaping the Future of Intellectual Property
+                </p>
+                
+                <div class="flex flex-col md:flex-row items-center justify-center gap-4 text-base mb-8 text-orange-100">
+                    <div class="flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
+                        <span>📅 May 28-30, 2025</span>
+                    </div>
+                    <div class="flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
+                        <span>🌍 San Francisco, CA</span>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="grid grid-cols-3 gap-4 max-w-lg mx-auto mb-8">
+                    <div class="text-center p-4 rounded-xl bg-white/15 backdrop-blur-md border border-white/30">
+                        <div class="text-2xl font-bold text-white mb-1">150+</div>
+                        <div class="text-orange-200 text-sm font-medium">Speakers</div>
+                    </div>
+                    <div class="text-center p-4 rounded-xl bg-white/15 backdrop-blur-md border border-white/30">
+                        <div class="text-2xl font-bold text-white mb-1">75+</div>
+                        <div class="text-orange-200 text-sm font-medium">Sessions</div>
+                    </div>
+                    <div class="text-center p-4 rounded-xl bg-white/15 backdrop-blur-md border border-white/30">
+                        <div class="text-2xl font-bold text-white mb-1">50+</div>
+                        <div class="text-orange-200 text-sm font-medium">Countries</div>
+                    </div>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col md:flex-row gap-4 justify-center">
+                    <button class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-lg text-lg">
+                        Register Now
+                    </button>
+                    <button class="border border-white text-white hover:bg-white hover:text-orange-600 font-bold py-3 px-8 rounded-lg text-lg">
+                        Watch Promo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section class="py-16 gradient-bg text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-4">Event Countdown</h2>
+            <p class="text-xl mb-8 text-blue-200">Don't miss INTA 2025 Annual Meeting</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 max-w-2xl mx-auto">
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
+                    <div class="text-4xl font-bold text-yellow-400">89</div>
+                    <div class="text-sm text-blue-200">Days</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
+                    <div class="text-4xl font-bold text-yellow-400">12</div>
+                    <div class="text-sm text-blue-200">Hours</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
+                    <div class="text-4xl font-bold text-yellow-400">30</div>
+                    <div class="text-sm text-blue-200">Minutes</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
+                    <div class="text-4xl font-bold text-yellow-400">15</div>
+                    <div class="text-sm text-blue-200">Seconds</div>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-center gap-6 text-lg">
+                <span>📅 May 28-30, 2025</span>
+                <span>📍 San Francisco, CA</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Highlights -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-inta-navy mb-12">
+                Highlights from Previous Events
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=300&h=200&fit=crop" 
+                         alt="Keynote presentation" 
+                         class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold mb-2">Keynote Highlights</h3>
+                        <p class="text-gray-600">Inspiring speakers sharing insights on the future of IP law</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=300&h=200&fit=crop" 
+                         alt="Panel discussion" 
+                         class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold mb-2">Panel Discussions</h3>
+                        <p class="text-gray-600">Expert panels covering cutting-edge topics in trademark law</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=300&h=200&fit=crop" 
+                         alt="Networking events" 
+                         class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold mb-2">Networking Moments</h3>
+                        <p class="text-gray-600">Connect with professionals from around the world</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Agenda Section -->
+    <section id="agenda" class="py-16 bg-gradient-to-br from-yellow-50 to-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-inta-navy mb-12">Event Agenda</h2>
+            
+            <!-- Agenda Tabs -->
+            <div class="mb-8">
+                <div class="flex bg-gray-100 rounded-lg p-1 max-w-md mx-auto">
+                    <button class="flex-1 bg-orange-500 text-white py-2 px-4 rounded font-semibold">View by Programs</button>
+                    <button class="flex-1 text-gray-600 py-2 px-4 rounded">View by Date</button>
+                </div>
+            </div>
+
+            <!-- Program Content -->
+            <div class="space-y-6">
+                <div class="bg-white border rounded-lg shadow-sm">
+                    <div class="p-4 border-b bg-blue-50">
+                        <h3 class="text-lg font-semibold text-blue-800">Main Conference Program</h3>
+                        <p class="text-sm text-blue-600">Core sessions, keynotes, and networking events</p>
+                    </div>
+                    <div class="p-4 space-y-3">
+                        <div class="bg-white p-4 rounded border-l-4 border-blue-600">
+                            <div class="flex justify-between">
+                                <div>
+                                    <h4 class="font-medium">Opening Keynote: AI and the Future of Trademark Law</h4>
+                                    <p class="text-sm text-gray-600">9:00 AM - 10:30 AM • Main Auditorium • Wednesday, May 28, 2025</p>
+                                    <p class="text-sm text-blue-600">Dr. Sarah Chen, Mark Rodriguez</p>
+                                </div>
+                                <button class="border border-gray-300 text-gray-700 px-3 py-1 rounded text-sm">Bookmark</button>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded border-l-4 border-green-600">
+                            <div class="flex justify-between">
+                                <div>
+                                    <h4 class="font-medium">Global Brand Protection Strategies</h4>
+                                    <p class="text-sm text-gray-600">11:00 AM - 12:30 PM • Conference Room A • Wednesday, May 28, 2025</p>
+                                    <p class="text-sm text-green-600">Alice Wang, James Miller, Roberto Silva</p>
+                                </div>
+                                <button class="border border-gray-300 text-gray-700 px-3 py-1 rounded text-sm">Bookmark</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Speakers Section -->
+    <section id="speakers" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-inta-navy mb-12">Featured Speakers</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d11994c94?w=150&h=150&fit=crop&crop=face" 
+                         alt="Dr. Sarah Chen" 
+                         class="w-32 h-32 rounded-full mx-auto mb-4 object-cover shadow-lg">
+                    <h4 class="font-semibold text-lg">Dr. Sarah Chen</h4>
+                    <p class="text-sm text-gray-600">AI Law Expert</p>
+                    <p class="text-xs text-blue-600">Stanford Law School</p>
+                    <button class="mt-2 border border-gray-300 text-gray-700 px-3 py-1 rounded text-sm">Follow</button>
+                </div>
+                <div class="text-center">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" 
+                         alt="Mark Rodriguez" 
+                         class="w-32 h-32 rounded-full mx-auto mb-4 object-cover shadow-lg">
+                    <h4 class="font-semibold text-lg">Mark Rodriguez</h4>
+                    <p class="text-sm text-gray-600">IP Strategy Director</p>
+                    <p class="text-xs text-blue-600">Global Tech Corp</p>
+                    <button class="mt-2 border border-gray-300 text-gray-700 px-3 py-1 rounded text-sm">Follow</button>
+                </div>
+                <div class="text-center">
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face" 
+                         alt="Alice Wang" 
+                         class="w-32 h-32 rounded-full mx-auto mb-4 object-cover shadow-lg">
+                    <h4 class="font-semibold text-lg">Alice Wang</h4>
+                    <p class="text-sm text-gray-600">Brand Protection Lead</p>
+                    <p class="text-xs text-blue-600">International Brands Inc</p>
+                    <button class="mt-2 border border-gray-300 text-gray-700 px-3 py-1 rounded text-sm">Follow</button>
+                </div>
+                <div class="text-center">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" 
+                         alt="James Miller" 
+                         class="w-32 h-32 rounded-full mx-auto mb-4 object-cover shadow-lg">
+                    <h4 class="font-semibold text-lg">James Miller</h4>
+                    <p class="text-sm text-gray-600">Patent Attorney</p>
+                    <p class="text-xs text-blue-600">Miller & Associates</p>
+                    <button class="mt-2 border border-gray-300 text-gray-700 px-3 py-1 rounded text-sm">Follow</button>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <button class="border border-gray-300 text-gray-700 px-6 py-3 rounded">View All Speakers</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section class="py-16 bg-gradient-to-br from-yellow-50 to-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-inta-navy mb-4">Secure Your Spot</h2>
+                <p class="text-lg text-inta-gray max-w-2xl mx-auto">
+                    Join 2,500+ professionals for three days of innovation, networking, and insights into the future of IP.
+                </p>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-3 gap-6 mb-12 max-w-2xl mx-auto">
+                <div class="text-center border-2 border-orange-200 rounded-lg p-4">
+                    <div class="text-2xl font-bold text-inta-navy">1,847</div>
+                    <div class="text-sm text-inta-gray">Registered</div>
+                </div>
+                <div class="text-center border-2 border-orange-200 rounded-lg p-4">
+                    <div class="text-2xl font-bold text-inta-navy">89</div>
+                    <div class="text-sm text-inta-gray">Days Left</div>
+                </div>
+                <div class="text-center border-2 border-orange-200 rounded-lg p-4">
+                    <div class="text-2xl font-bold text-inta-navy">153</div>
+                    <div class="text-sm text-inta-gray">Early Bird Spots</div>
+                </div>
+            </div>
+
+            <!-- Pricing Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Early Bird -->
+                <div class="relative bg-white rounded-lg shadow-lg border-2 border-orange-500 scale-105">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                        <span class="bg-orange-500 text-white font-semibold px-4 py-1 rounded-full text-sm">
+                            ⭐ Most Popular
+                        </span>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold text-inta-navy mb-4">Early Bird</h3>
+                        <div class="mb-4">
+                            <span class="text-3xl font-bold text-inta-blue">$299</span>
+                            <span class="text-lg text-inta-gray line-through ml-2">$399</span>
+                        </div>
+                        <div class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm mb-4">Save $100</div>
+                        <p class="text-sm text-inta-gray mb-6">Until Feb 15, 2028</p>
+                        
+                        <ul class="text-left space-y-2 mb-6">
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="text-sm">Access to all sessions and workshops</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="text-sm">Welcome reception and networking events</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="text-sm">Event materials and swag bag</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="text-sm">Mobile app access</span>
+                            </li>
+                        </ul>
+                        
+                        <button class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded">
+                            Register Now - Early Bird
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Regular -->
+                <div class="bg-white rounded-lg shadow-lg border">
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold text-inta-navy mb-4">Regular</h3>
+                        <div class="mb-4">
+                            <span class="text-3xl font-bold text-inta-blue">$399</span>
+                        </div>
+                        <p class="text-sm text-inta-gray mb-6">After Feb 15, 2028</p>
+                        
+                        <ul class="text-left space-y-2 mb-6">
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="text-sm">Access to all sessions and workshops</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="text-sm">Welcome reception and networking events</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="text-sm">Event materials and swag bag</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="text-sm">Mobile app access</span>
+                            </li>
+                        </ul>
+                        
+                        <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded">
+                            Choose Regular
+                        </button>
+                    </div>
+                </div>
+
+                <!-- VIP -->
+                <div class="bg-white rounded-lg shadow-lg border">
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold text-inta-navy mb-4">VIP Experience</h3>
+                        <div class="mb-4">
+                            <span class="text-3xl font-bold text-inta-blue">$799</span>
+                        </div>
+                        <div class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm mb-4">Best Value</div>
+                        <p class="text-sm text-inta-gray mb-6">Limited Spots</p>
+                        
+                        <ul class="text-left space-y-2 mb-6">
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="text-sm">All Regular benefits</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="text-sm">Premium seating in all sessions</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="text-sm">Exclusive VIP networking dinner</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="text-sm">One-on-one speaker meetups</span>
+                            </li>
+                        </ul>
+                        
+                        <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded">
+                            Choose VIP Experience
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-inta-navy text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Event Info</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-orange-300">Schedule</a></li>
+                        <li><a href="#" class="hover:text-orange-300">Venue</a></li>
+                        <li><a href="#" class="hover:text-orange-300">Registration</a></li>
+                        <li><a href="#" class="hover:text-orange-300">Travel</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-orange-300">Mobile App</a></li>
+                        <li><a href="#" class="hover:text-orange-300">Event Guide</a></li>
+                        <li><a href="#" class="hover:text-orange-300">Networking</a></li>
+                        <li><a href="#" class="hover:text-orange-300">Live Stream</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Support</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-orange-300">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-orange-300">FAQs</a></li>
+                        <li><a href="#" class="hover:text-orange-300">Tech Support</a></li>
+                        <li><a href="#" class="hover:text-orange-300">Accessibility</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Connect</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-orange-300">LinkedIn</a></li>
+                        <li><a href="#" class="hover:text-orange-300">Twitter</a></li>
+                        <li><a href="#" class="hover:text-orange-300">YouTube</a></li>
+                        <li><a href="#" class="hover:text-orange-300">Newsletter</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm">
+                <p>&copy; 2025 International Trademark Association. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple countdown timer
+        function updateCountdown() {
+            const countdownElements = document.querySelectorAll('[data-countdown]');
+            countdownElements.forEach(el => {
+                const current = parseInt(el.textContent);
+                if (current > 0) {
+                    el.textContent = current - 1;
+                }
+            });
+        }
+        
+        // Update every second
+        setInterval(updateCountdown, 1000);
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
 </html>

@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INTA Event 2025 - Wireframe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .wireframe-section {
+            border: 2px dashed #d1d5db;
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+        .wireframe-note {
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: 16px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 p-8">
+    <div class="max-w-6xl mx-auto space-y-8">
+        <!-- Header -->
+        <div class="wireframe-section">
+            <div class="flex justify-between items-center mb-4">
+                <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=100&h=40&fit=crop" 
+                     alt="INTA Logo" 
+                     class="w-20 h-8 object-cover rounded">
+                <div class="flex space-x-4 items-center">
+                    <span class="text-sm text-gray-600 px-3 py-1 bg-gray-100 rounded">Agenda</span>
+                    <span class="text-sm text-gray-600 px-3 py-1 bg-gray-100 rounded">Favorites (3)</span>
+                    <span class="text-sm text-gray-600 px-3 py-1 bg-gray-100 rounded">Speakers</span>
+                    <span class="text-sm text-gray-600 px-3 py-1 bg-gray-100 rounded">Sponsors & Media</span>
+                    <span class="text-sm text-gray-600 px-3 py-1 bg-gray-100 rounded">Search</span>
+                    <span class="text-sm text-gray-600 px-3 py-1 bg-gray-100 rounded">Profile</span>
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded text-sm">Register Now</button>
+                </div>
+            </div>
+            <div class="bg-blue-50 p-3 rounded wireframe-note">
+                <p class="text-sm font-semibold text-blue-800">HEADER SECTION</p>
+                <p class="text-xs text-blue-600">Contains the INTA logo, main navigation menu (Agenda, Favorites with badge count, Speakers, Sponsors & Media), search, profile, and prominent registration button. Sticky navigation for easy access.</p>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="wireframe-section">
+            <div class="text-center space-y-6">
+                <h1 class="text-4xl font-bold text-gray-800">INTA Annual Meeting 2025</h1>
+                <p class="text-lg text-gray-600">Join us for the premier intellectual property event</p>
+                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=250&fit=crop" 
+                     alt="Conference venue" 
+                     class="w-96 h-48 object-cover rounded mx-auto shadow-lg">
+                <div class="flex justify-center space-x-4">
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded">Register Now</button>
+                    <button class="border border-gray-300 text-gray-700 px-8 py-3 rounded">Watch Promo</button>
+                </div>
+                <div class="flex justify-center space-x-8 mt-8">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-blue-600">500+</div>
+                        <div class="text-sm text-gray-600">Speakers</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-blue-600">50+</div>
+                        <div class="text-sm text-gray-600">Sessions</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-blue-600">5000+</div>
+                        <div class="text-sm text-gray-600">Attendees</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-green-50 p-3 rounded wireframe-note">
+                <p class="text-sm font-semibold text-green-800">HERO SECTION</p>
+                <p class="text-xs text-green-600">Main banner featuring event title, date, location, hero video/image, primary CTA buttons (Register, Watch Promo), and key statistics (speaker count, attendee numbers, session count).</p>
+            </div>
+        </div>
+
+        <!-- Countdown Section -->
+        <div class="wireframe-section">
+            <div class="text-center">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Event Starts In</h2>
+                <div class="flex justify-center space-x-6">
+                    <div class="bg-blue-600 text-white p-4 rounded-lg text-center">
+                        <div class="text-3xl font-bold">45</div>
+                        <div class="text-sm">Days</div>
+                    </div>
+                    <div class="bg-blue-600 text-white p-4 rounded-lg text-center">
+                        <div class="text-3xl font-bold">12</div>
+                        <div class="text-sm">Hours</div>
+                    </div>
+                    <div class="bg-blue-600 text-white p-4 rounded-lg text-center">
+                        <div class="text-3xl font-bold">30</div>
+                        <div class="text-sm">Minutes</div>
+                    </div>
+                    <div class="bg-blue-600 text-white p-4 rounded-lg text-center">
+                        <div class="text-3xl font-bold">15</div>
+                        <div class="text-sm">Seconds</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-purple-50 p-3 rounded wireframe-note">
+                <p class="text-sm font-semibold text-purple-800">COUNTDOWN TIMER</p>
+                <p class="text-xs text-purple-600">Real-time countdown to event start date with animated numbers. Creates urgency and excitement. Updates automatically every second. Shows when future dates are provided in URL.</p>
+            </div>
+        </div>
+
+        <!-- Video Highlights -->
+        <div class="wireframe-section">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Highlights from Previous Events</h2>
+            <div class="grid grid-cols-3 gap-6">
+                <div class="space-y-2">
+                    <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=300&h=200&fit=crop" 
+                         alt="Keynote presentation" 
+                         class="w-full h-32 object-cover rounded shadow">
+                    <p class="text-sm font-medium">Keynote Highlights</p>
+                </div>
+                <div class="space-y-2">
+                    <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=300&h=200&fit=crop" 
+                         alt="Panel discussion" 
+                         class="w-full h-32 object-cover rounded shadow">
+                    <p class="text-sm font-medium">Panel Discussions</p>
+                </div>
+                <div class="space-y-2">
+                    <img src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=300&h=200&fit=crop" 
+                         alt="Networking events" 
+                         class="w-full h-32 object-cover rounded shadow">
+                    <p class="text-sm font-medium">Networking Moments</p>
+                </div>
+            </div>
+            <div class="bg-orange-50 p-3 rounded wireframe-note">
+                <p class="text-sm font-semibold text-orange-800">VIDEO HIGHLIGHTS</p>
+                <p class="text-xs text-orange-600">Showcase of video content from previous INTA events including keynote speeches, panel discussions, and networking moments. Builds credibility and excitement.</p>
+            </div>
+        </div>
+
+        <!-- Agenda Section -->
+        <div class="wireframe-section">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Event Agenda</h2>
+            
+            <!-- Tab Navigation -->
+            <div class="mb-6">
+                <div class="flex bg-gray-100 rounded-lg p-1">
+                    <button class="flex-1 bg-blue-600 text-white py-2 px-4 rounded">View by Programs</button>
+                    <button class="flex-1 text-gray-600 py-2 px-4 rounded">View by Date</button>
+                </div>
+            </div>
+
+            <!-- Program Content -->
+            <div class="space-y-4">
+                <div class="bg-gray-50 border rounded-lg">
+                    <div class="p-4 border-b bg-blue-50">
+                        <h3 class="text-lg font-semibold text-blue-800">Main Conference Program</h3>
+                        <p class="text-sm text-blue-600">Core sessions, keynotes, and networking events</p>
+                    </div>
+                    <div class="p-4 space-y-3">
+                        <div class="bg-white p-3 rounded border-l-4 border-blue-600">
+                            <div class="flex justify-between">
+                                <div>
+                                    <h4 class="font-medium">Opening Keynote: AI and the Future of Trademark Law</h4>
+                                    <p class="text-sm text-gray-600">9:00 AM - 10:30 AM • Main Auditorium • Wednesday, May 28, 2025</p>
+                                    <p class="text-sm text-blue-600">Dr. Sarah Chen, Mark Rodriguez</p>
+                                </div>
+                                <button class="border border-gray-300 text-gray-700 px-3 py-1 rounded text-sm">Bookmark</button>
+                            </div>
+                        </div>
+                        <div class="bg-white p-3 rounded border-l-4 border-green-600">
+                            <div class="flex justify-between">
+                                <div>
+                                    <h4 class="font-medium">Global Brand Protection Strategies</h4>
+                                    <p class="text-sm text-gray-600">11:00 AM - 12:30 PM • Conference Room A • Wednesday, May 28, 2025</p>
+                                    <p class="text-sm text-green-600">Alice Wang, James Miller, Roberto Silva</p>
+                                </div>
+                                <button class="border border-gray-300 text-gray-700 px-3 py-1 rounded text-sm">Bookmark</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-indigo-50 p-3 rounded wireframe-note">
+                <p class="text-sm font-semibold text-indigo-800">AGENDA SECTION</p>
+                <p class="text-xs text-indigo-600">Displays event agenda with dates dynamically loaded from URL parameters. Shows program-based and date-based views with search and filtering capabilities. Dates reflect URL parameters when provided.</p>
+            </div>
+        </div>
+
+        <!-- Speakers Section -->
+        <div class="wireframe-section">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Featured Speakers</h2>
+            <div class="grid grid-cols-4 gap-6">
+                <div class="text-center space-y-3">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d11994c94?w=150&h=150&fit=crop&crop=face"
+                         alt="Speaker 1"
+                         class="w-24 h-24 rounded-full mx-auto object-cover shadow-lg">
+                    <div>
+                        <h4 class="font-semibold">Dr. Speaker 1</h4>
+                        <p class="text-sm text-gray-600">IP Law Expert</p>
+                        <p class="text-xs text-blue-600">Harvard Law School</p>
+                        <button class="border border-gray-300 text-gray-700 px-3 py-1 rounded text-sm mt-2">Follow</button>
+                    </div>
+                </div>
+                <div class="text-center space-y-3">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+                         alt="Speaker 2"
+                         class="w-24 h-24 rounded-full mx-auto object-cover shadow-lg">
+                    <div>
+                        <h4 class="font-semibold">Dr. Speaker 2</h4>
+                        <p class="text-sm text-gray-600">IP Law Expert</p>
+                        <p class="text-xs text-blue-600">Stanford University</p>
+                        <button class="border border-gray-300 text-gray-700 px-3 py-1 rounded text-sm mt-2">Follow</button>
+                    </div>
+                </div>
+                <div class="text-center space-y-3">
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face"
+                         alt="Speaker 3"
+                         class="w-24 h-24 rounded-full mx-auto object-cover shadow-lg">
+                    <div>
+                        <h4 class="font-semibold">Dr. Speaker 3</h4>
+                        <p class="text-sm text-gray-600">IP Law Expert</p>
+                        <p class="text-xs text-blue-600">MIT Law</p>
+                        <button class="border border-gray-300 text-gray-700 px-3 py-1 rounded text-sm mt-2">Follow</button>
+                    </div>
+                </div>
+                <div class="text-center space-y-3">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+                         alt="Speaker 4"
+                         class="w-24 h-24 rounded-full mx-auto object-cover shadow-lg">
+                    <div>
+                        <h4 class="font-semibold">Dr. Speaker 4</h4>
+                        <p class="text-sm text-gray-600">IP Law Expert</p>
+                        <p class="text-xs text-blue-600">Columbia Law</p>
+                        <button class="border border-gray-300 text-gray-700 px-3 py-1 rounded text-sm mt-2">Follow</button>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-6">
+                <button class="border border-gray-300 text-gray-700 px-6 py-3 rounded">View All Speakers</button>
+            </div>
+            <div class="bg-teal-50 p-3 rounded wireframe-note">
+                <p class="text-sm font-semibold text-teal-800">SPEAKERS SECTION</p>
+                <p class="text-xs text-teal-600">Showcase of keynote speakers and panelists with professional photos, credentials, bios, and their session details. Users can follow speakers and view their complete profiles.</p>
+            </div>
+        </div>
+
+        <!-- Registration Section -->
+        <div class="wireframe-section">
+            <div class="text-center space-y-4">
+                <h2 class="text-3xl font-bold text-gray-800">Don't Miss Out!</h2>
+                <p class="text-lg text-gray-600">Early bird pricing ends in 10 days</p>
+                <div class="bg-green-100 p-4 rounded inline-block">
+                    <span class="text-2xl font-bold text-green-800">$599</span>
+                    <span class="text-sm text-green-600 ml-2">Early Bird Price</span>
+                    <span class="text-xs text-gray-500 block">Regular price: $799</span>
+                </div>
+                <div class="flex justify-center gap-4">
+                    <button class="bg-green-600 hover:bg-green-700 text-white px-12 py-3 rounded text-lg">Register Now</button>
+                    <button class="border border-gray-300 text-gray-700 px-8 py-3 rounded text-lg">Group Rates</button>
+                </div>
+            </div>
+            <div class="bg-emerald-50 p-3 rounded wireframe-note">
+                <p class="text-sm font-semibold text-emerald-800">REGISTRATION CTA</p>
+                <p class="text-xs text-emerald-600">Strategically placed after demonstrating value. Features pricing information, registration deadlines, group discounts, and prominent registration button.</p>
+            </div>
+        </div>
+
+        <!-- Sponsors Section -->
+        <div class="wireframe-section">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Our Sponsors & Media Partners</h2>
+            
+            <!-- Platinum Sponsors -->
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold text-gray-700 mb-3">Platinum Sponsors</h3>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="bg-gradient-to-br from-gray-100 to-gray-200 p-6 rounded flex items-center justify-center h-20 border">
+                        <span class="text-lg font-bold text-gray-600">Platinum 1</span>
+                    </div>
+                    <div class="bg-gradient-to-br from-gray-100 to-gray-200 p-6 rounded flex items-center justify-center h-20 border">
+                        <span class="text-lg font-bold text-gray-600">Platinum 2</span>
+                    </div>
+                    <div class="bg-gradient-to-br from-gray-100 to-gray-200 p-6 rounded flex items-center justify-center h-20 border">
+                        <span class="text-lg font-bold text-gray-600">Platinum 3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gold Sponsors -->
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold text-gray-700 mb-3">Gold Sponsors</h3>
+                <div class="grid grid-cols-4 gap-4">
+                    <div class="bg-yellow-50 p-4 rounded flex items-center justify-center h-16 border">
+                        <span class="text-sm font-medium text-gray-600">Gold 1</span>
+                    </div>
+                    <div class="bg-yellow-50 p-4 rounded flex items-center justify-center h-16 border">
+                        <span class="text-sm font-medium text-gray-600">Gold 2</span>
+                    </div>
+                    <div class="bg-yellow-50 p-4 rounded flex items-center justify-center h-16 border">
+                        <span class="text-sm font-medium text-gray-600">Gold 3</span>
+                    </div>
+                    <div class="bg-yellow-50 p-4 rounded flex items-center justify-center h-16 border">
+                        <span class="text-sm font-medium text-gray-600">Gold 4</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-pink-50 p-3 rounded wireframe-note">
+                <p class="text-sm font-semibold text-pink-800">SPONSORS & MEDIA SECTION</p>
+                <p class="text-xs text-pink-600">Display of sponsor logos organized by sponsorship tiers. Supporting element that builds trust and credibility.</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="wireframe-section">
+            <div class="grid grid-cols-4 gap-6">
+                <div class="space-y-3">
+                    <h4 class="font-semibold text-gray-800">Event Info</h4>
+                    <div class="space-y-1">
+                        <p class="text-sm text-gray-600">Schedule</p>
+                        <p class="text-sm text-gray-600">Venue</p>
+                        <p class="text-sm text-gray-600">Registration</p>
+                        <p class="text-sm text-gray-600">Travel</p>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="font-semibold text-gray-800">Resources</h4>
+                    <div class="space-y-1">
+                        <p class="text-sm text-gray-600">Mobile App</p>
+                        <p class="text-sm text-gray-600">Event Guide</p>
+                        <p class="text-sm text-gray-600">Networking</p>
+                        <p class="text-sm text-gray-600">Live Stream</p>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="font-semibold text-gray-800">Support</h4>
+                    <div class="space-y-1">
+                        <p class="text-sm text-gray-600">Contact Us</p>
+                        <p class="text-sm text-gray-600">FAQs</p>
+                        <p class="text-sm text-gray-600">Tech Support</p>
+                        <p class="text-sm text-gray-600">Accessibility</p>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="font-semibold text-gray-800">Legal</h4>
+                    <div class="space-y-1">
+                        <p class="text-sm text-gray-600">Privacy Policy</p>
+                        <p class="text-sm text-gray-600">Terms of Use</p>
+                        <p class="text-sm text-gray-600">Code of Conduct</p>
+                        <p class="text-sm text-gray-600">Cookie Policy</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t pt-4 mt-6">
+                <div class="flex justify-between items-center">
+                    <p class="text-sm text-gray-500">© 2025 International Trademark Association. All rights reserved.</p>
+                    <div class="flex space-x-4">
+                        <span class="text-sm text-gray-400">Follow us:</span>
+                        <span class="text-sm text-blue-600">LinkedIn</span>
+                        <span class="text-sm text-blue-600">Twitter</span>
+                        <span class="text-sm text-blue-600">YouTube</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 p-3 rounded wireframe-note">
+                <p class="text-sm font-semibold text-gray-800">FOOTER SECTION</p>
+                <p class="text-xs text-gray-600">Comprehensive footer with organized links to event information, resources, support contacts, and legal pages. Includes social media links and copyright information.</p>
+            </div>
+        </div>
+
+        <!-- Page Info -->
+        <div class="text-center text-gray-500 text-sm space-y-2 py-8">
+            <p class="text-lg font-semibold">INTA Event 2025 - Wireframe View</p>
+            <p>Complete layout structure and component organization</p>
+            <p class="text-xs">
+                Flow: Hero → Countdown → Video Highlights → Agenda → Speakers → Registration → Sponsors
+            </p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,73 +1,58 @@
-# Welcome to your Lovable project
 
-## Project info
+# INTA Event Website - Static HTML Files
 
-**URL**: https://lovable.dev/projects/3df1eb08-0d3a-4db1-a904-02d307f5010a
+This folder contains static HTML versions of the INTA Annual Meeting 2025 website that you can open directly in any web browser.
 
-## How can I edit this code?
+## Files Included
 
-There are several ways of editing your application.
+1. **index.html** - Complete event website with all sections
+2. **wireframe.html** - Wireframe/mockup version showing layout structure
 
-**Use Lovable**
+## How to Use
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/3df1eb08-0d3a-4db1-a904-02d307f5010a) and start prompting.
+1. Save these files to your computer
+2. Double-click any HTML file to open it in your default web browser
+3. Or right-click and "Open with" your preferred browser
 
-Changes made via Lovable will be committed automatically to this repo.
+## Features
 
-**Use your preferred IDE**
+### index.html
+- Complete responsive event website
+- Header with navigation
+- Hero section with event details
+- Countdown timer
+- Video highlights section
+- Event agenda
+- Featured speakers
+- Registration pricing
+- Footer with links
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### wireframe.html
+- Layout structure visualization
+- Annotated sections explaining functionality
+- Clean wireframe design for presentations
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Browser Compatibility
 
-Follow these steps:
+These files work in all modern browsers:
+- Chrome
+- Firefox
+- Safari
+- Edge
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## Notes
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+- Uses Tailwind CSS from CDN for styling
+- Includes basic JavaScript for interactive elements
+- Images are loaded from Unsplash for demonstration
+- Fully responsive design for mobile and desktop
 
-# Step 3: Install the necessary dependencies.
-npm i
+## Customization
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+You can easily modify:
+- Event dates and details
+- Colors and styling
+- Content and text
+- Images (replace Unsplash URLs with your own)
 
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/3df1eb08-0d3a-4db1-a904-02d307f5010a) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Enjoy your INTA event presentation!
